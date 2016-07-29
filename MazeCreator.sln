@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator", "MazeCreator.csproj", "{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreatorTest", "MazeCreatorTest.csproj", "{CFC2AE61-4DAF-4B2E-B916-7AE826212432}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Debug|x86.Build.0 = Debug|Any CPU
+		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Release|x86.ActiveCfg = Release|Any CPU
+		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Release|x86.Build.0 = Release|Any CPU
+		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Debug|x86.Build.0 = Debug|Any CPU
+		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Release|x86.ActiveCfg = Release|Any CPU
+		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
