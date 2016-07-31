@@ -1,29 +1,15 @@
 ﻿<Properties StartupItem="MazeCreatorTest.csproj">
   <MonoDevelop.Ide.Workbench ActiveDocument="Test.cs">
     <Files>
-      <File FileName="Creator/DFS.cs" Line="101" Column="12" />
-      <File FileName="Test.cs" Line="12" Column="34" />
+      <File FileName="Creator/DFS.cs" Line="95" Column="6" />
+      <File FileName="Test.cs" Line="17" Column="19" />
+      <File FileName="Cell.cs" Line="109" Column="3" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="MazeCreator" expanded="True">
-            <Node name="MazeCreator" expanded="True">
-              <Node name="Creator" expanded="True" />
-            </Node>
-            <Node name="MazeCreatorTest" expanded="True">
-              <Node name="Test.cs" selected="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/viniciusjarina/projects/MazeCreator/Creator/DFS.cs" line="71" column="1" />
-      <Breakpoint file="/Users/viniciusjarina/projects/MazeCreator/Creator/DFS.cs" line="101" column="1" />
+      <Breakpoint file="/Users/viniciusjarina/projects/MazeCreator/Creator/DFS.cs" line="103" column="1" />
       <Catchpoint exceptionName="System.Exception" includeSubclasses="True" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

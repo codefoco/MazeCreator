@@ -48,6 +48,8 @@ namespace MazeCreator
 
 		Direction GetRandomDirection (Direction [] directions, IRandomGenerator random)
 		{
+			if (directions.Length == 1)
+				return directions [0];
 			return directions [random.Next (directions.Length)];
 		}
 

@@ -89,6 +89,30 @@ namespace MazeCreator
 			}
 		}
 
+		public bool HasLeftWall {
+			get {
+				return (info & CellInfo.LeftBorder) == CellInfo.LeftBorder;
+			}
+		}
+
+		public bool HasTopWall {
+			get {
+				return (info & CellInfo.TopWall) == CellInfo.TopWall;
+			}
+		}
+
+		public bool HasBottomWall {
+			get {
+				return (info & CellInfo.BottomWall) == CellInfo.BottomWall;
+			}
+		}
+
+		public bool HasRightWall {
+			get {
+				return (info & CellInfo.RightWall) == CellInfo.RightWall;
+			}
+		}
+
 		public bool HasAllWalls {
 			get {
 				return (info & CellInfo.AllWalls) == CellInfo.AllWalls;
