@@ -1,11 +1,13 @@
-﻿
-using System;
+﻿using System;
 
 namespace MazeCreator
 {
+	using Box = BoxDrawing.BoxDrawing;
+
 	[Flags]
 	public enum CellInfo : byte
 	{
+		EmptyCell    = 0,
 		TopWall      = 1 << 0,
 		LeftWall     = 1 << 1,
 		BottomWall   = 1 << 2,
@@ -15,7 +17,6 @@ namespace MazeCreator
 		LeftBorder   = 1 << 5,
 		BottomBorder = 1 << 6,
 		RightBorder  = 1 << 7,
-		InvalidCell  = TopBorder | LeftBorder | BottomBorder | RightBorder,
 		RemoveTopWall    = ~TopWall     & 0xFF,
 		RemoveLeftWall   = ~LeftWall    & 0xFF,
 		RemoveBottomWall = ~BottomWall  & 0xFF,
@@ -53,9 +54,9 @@ namespace MazeCreator
 			this.info = info;
 		}
 
-		public static Cell InvalidCell {
+		public static Cell EmptyCell {
 			get {
-				return new Cell (CellInfo.InvalidCell);
+				return new Cell (CellInfo.EmptyCell);
 			}
 		}
 
@@ -91,7 +92,7 @@ namespace MazeCreator
 
 		public bool HasLeftWall {
 			get {
-				return (info & CellInfo.LeftBorder) == CellInfo.LeftBorder;
+				return (info & CellInfo.LeftWall) == CellInfo.LeftWall;
 			}
 		}
 
@@ -127,6 +128,55 @@ namespace MazeCreator
 		public void RemoveEndWall (Direction direction)
 		{
 			info &= removeWallFlagsEnd [(int)direction];
+		}
+
+		public override bool Equals (object obj)
+		{
+			var cell = obj as Cell?;
+			if (cell == null)
+				return false;
+			return this == cell;
+		}
+
+		public static bool operator == (Cell lhs, Cell rhs)
+		{
+			return lhs.CellInfo == rhs.CellInfo;
+		}
+
+		public static bool operator != (Cell lhs, Cell rhs)
+		{
+			return !(lhs == rhs);
+		}
+
+		public override int GetHashCode ()
+		{
+			return CellInfo.GetHashCode ();
+		}
+
+		public static char [] GetCellString (Cell topLeft, Cell topRight, Cell bottomLeft, Cell bottomRight)
+		{
+			char [] chars = new char [2];
+
+			BoxFlags flags = BoxFlags.None;
+
+			if (topRight.HasBottomWall || bottomRight.HasTopWall)
+				flags |= BoxFlags.Right;
+			if (topLeft.HasRightWall || topRight.HasLeftWall)
+				flags |= BoxFlags.Top;
+			if (topLeft.HasBottomWall || bottomLeft.HasTopWall)
+				flags |= BoxFlags.Left;
+			if (bottomLeft.HasRightWall || bottomRight.HasLeftWall)
+				flags |= BoxFlags.Bottom;
+
+			chars[0] = Box.CharFromFlags (flags);
+
+			flags = BoxFlags.None;
+
+			if (topRight.HasBottomWall || bottomRight.HasTopWall)
+				flags |= BoxFlags.Right | BoxFlags.Left;
+			
+			chars [1] = Box.CharFromFlags (flags);
+			return chars;
 		}
 
 	}
