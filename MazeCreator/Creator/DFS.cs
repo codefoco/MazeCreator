@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace MazeCreator
+using MazeCreator.Core;
+
+namespace MazeCreator.Creator
 {
 	public class DFS : ICreator
 	{

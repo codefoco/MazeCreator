@@ -1,4 +1,4 @@
-﻿namespace MazeCreator
+﻿namespace MazeCreator.Core
 {
 	public interface ICreator
 	{

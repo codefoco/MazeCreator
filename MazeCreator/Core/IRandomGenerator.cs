@@ -1,5 +1,5 @@
 ﻿
-namespace MazeCreator
+namespace MazeCreator.Core
 {
 	public interface IRandomGenerator
 	{

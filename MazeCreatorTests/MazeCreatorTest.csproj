@@ -29,20 +29,25 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="nunit.framework">
-      <HintPath>packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.3.6.0\lib\net45\nunit.framework.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestMaze.cs" />
+    <Compile Include="Tests\TestMaze.cs" />
+    <Compile Include="Tests\TestRandomGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Folder Include="Tests\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="MazeCreator.csproj">
+    <ProjectReference Include="..\MazeCreator\MazeCreator.csproj">
       <Project>{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}</Project>
       <Name>MazeCreator</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

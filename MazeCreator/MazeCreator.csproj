@@ -32,23 +32,28 @@
     <NoStdLib>false</NoStdLib>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Maze.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Cell.cs" />
-    <Compile Include="Creator.cs" />
     <Compile Include="Creator\DFS.cs" />
-    <Compile Include="ICreator.cs" />
     <Compile Include="Creator\Prim.cs" />
     <Compile Include="Creator\Kruskal.cs" />
-    <Compile Include="IRandomGenerator.cs" />
-    <Compile Include="DefaultRandomGenerator.cs" />
-    <Compile Include="Position.cs" />
     <Compile Include="BoxDrawing\BoxDrawing.cs" />
     <Compile Include="BoxDrawing\BoxFlags.cs" />
+    <Compile Include="Core\Cell.cs" />
+    <Compile Include="Core\Creator.cs" />
+    <Compile Include="Core\DefaultRandomGenerator.cs" />
+    <Compile Include="Core\ICreator.cs" />
+    <Compile Include="Core\IRandomGenerator.cs" />
+    <Compile Include="Core\Maze.cs" />
+    <Compile Include="Core\Position.cs" />
+    <Compile Include="Extensions\MazeExtensions.cs" />
+    <Compile Include="CellBoxDrawing\CellToString.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Creator\" />
     <Folder Include="BoxDrawing\" />
+    <Folder Include="Core\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="CellBoxDrawing\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="nunit.framework">
@@ -56,7 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="Core\packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

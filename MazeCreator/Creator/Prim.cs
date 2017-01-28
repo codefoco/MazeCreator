@@ -1,5 +1,7 @@
 ﻿using System;
-namespace MazeCreator
+using MazeCreator.Core;
+
+namespace MazeCreator.Creator
 {
 	public class Prim : ICreator
 	{

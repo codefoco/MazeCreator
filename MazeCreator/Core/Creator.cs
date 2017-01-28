@@ -1,5 +1,7 @@
 ﻿using System;
-namespace MazeCreator
+using MazeCreator.Creator;
+
+namespace MazeCreator.Core
 {
 	public enum Algorithm
 	{

@@ -1,5 +1,6 @@
 ﻿using System;
-namespace MazeCreator
+
+namespace MazeCreator.Core
 {
 	public class DefaultRandomGenerator : IRandomGenerator
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace MazeCreator
+namespace MazeCreator.Core
 {
 	public class Maze
 	{
@@ -87,6 +87,21 @@ namespace MazeCreator
 				   0 <= position.Column && position.Column < Columns;
 		}
 
+		public Cell CellAt (Position position)
+		{
+			return this [position];
+		}
+
+		public Cell CellAt (int line, int column)
+		{
+			return this [new Position (line, column)];
+		}
+
+		public Cell this [int line, int column] {
+			get {
+				return this [new Position (line, column)];
+			}
+		}
 
 		public Cell this[Position position] {
 			get {
@@ -103,33 +118,6 @@ namespace MazeCreator
 				int index = IndexFromPosition (position);
 				cells [index] = value;
 			}
-		}
-
-		public override string ToString ()
-		{
-			Position position = new Position (0, 0);
-			var builder = new StringBuilder ();
-
-			Cell topLeft  = Cell.EmptyCell;
-			Cell topRight = Cell.EmptyCell;;
-			Cell bottomLeft = Cell.EmptyCell;;
-			Cell bottomRight = Cell.EmptyCell;;
-
-			for (int line = 0; line <= Lines; line++) {
-				for (int column = 0; column <= Columns; column++) {
-					position.Line = line;
-					position.Column = column;
-
-					topLeft = this [position.UpLeft];
-					topRight = this [position.Up];
-					bottomLeft = this [position.Left];
-					bottomRight = this [position];
-					builder.Append (Cell.GetCellString (topLeft, topRight, bottomLeft, bottomRight));
-				}
-				builder.AppendLine ();
-			}
-			
-			return builder.ToString ();
 		}
 	}
 }
