@@ -42,5 +42,27 @@ To get cell information you can do:
 Building
 --------
 
-    `msbuild`
+    msbuild
+
+
+Kruskal
+--------
+
+To create a maze using Kruskal algorithm use:
+
+    Maze maze = Creator.Create (10, 10, Algorithm.Kruskal)
+
+This will create a maze like:
+
+    ┌─┬───┬─────┬───┬───┐ 
+    │ ╵ ╶─┤ ╷ ╶─┴─╴ │ ╷ │ 
+    ├─╴ ╶─┘ │ ╷ ┌─╴ ╵ └─┤ 
+    ├─╴ ╷ ╷ └─┼─┴─┬───┬─┤ 
+    │ ╶─┼─┤ ┌─┘ ╷ ├─╴ │ │ 
+    │ ╷ │ ╵ │ ╷ │ └─┐ │ │ 
+    ├─┴─┘ ╷ └─┘ │ ╶─┤ │ │ 
+    ├───╴ ├─╴ ┌─┴───┘ ╵ │ 
+    ├─┬─┐ │ ╷ └─╴ ╶─┬─╴ │ 
+    │ ╵ └─┘ │ ╷ ┌───┘ ╶─┤ 
+    └───────┴─┴─┴───────┘ 
 
