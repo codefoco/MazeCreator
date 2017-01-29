@@ -54,17 +54,6 @@ namespace MazeCreator.Creator
 			return directions [random.Next (directions.Length)];
 		}
 
-		void RemoveWalls (Position position, Position nextPosition, Direction direction, Maze maze)
-		{
-			Cell start = maze [position];
-			Cell end   = maze [nextPosition];
-
-			start.RemoveStartWall (direction);
-			end.RemoveEndWall (direction);
-
-			maze [position] = start;
-			maze [nextPosition] = end;
-		}
 
 
 		public Maze Create (int lines, int columns, IRandomGenerator random)
@@ -87,7 +76,7 @@ namespace MazeCreator.Creator
 					var direction = GetRandomDirection (directions, random);
 					var nextPosition = Maze.GetNextPosition (position, direction);
 
-					RemoveWalls (position, nextPosition, direction, maze);
+					maze.RemoveWalls (position, nextPosition, direction);
 
 					backtrack [backtrackPosition] = direction;
 					backtrackPosition++;

@@ -1,14 +1,49 @@
-﻿<Properties StartupConfiguration="{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}|Unit Tests">
+﻿<Properties StartupConfiguration="{CFC2AE61-4DAF-4B2E-B916-7AE826212432}|Unit Tests">
   <MonoDevelop.Ide.Workbench ActiveDocument="MazeCreatorTests/Tests/TestMaze.cs">
     <Files>
-      <File FileName="MazeCreatorTests/Tests/TestMaze.cs" Line="5" Column="7" />
+      <File FileName="MazeCreatorTests/Tests/TestMaze.cs" Line="38" Column="26" NotebookId="1" />
+      <File FileName="MazeCreator/Creator/Kruskal.cs" Line="80" Column="22" NotebookId="1" />
+      <File FileName="MazeCreator/Core/ICreator.cs" Line="3" Column="19" NotebookId="1" />
+      <File FileName="MazeCreator/Creator/DFS.cs" Line="47" Column="31" NotebookId="1" />
+      <File FileName="MazeCreator/Core/Creator.cs" Line="21" Column="1" NotebookId="1" />
+      <File FileName="MazeCreatorTests/Tests/TestRandomGenerator.cs" Line="8" Column="1" NotebookId="1" />
     </Files>
+    <FloatingWindows>
+      <FloatingWindow WindowId="1" X="472" Y="1141" Width="1448" Height="868">
+        <Files>
+          <File FileName="MazeCreator/Core/Cell.cs" Line="38" Column="28" />
+          <File FileName="MazeCreator/Core/Position.cs" Line="20" Column="21" />
+          <File FileName="MazeCreator/Extensions/MazeExtensions.cs" Line="26" Column="32" />
+          <File FileName="MazeCreator/Core/Maze.cs" Line="79" Column="31" />
+        </Files>
+      </FloatingWindow>
+    </FloatingWindows>
+    <Pads>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="MazeCreator" expanded="True">
+            <Node name="MazeCreatorTest" expanded="True">
+              <Node name="MazeCreatorTest" expanded="True">
+                <Node name="Tests" expanded="True">
+                  <Node name="CreatorTests" expanded="True">
+                    <Node name="Kruskal" selected="True" />
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.ItemProperties.MazeCreator PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/viniciusjarina/projects/viniciusjarina/MazeCreator/MazeCreatorTests/Tests/TestMaze.cs" relfile="MazeCreatorTests/Tests/TestMaze.cs" line="37" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.MazeCreatorTest PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

@@ -76,7 +76,7 @@ namespace MazeCreator.Core
 			return position;
 		}
 
-		int IndexFromPosition (Position position)
+		public int IndexFromPosition (Position position)
 		{
 			return Columns * position.Line + position.Column;
 		}
@@ -118,6 +118,18 @@ namespace MazeCreator.Core
 				int index = IndexFromPosition (position);
 				cells [index] = value;
 			}
+		}
+
+		public void RemoveWalls (Position position, Position nextPosition, Direction direction)
+		{
+			Cell start	= this [position];
+			Cell end 	= this [nextPosition];
+
+			start.RemoveStartWall (direction);
+			end.RemoveEndWall (direction);
+
+			this [position] 	= start;
+			this [nextPosition] = end;
 		}
 	}
 }
