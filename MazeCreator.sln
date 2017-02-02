@@ -1,9 +1,9 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator", "MazeCreator\MazeCreator.csproj", "{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator", "src\MazeCreator.csproj", "{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreatorTest", "MazeCreatorTests\MazeCreatorTest.csproj", "{CFC2AE61-4DAF-4B2E-B916-7AE826212432}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreatorTest", "tests\MazeCreatorTest.csproj", "{CFC2AE61-4DAF-4B2E-B916-7AE826212432}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

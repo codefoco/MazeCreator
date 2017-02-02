@@ -1,6 +1,10 @@
 Maze Creator
 ============
 
+|  | Status | 
+| :------ | :------: | 
+| **Linux** | [![Linux](https://travis-ci.org/viniciusjarina/MazeCreator.svg?branch=master)](https://travis-ci.org/viniciusjarina/MazeCreator) |
+
 This library will help you to create simple Mazes.
 
     using MazeCreator.Core;
@@ -65,4 +69,27 @@ This will create a maze like:
     ├─┬─┐ │ ╷ └─╴ ╶─┬─╴ │ 
     │ ╵ └─┘ │ ╷ ┌───┘ ╶─┤ 
     └───────┴─┴─┴───────┘ 
+
+
+Prim
+--------
+
+To create a maze using Prim algorithm use:
+
+    Maze maze = Creator.Create (10, 10, Algorithm.Prim)
+
+This will create a maze like:
+
+
+    ┌─┬─┬─────┬─┬─────┬─┐ 
+    │ ╵ ╵ ╷ ╷ ╵ ╵ ╶───┘ │ 
+    │ ┌─╴ │ │ ╶─┐ ╶─┐ ┌─┤ 
+    │ │ ╷ └─┤ ┌─┘ ╶─┴─┘ │ 
+    │ └─┼─╴ ├─┘ ╷ ╶─┐ ╷ │ 
+    │ ╷ │ ╷ ├─╴ │ ╷ ├─┤ │ 
+    ├─┘ ├─┘ └─┐ └─┴─┘ │ │ 
+    │ ╷ ├─┬───┘ ┌─╴ ╷ └─┤ 
+    │ │ │ ╵ ╶─┐ └─┐ │ ╷ │ 
+    │ └─┼─╴ ╷ ├───┴─┘ └─┤ 
+    └───┴───┴─┴─────────┘  
 

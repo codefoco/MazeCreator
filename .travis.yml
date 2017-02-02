@@ -1,0 +1,32 @@
+#
+# MazeCreator Travis-CI Hook
+#
+
+language: csharp
+
+before_install:
+  - export PATH=/opt/mono/bin:$PATH
+
+install:
+  - sudo apt-get install mono-devel cmake nunit
+
+script:
+  - xbuild /p:Configuration=Release
+  - nunit-console ./tests/Release/MazeCreatorTest.dll
+
+# Execute additional tests or commands
+#after_script:
+#  - [run additional test commans]
+
+# Only watch the master branch
+branches:
+  only:
+    - master
+
+# Notify if needed
+notifications:
+  recipients:
+    - viniciusjarina@gmail.com
+  email:
+    on_success: change
+    on_failure: always
