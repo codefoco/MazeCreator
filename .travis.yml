@@ -8,11 +8,11 @@ before_install:
   - export PATH=/opt/mono/bin:$PATH
 
 install:
-  - sudo apt-get install mono-devel cmake nunit
+  - sudo apt-get install mono-devel nunit
 
 script:
   - xbuild /p:Configuration=Release
-  - nunit-console ./tests/Release/MazeCreatorTest.dll
+  - nunit-console ./tests/bin/Release/MazeCreatorTest.dll
 
 # Execute additional tests or commands
 #after_script:
