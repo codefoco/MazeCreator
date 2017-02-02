@@ -144,13 +144,13 @@ namespace MazeCreator.Core
 
 		public void RemoveWalls (Position position, Position nextPosition, Direction direction)
 		{
-			Cell start	= this [position];
-			Cell end 	= this [nextPosition];
+			Cell start  = this [position];
+			Cell end    = this [nextPosition];
 
 			start.RemoveStartWall (direction);
 			end.RemoveEndWall (direction);
 
-			this [position] 	= start;
+			this [position]     = start;
 			this [nextPosition] = end;
 		}
 	}
