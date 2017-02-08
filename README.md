@@ -3,7 +3,7 @@ Maze Creator
 
 |  | Status | 
 | :------ | :------: | 
-| **Linux** | [![Linux](https://travis-ci.org/viniciusjarina/MazeCreator.svg?branch=master)](https://travis-ci.org/viniciusjarina/MazeCreator) |
+| **Linux** | [![Linux](https://travis-ci.org/codefoco/MazeCreator.svg?branch=master)](https://travis-ci.org/codefoco/MazeCreator) |
 
 This library will help you to create simple Mazes.
 
