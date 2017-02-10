@@ -26,6 +26,7 @@ using NUnit.Framework;
 
 using MazeCreator.Core;
 using MazeCreator.Extensions;
+using System;
 
 namespace MazeCreatorTest.Tests
 {
@@ -52,6 +53,7 @@ namespace MazeCreatorTest.Tests
 │ │ ╶─┘ ╷ ╵ └─┐ ╶─┘ │ 
 └─┴─────┴─────┴─────┘ 
 ";
+			expected = expected.Replace ("\n", Environment.NewLine);
 			Assert.AreEqual (expected, s);
 		}
 
@@ -75,6 +77,7 @@ namespace MazeCreatorTest.Tests
 │ ╵ └─┘ │ ╷ ┌───┘ ╶─┤ 
 └───────┴─┴─┴───────┘ 
 ";
+			expected = expected.Replace ("\n", Environment.NewLine);
 			Assert.AreEqual (expected, s);
 		}
 
@@ -98,6 +101,7 @@ namespace MazeCreatorTest.Tests
 │ └─┼─╴ ╷ ├───┴─┘ └─┤ 
 └───┴───┴─┴─────────┘ 
 ";
+			expected = expected.Replace ("\n", Environment.NewLine);
 			Assert.AreEqual (expected, s);
 		}
 	}

@@ -29,7 +29,7 @@ namespace MazeCreator.Extensions
 					bottomRight = maze [position];
 					builder.Append (CellToString.GetCellString (topLeft, topRight, bottomLeft, bottomRight));
 				}
-				builder.Append (Environment.NewLine);
+				builder.AppendLine ();
 			}
 
 			return builder.ToString ();
