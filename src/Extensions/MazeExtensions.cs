@@ -2,6 +2,7 @@
 
 using MazeCreator.Core;
 using MazeCreator.CellBoxDrawing;
+using System;
 
 namespace MazeCreator.Extensions
 {
@@ -28,7 +29,7 @@ namespace MazeCreator.Extensions
 					bottomRight = maze [position];
 					builder.Append (CellToString.GetCellString (topLeft, topRight, bottomLeft, bottomRight));
 				}
-				builder.AppendLine ();
+				builder.Append (Environment.NewLine);
 			}
 
 			return builder.ToString ();
