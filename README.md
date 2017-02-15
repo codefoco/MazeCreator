@@ -10,7 +10,7 @@ This library will help you to create simple Mazes.
 
     using MazeCreator.Core;
 
-    Maze maze = Creator.Create (10, 10);
+    Maze maze = Creator.GetCreator ().Create (10, 10);
 
 This will create a maze 10 x 10:
 
@@ -55,7 +55,7 @@ Kruskal
 
 To create a maze using Kruskal algorithm use:
 
-    Maze maze = Creator.Create (10, 10, Algorithm.Kruskal)
+    Maze maze = Creator.GetCreator (Algorithm.Kruskal).Create (10, 10)
 
 This will create a maze like:
 
@@ -77,7 +77,7 @@ Prim
 
 To create a maze using Prim algorithm use:
 
-    Maze maze = Creator.Create (10, 10, Algorithm.Prim)
+    Maze maze = Creator.GetCreator (Algorithm.Prim).Create (10, 10)
 
 This will create a maze like:
 
