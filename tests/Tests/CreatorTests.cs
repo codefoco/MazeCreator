@@ -37,7 +37,8 @@ namespace MazeCreatorTest.Tests
 		public void DFS ()
 		{
 			var random = new TestRandomGenerator ();
-			Maze maze = Creator.Create (10, 10, Algorithm.DFS, random);
+			ICreator creator = Creator.GetCreator (Algorithm.DFS, random);
+			Maze maze = creator.Create (10, 10);
 			string s = maze.ToBoxString();
 
 			string expected =
@@ -61,7 +62,8 @@ namespace MazeCreatorTest.Tests
 		public void Kruskal ()
 		{
 			var random = new TestRandomGenerator ();
-			Maze maze = Creator.Create (10, 10, Algorithm.Kruskal, random);
+			ICreator creator = Creator.GetCreator (Algorithm.Kruskal, random);
+			Maze maze = creator.Create (10, 10);
 			string s = maze.ToBoxString ();
 
 			string expected =
@@ -85,7 +87,8 @@ namespace MazeCreatorTest.Tests
 		public void Prim ()
 		{
 			var random = new TestRandomGenerator ();
-			Maze maze = Creator.Create (10, 10, Algorithm.Prim, random);
+			ICreator creator = Creator.GetCreator (Algorithm.Prim, random);
+			Maze maze = creator.Create (10, 10);
 			string s = maze.ToBoxString ();
 
 			string expected =
@@ -104,5 +107,27 @@ namespace MazeCreatorTest.Tests
 			expected = expected.Replace ("\n", Environment.NewLine);
 			Assert.AreEqual (expected, s);
 		}
+
+		[Test]
+		public void NotificationCreate ()
+		{
+			int position = 0;
+			int walls = 0;
+			var random = new TestRandomGenerator ();
+			ICreator creator = Creator.GetCreator (Algorithm.DFS, random);
+			creator.PositionVisited = (m, p) => {
+				position++;
+			};
+
+			creator.WallRemoved = (m, p, nextPosition, direction) => {
+				walls++;
+			};
+
+			creator.Create (10, 10);
+
+			Assert.AreEqual (167, position);
+			Assert.AreEqual (99, walls);
+		}
+		
 	}
 }

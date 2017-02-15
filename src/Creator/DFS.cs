@@ -23,6 +23,7 @@
  * THE SOFTWARE.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,6 +33,11 @@ namespace MazeCreator.Creator
 {
 	public class DFS : ICreator
 	{
+		public IRandomGenerator Random { get; set; }
+		
+		public Action<Maze, Position> PositionVisited { get; set; }
+		public Action<Maze, Position, Position, Direction> WallRemoved { get; set; }
+
 		Direction [] GetAvailableDirections (Maze maze, Position position)
 		{
 			var directions = new List<Direction> ();
@@ -81,10 +87,10 @@ namespace MazeCreator.Creator
 
 
 
-		public Maze Create (int lines, int columns, IRandomGenerator random)
+		public Maze Create (int lines, int columns)
 		{
 			Maze maze = new Maze (lines, columns);
-			var position = Position.RandomPosition (lines, columns, random);
+			var position = Position.RandomPosition (lines, columns, Random);
 
 			int totalCells = maze.TotalCells;
 			var backtrack = new Direction [totalCells];
@@ -96,12 +102,18 @@ namespace MazeCreator.Creator
 
 				var directions = GetAvailableDirections (maze, position);
 
+				if (PositionVisited != null)
+					PositionVisited (maze, position);
+
 				if (directions.Any ()) {
 
-					var direction = GetRandomDirection (directions, random);
+					var direction = GetRandomDirection (directions, Random);
 					var nextPosition = Maze.GetNextPosition (position, direction);
 
 					maze.RemoveWalls (position, nextPosition, direction);
+
+					if (WallRemoved != null)
+						WallRemoved (maze, position, nextPosition, direction);
 
 					backtrack [backtrackPosition] = direction;
 					backtrackPosition++;

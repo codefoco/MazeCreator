@@ -33,7 +33,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tests\TestMaze.cs" />
+    <Compile Include="Tests\CreatorTests.cs" />
     <Compile Include="Tests\TestRandomGenerator.cs" />
   </ItemGroup>
   <ItemGroup>

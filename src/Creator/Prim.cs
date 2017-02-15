@@ -22,14 +22,22 @@
  * THE SOFTWARE.
  */
 
-using MazeCreator.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using MazeCreator.Core;
+
 namespace MazeCreator.Creator
 {
+	
 	public class Prim : ICreator
 	{
+		public IRandomGenerator Random { get; set; }
+		
+		public Action<Maze, Position> PositionVisited { get; set; }
+		public Action<Maze, Position, Position, Direction> WallRemoved { get; set; }
+
 		void MoveCell (List<Position> from, List<Position> to, int index)
 		{
 			if (index == -1)
@@ -39,7 +47,7 @@ namespace MazeCreator.Creator
 			from.RemoveAt (index);
 		}
 
-		public Maze Create (int lines, int columns, IRandomGenerator random)
+		public Maze Create (int lines, int columns)
 		{
 			Maze maze = new Maze (lines, columns);
 
@@ -66,7 +74,7 @@ namespace MazeCreator.Creator
 				}
 			}
 			
-			index = random.Next (totalCells);
+			index = Random.Next (totalCells);
 			position  = output [index];
 
 			MoveCell (output, input, index);
@@ -85,7 +93,7 @@ namespace MazeCreator.Creator
 
 			while (frontier.Any ()) {
 				
-				index = random.Next (frontier.Count);
+				index = Random.Next (frontier.Count);
 				position  = frontier [index];
 
 				MoveCell (frontier, input, index);
@@ -128,7 +136,7 @@ namespace MazeCreator.Creator
 				if (position.Line < (lines - 1) && input.IndexOf (downCell) >= 0)
 					directions [candidates++] = Direction.Down;
 				
-				Direction direction = directions [random.Next (candidates)];
+				Direction direction = directions [Random.Next (candidates)];
 
 				var nextPosition = Maze.GetNextPosition (position, direction);
 				maze.RemoveWalls (position, nextPosition, direction);

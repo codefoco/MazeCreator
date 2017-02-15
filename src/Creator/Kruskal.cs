@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+using System;
 
 using MazeCreator.Core;
 
@@ -40,6 +41,11 @@ namespace MazeCreator.Creator
 
 	public class Kruskal : ICreator
 	{
+		public IRandomGenerator Random { get; set; }
+		
+		public Action<Maze, Position> PositionVisited { get; set; }
+		public Action<Maze, Position, Position, Direction> WallRemoved { get; set; }
+
 		int [] unionFind;
 
 		int Find (int n)
@@ -60,7 +66,7 @@ namespace MazeCreator.Creator
 			}
 		}
 
-		public Maze Create (int lines, int columns, IRandomGenerator random)
+		public Maze Create (int lines, int columns)
 		{
 			Maze maze = new Maze (lines, columns);
 			int totalCells = maze.TotalCells;
@@ -97,7 +103,7 @@ namespace MazeCreator.Creator
 
 			while (visited < totalCells) {
 				
-				index = random.Next (wallIndex--);
+				index = Random.Next (wallIndex--);
 
 				start = walls [index].Position;
 				Direction direction = walls [index].Direction;

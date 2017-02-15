@@ -36,16 +36,18 @@ namespace MazeCreator.Core
 
 	public static class Creator
 	{
-		public static Maze Create (int lines, int columns, Algorithm algoritm = Algorithm.DFS, IRandomGenerator random = null)
+		public static ICreator GetCreator (Algorithm algoritm = Algorithm.DFS, IRandomGenerator random = null)
 		{
 			if (random == null)
 				random = new DefaultRandomGenerator ();
 
-			ICreator creator = GetCreator (algoritm);
-			return creator.Create (lines, columns, random);
+			ICreator creator = CreatorFromAlgorithm (algoritm);
+			creator.Random = random;
+
+			return creator;
 		}
 
-		static ICreator GetCreator (Algorithm algorithm)
+		static ICreator CreatorFromAlgorithm (Algorithm algorithm)
 		{
 			switch (algorithm) {
 			case Algorithm.DFS:

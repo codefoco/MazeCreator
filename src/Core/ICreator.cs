@@ -22,10 +22,16 @@
  * THE SOFTWARE.
  */
 
+using System;
+
 namespace MazeCreator.Core
 {
 	public interface ICreator
 	{
-		Maze Create (int lines, int columns, IRandomGenerator random);
+		Maze Create (int lines, int columns);
+
+		IRandomGenerator Random { get; set; }
+		Action<Maze, Position> PositionVisited { get; set; }
+		Action<Maze, Position, Position, Direction> WallRemoved { get; set; }
 	}
 }
