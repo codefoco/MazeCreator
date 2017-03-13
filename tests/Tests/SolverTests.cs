@@ -22,54 +22,36 @@
  * THE SOFTWARE.
  */
 
+using System.Linq;
+
+using NUnit.Framework;
+
 using MazeCreator.Core;
+using MazeCreator;
 
-namespace MazeCreator
+namespace MazeCreatorTest.Tests
 {
-	public struct PositionDirection
+	[TestFixture]
+	public class SolverTests
 	{
-		public PositionDirection (Position position, Direction direction)
+		[Test]
+		public void DefaultSolver ()
 		{
-			Position  = position;
-			Direction = direction;
-		}
+			var random = new TestRandomGenerator ();
+			ICreator creator = Creator.GetCreator (Algorithm.DFS, random);
+			Maze maze = creator.Create (3, 3);
 
-		public Position Position {
-			get;
-			set;
-		}
+			IMazeSolver solver = Solver.Create (random);
 
-		public Direction Direction {
-			get;
-			set;
-		}
+			PositionDirection [] steps = solver.Solve (maze, new Position (0, 0), new Position (2, 2));
 
-		public override bool Equals (object obj)
-		{
-			var positionDirection = obj as PositionDirection?;
-			if (positionDirection == null)
-				return false;
-			return this == positionDirection;
-		}
-
-		public static bool operator == (PositionDirection lhs, PositionDirection rhs)
-		{
-			return lhs.Position == rhs.Position && lhs.Direction == rhs.Direction;
-		}
-
-		public static bool operator != (PositionDirection lhs, PositionDirection rhs)
-		{
-			return !(lhs == rhs);
-		}
-
-		public override int GetHashCode ()
-		{
-			return Position.GetHashCode () ^ Direction.GetHashCode ();
-		}
-
-		public override string ToString ()
-		{
-			return string.Format ("[Position: {0}, Direction={1}]", Position.ToString (), Direction.ToString ());
+			PositionDirection [] expected = {
+				new PositionDirection (new Position (0,0), Direction.Left),
+				new PositionDirection (new Position (0,1), Direction.Down),
+				new PositionDirection (new Position (1,1), Direction.Left),
+				new PositionDirection (new Position (1,2), Direction.Down),
+			};
+			Assert.True (expected.SequenceEqual (steps), "#1");
 		}
 	}
 }

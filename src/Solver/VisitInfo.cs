@@ -10,6 +10,7 @@ namespace MazeCreator
 		BottomPath = 1 << 2,
 		RightPath  = 1 << 3,
 		CellPath   = 1 << 4,
+		Visited    = CellPath,
 
 		CellTopPath    = CellPath | TopPath,
 		CellLeftPath   = CellPath | LeftPath,

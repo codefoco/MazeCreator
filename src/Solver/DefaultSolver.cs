@@ -33,24 +33,26 @@ namespace MazeCreator
 {
 	public class DefaultSolver : IMazeSolver
 	{
-		IRandomGenerator Random { get; set; }
+		public IRandomGenerator Random { get; set; }
 
-		Action<Maze, Position> PositionVisited { get; set; }
-		Action<Maze, Position> WalkBack { get; set; }
+		public Action<Maze, Position> PositionVisited { get; set; }
+		public Action<Maze, Position> WalkBack { get; set; }
 
 		public PositionDirection [] Solve (Maze maze, Position start, Position end)
 		{
-			var backtrack = new Direction [mazeToSolve.TotalCells];
+			var backtrack         = new Direction [maze.TotalCells];
 			int backtrackPosition = 0;
+
 			Position currentPosition = start;
+
 			var steps = new List<PositionDirection> ();
 
 			CellVisitBuffer buffer = new CellVisitBuffer (maze.Lines, maze.Columns);
 
-			buffer [start].Visit ();
+			buffer [start] = CellVisit.Visited;
 
 			while (currentPosition != end) {
-				if (CanGoUp (currentPosition, buffer, maze))
+				
 			}
 		
 
@@ -65,17 +67,17 @@ namespace MazeCreator
 		}
 
 
-		static Direction [] GetAvailableDirections (CellVisitBuffer buffer, Position position)
+		static Direction [] GetAvailableDirections (CellVisitBuffer buffer,Maze maze, Position position)
 		{
 			var directions = new List<Direction> (4);
 
-			if (CanGoUp (position, maze))
+			if (CanGoUp (position, buffer, maze))
 				directions.Add (Direction.Up);
-			if (CanGoLeft (position, maze))
+			if (CanGoLeft (position, buffer, maze))
 				directions.Add (Direction.Left);
-			if (CanGoDown (position, maze))
+			if (CanGoDown (position, buffer, maze))
 				directions.Add (Direction.Down);
-			if (CanGoRight (position, maze))
+			if (CanGoRight (position, buffer, maze))
 				directions.Add (Direction.Right);
 
 			return directions.ToArray ();
@@ -83,26 +85,30 @@ namespace MazeCreator
 
 		static bool CanGoUp (Position position, CellVisitBuffer buffer, Maze maze)
 		{
-			CellVisit cell = buffer [position];
-			return !cell.HasTopWall && !buffer [position.Up].Visited;
+			CellVisit visitCell = buffer [position];
+			Cell cell = maze [position];
+			return !cell.HasTopWall && !visitCell.Visited;
 		}
 
-		static bool CanGoLeft (Position position, CellVisitBuffer buffer)
+		static bool CanGoLeft (Position position, CellVisitBuffer buffer, Maze maze)
 		{
-			CellVisit cell = buffer [position];
-			return !cell.HasLeftWall && !maze [position.Left].Visited;
+			CellVisit visitCell = buffer [position];
+			Cell cell = maze [position];
+			return !cell.HasLeftWall && !visitCell.Visited;
 		}
 
-		static bool CanGoDown (Position position, CellVisitBuffer buffer)
+		static bool CanGoDown (Position position, CellVisitBuffer buffer, Maze maze)
 		{
-			CellVisit cell = buffer [position];
-			return !cell.HasBottomWall && !maze [position.Down].Visited;
+			CellVisit visitCell = buffer [position];
+			Cell cell = maze [position];
+			return !cell.HasBottomWall && !visitCell.Visited;
 		}
 
-		static bool CanGoRight (Position position, CellVisitBuffer buffer)
+		static bool CanGoRight (Position position, CellVisitBuffer buffer, Maze maze)
 		{
-			CellVisit cell = buffer [position];
-			return !cell.HasRightWall && !maze [position.Down].Visited;
+			CellVisit visitCell = buffer [position];
+			Cell cell = maze [position];
+			return !cell.HasRightWall && !visitCell.Visited;
 		}
 
 	}

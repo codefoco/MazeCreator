@@ -4,7 +4,7 @@ namespace MazeCreator
 {
 	public static class  Solver
 	{
-		static IMazeSolver Create (IRandomGenerator random = null)
+		public static IMazeSolver Create (IRandomGenerator random = null)
 		{
 			if (random == null)
 				random = new DefaultRandomGenerator ();

@@ -39,6 +39,9 @@ namespace MazeCreatorTest.Tests
 			var random = new TestRandomGenerator ();
 			ICreator creator = Creator.GetCreator (Algorithm.DFS, random);
 			Maze maze = creator.Create (10, 10);
+			Maze maze3 = creator.Create (3, 3);
+
+			string x = maze3.ToBoxString ();
 			string s = maze.ToBoxString();
 
 			string expected =

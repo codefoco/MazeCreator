@@ -35,6 +35,7 @@
   <ItemGroup>
     <Compile Include="Tests\CreatorTests.cs" />
     <Compile Include="Tests\TestRandomGenerator.cs" />
+    <Compile Include="Tests\SolverTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests\" />

@@ -15,19 +15,18 @@
 			}
 		}
 
+		public static CellVisit Visited {
+			get {
+				return new CellVisit (VisitInfo.Visited);
+			}
+		}
+
 		public VisitInfo VisitInfo {
 			get {
 				return info;
 			}
 		}
 
-		public bool Visited {
-			get {
-				
-			}
-			set {
-				
-			}
-		}
+
 	}
 }

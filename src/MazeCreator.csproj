@@ -54,7 +54,7 @@
     <Compile Include="Core\CellInfo.cs" />
     <Compile Include="Core\Direction.cs" />
     <Compile Include="Solver\VisitInfo.cs" />
-    <Compile Include="Solver\MazeSolver.cs" />
+    <Compile Include="Solver\CellVisitBuffer.cs" />
     <Compile Include="Solver\CellVisit.cs" />
   </ItemGroup>
   <ItemGroup>
