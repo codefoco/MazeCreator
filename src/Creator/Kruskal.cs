@@ -27,18 +27,6 @@ using MazeCreator.Core;
 
 namespace MazeCreator.Creator
 {
-	struct PositionDirection
-	{
-		public Position Position {
-			get;
-			set;
-		}
-		public Direction Direction {
-			get;
-			set;
-		}
-	}
-
 	public class Kruskal : ICreator
 	{
 		public IRandomGenerator Random { get; set; }
@@ -116,8 +104,8 @@ namespace MazeCreator.Creator
 				else
 					end = start.Left;
 				
-				root1 = Find (maze.IndexFromPosition (start));
-				root2 = Find (maze.IndexFromPosition (end));
+				root1 = Find (Position.IndexFromPosition (start, maze.Columns));
+				root2 = Find (Position.IndexFromPosition (end, maze.Columns));
 
 				if (root1 != root2) {
 					

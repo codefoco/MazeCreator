@@ -78,6 +78,41 @@ namespace MazeCreator.Core
 			return new Position (line, column);
 		}
 
+		public static Position GetNextPosition (Position position, Direction direction)
+		{
+			switch (direction) {
+			case Direction.Up:
+				return new Position (position.Line - 1, position.Column);
+			case Direction.Left:
+				return new Position (position.Line, position.Column - 1);
+			case Direction.Down:
+				return new Position (position.Line + 1, position.Column);
+			case Direction.Right:
+				return new Position (position.Line, position.Column + 1);
+			}
+			return position;
+		}
+
+		public static Position GetPreviousPosition (Position position, Direction direction)
+		{
+			switch (direction) {
+			case Direction.Up:
+				return new Position (position.Line + 1, position.Column);
+			case Direction.Left:
+				return new Position (position.Line, position.Column + 1);
+			case Direction.Down:
+				return new Position (position.Line - 1, position.Column);
+			case Direction.Right:
+				return new Position (position.Line, position.Column - 1);
+			}
+			return position;
+		}
+
+		public static int IndexFromPosition (Position position, int columns)
+		{
+			return columns * position.Line + position.Column;
+		}
+
 		public override bool Equals (object obj)
 		{
 			var position = obj as Position?;

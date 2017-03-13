@@ -138,7 +138,7 @@ namespace MazeCreator.Creator
 				
 				Direction direction = directions [Random.Next (candidates)];
 
-				var nextPosition = Maze.GetNextPosition (position, direction);
+				var nextPosition = Position.GetNextPosition (position, direction);
 				maze.RemoveWalls (position, nextPosition, direction);
 			}
 
