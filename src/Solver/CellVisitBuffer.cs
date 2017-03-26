@@ -64,5 +64,17 @@ namespace MazeCreator
 				cells [index] = value;
 			}
 		}
+
+		public void WalkPath (Position position, Position nextPosition, Direction direction)
+		{
+			CellVisit start = this [position];
+			CellVisit end = this [nextPosition];
+
+			start.MarkStartCell (direction);
+			end.MarkEndCell (direction);
+
+			this [position] = start;
+			this [nextPosition] = end;
+		}
 	}
 }

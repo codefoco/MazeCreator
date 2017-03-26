@@ -90,7 +90,7 @@ namespace MazeCreator.Creator
 		public Maze Create (int lines, int columns)
 		{
 			Maze maze = new Maze (lines, columns);
-			var position = Position.RandomPosition (lines, columns, Random);
+			Position position = Position.RandomPosition (lines, columns, Random);
 
 			int totalCells = maze.TotalCells;
 			var backtrack = new Direction [totalCells];
@@ -100,7 +100,7 @@ namespace MazeCreator.Creator
 
 			while (visited < totalCells) {
 
-				var directions = GetAvailableDirections (maze, position);
+				Direction [] directions = GetAvailableDirections (maze, position);
 
 				if (PositionVisited != null)
 					PositionVisited (maze, position);

@@ -43,31 +43,44 @@ namespace MazeCreator
 			var backtrack         = new Direction [maze.TotalCells];
 			int backtrackPosition = 0;
 
-			Position currentPosition = start;
+			Position position = start;
 
 			var steps = new List<PositionDirection> ();
 
 			CellVisitBuffer buffer = new CellVisitBuffer (maze.Lines, maze.Columns);
 
-			buffer [start] = CellVisit.Visited;
+			buffer [start] = CellVisit.VisitedCell;
 
-			while (currentPosition != end) {
+			while (position != end) {
 				
+				Direction [] directions = GetAvailableDirections (buffer, maze, position);
+
+				if (directions.Any ()) {
+
+					Direction direction = GetRandomDirection (directions);
+					Position nextPosition = Position.GetNextPosition (position, direction);
+
+					buffer.WalkPath (position, nextPosition, direction);
+
+					if (PositionVisited != null)
+						PositionVisited (maze, position);
+				} else {
+				}
 			}
 		
 
 			return steps.ToArray ();
 		}
 
-		static Direction GetRandomDirection (Direction [] directions, IRandomGenerator random)
+		Direction GetRandomDirection (Direction [] directions)
 		{
 			if (directions.Length == 1)
 				return directions [0];
-			return directions [random.Next (directions.Length)];
+			return directions [Random.Next (directions.Length)];
 		}
 
 
-		static Direction [] GetAvailableDirections (CellVisitBuffer buffer,Maze maze, Position position)
+		static Direction [] GetAvailableDirections (CellVisitBuffer buffer, Maze maze, Position position)
 		{
 			var directions = new List<Direction> (4);
 
