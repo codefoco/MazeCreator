@@ -60,11 +60,19 @@ namespace MazeCreator
 					Direction direction = GetRandomDirection (directions);
 					Position nextPosition = Position.GetNextPosition (position, direction);
 
+					backtrack [backtrackPosition] = direction;
+					backtrackPosition++;
+
 					buffer.WalkPath (position, nextPosition, direction);
+					position = nextPosition;
 
 					if (PositionVisited != null)
 						PositionVisited (maze, position);
+
+
 				} else {
+					backtrackPosition--;
+					Direction direction = backtrack [backtrackPosition];
 				}
 			}
 		
@@ -98,28 +106,28 @@ namespace MazeCreator
 
 		static bool CanGoUp (Position position, CellVisitBuffer buffer, Maze maze)
 		{
-			CellVisit visitCell = buffer [position];
+			CellVisit visitCell = buffer [position.Up];
 			Cell cell = maze [position];
 			return !cell.HasTopWall && !visitCell.Visited;
 		}
 
 		static bool CanGoLeft (Position position, CellVisitBuffer buffer, Maze maze)
 		{
-			CellVisit visitCell = buffer [position];
+			CellVisit visitCell = buffer [position.Left];
 			Cell cell = maze [position];
 			return !cell.HasLeftWall && !visitCell.Visited;
 		}
 
 		static bool CanGoDown (Position position, CellVisitBuffer buffer, Maze maze)
 		{
-			CellVisit visitCell = buffer [position];
+			CellVisit visitCell = buffer [position.Down];
 			Cell cell = maze [position];
 			return !cell.HasBottomWall && !visitCell.Visited;
 		}
 
 		static bool CanGoRight (Position position, CellVisitBuffer buffer, Maze maze)
 		{
-			CellVisit visitCell = buffer [position];
+			CellVisit visitCell = buffer [position.Right];
 			Cell cell = maze [position];
 			return !cell.HasRightWall && !visitCell.Visited;
 		}

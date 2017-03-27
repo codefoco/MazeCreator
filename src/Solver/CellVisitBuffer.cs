@@ -51,7 +51,7 @@ namespace MazeCreator
 		public CellVisit this [Position position] {
 			get {
 				if (!IsValidPosition (position))
-					return CellVisit.NotVisited;
+					return CellVisit.NotVisitedCell;
 
 				int index = IndexFromPosition (position);
 				return cells [index];
