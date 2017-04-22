@@ -38,9 +38,9 @@ namespace MazeCreator.Creator
 		public Action<Maze, Position> PositionVisited { get; set; }
 		public Action<Maze, Position, Position, Direction> WallRemoved { get; set; }
 
-		Direction [] GetAvailableDirections (Maze maze, Position position)
+		static Direction [] GetAvailableDirections (Maze maze, Position position)
 		{
-			var directions = new List<Direction> ();
+			var directions = new List<Direction> (4);
 
 			if (CanGoUp (position, maze))
 				directions.Add (Direction.Up);
@@ -54,31 +54,31 @@ namespace MazeCreator.Creator
 			return directions.ToArray ();
 		}
 
-		bool CanGoUp (Position position, Maze maze)
+		static bool CanGoUp (Position position, Maze maze)
 		{
 			Cell cell = maze [position];
 			return !cell.HasTopBorder && maze [position.Up].HasAllWalls;
 		}
 
-		bool CanGoLeft (Position position, Maze maze)
+		static bool CanGoLeft (Position position, Maze maze)
 		{
 			Cell cell = maze [position];
 			return !cell.HasLeftBorder && maze [position.Left].HasAllWalls;
 		}
 
-		bool CanGoDown (Position position, Maze maze)
+		static bool CanGoDown (Position position, Maze maze)
 		{
 			Cell cell = maze [position];
 			return !cell.HasBottomBorder && maze [position.Down].HasAllWalls;
 		}
 
-		bool CanGoRight (Position position, Maze maze)
+		static bool CanGoRight (Position position, Maze maze)
 		{
 			Cell cell = maze [position];
 			return !cell.HasRightBorder && maze [position.Right].HasAllWalls;
 		}
 
-		Direction GetRandomDirection (Direction [] directions, IRandomGenerator random)
+		static Direction GetRandomDirection (Direction [] directions, IRandomGenerator random)
 		{
 			if (directions.Length == 1)
 				return directions [0];
@@ -90,7 +90,7 @@ namespace MazeCreator.Creator
 		public Maze Create (int lines, int columns)
 		{
 			Maze maze = new Maze (lines, columns);
-			var position = Position.RandomPosition (lines, columns, Random);
+			Position position = Position.RandomPosition (lines, columns, Random);
 
 			int totalCells = maze.TotalCells;
 			var backtrack = new Direction [totalCells];
@@ -100,15 +100,15 @@ namespace MazeCreator.Creator
 
 			while (visited < totalCells) {
 
-				var directions = GetAvailableDirections (maze, position);
+				Direction [] directions = GetAvailableDirections (maze, position);
 
 				if (PositionVisited != null)
 					PositionVisited (maze, position);
 
 				if (directions.Any ()) {
 
-					var direction = GetRandomDirection (directions, Random);
-					var nextPosition = Maze.GetNextPosition (position, direction);
+					Direction direction = GetRandomDirection (directions, Random);
+					Position nextPosition = Position.GetNextPosition (position, direction);
 
 					maze.RemoveWalls (position, nextPosition, direction);
 
@@ -123,7 +123,7 @@ namespace MazeCreator.Creator
 					visited++;
 				} else {
 					backtrackPosition--;
-					position = Maze.GetPreviousPosition (position, backtrack [backtrackPosition]);
+					position = Position.GetPreviousPosition (position, backtrack [backtrackPosition]);
 				}
 			}
 

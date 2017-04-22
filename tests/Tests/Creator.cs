@@ -31,14 +31,17 @@ using System;
 namespace MazeCreatorTest.Tests
 {
 	[TestFixture]
-	public class CreatorTests
+	public class Creator
 	{
 		[Test]
 		public void DFS ()
 		{
 			var random = new TestRandomGenerator ();
-			ICreator creator = Creator.GetCreator (Algorithm.DFS, random);
+			ICreator creator = MazeCreator.Core.Creator.GetCreator (Algorithm.DFS, random);
 			Maze maze = creator.Create (10, 10);
+			Maze maze3 = creator.Create (3, 3);
+
+			string x = maze3.ToBoxString ();
 			string s = maze.ToBoxString();
 
 			string expected =
@@ -62,7 +65,7 @@ namespace MazeCreatorTest.Tests
 		public void Kruskal ()
 		{
 			var random = new TestRandomGenerator ();
-			ICreator creator = Creator.GetCreator (Algorithm.Kruskal, random);
+			ICreator creator = MazeCreator.Core.Creator.GetCreator (Algorithm.Kruskal, random);
 			Maze maze = creator.Create (10, 10);
 			string s = maze.ToBoxString ();
 
@@ -87,7 +90,7 @@ namespace MazeCreatorTest.Tests
 		public void Prim ()
 		{
 			var random = new TestRandomGenerator ();
-			ICreator creator = Creator.GetCreator (Algorithm.Prim, random);
+			ICreator creator = MazeCreator.Core.Creator.GetCreator (Algorithm.Prim, random);
 			Maze maze = creator.Create (10, 10);
 			string s = maze.ToBoxString ();
 
@@ -114,7 +117,7 @@ namespace MazeCreatorTest.Tests
 			int position = 0;
 			int walls = 0;
 			var random = new TestRandomGenerator ();
-			ICreator creator = Creator.GetCreator (Algorithm.DFS, random);
+			ICreator creator = MazeCreator.Core.Creator.GetCreator (Algorithm.DFS, random);
 			creator.PositionVisited = (m, p) => {
 				position++;
 			};

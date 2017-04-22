@@ -22,53 +22,19 @@
  * THE SOFTWARE.
  */
 
-using System;
+using MazeCreator.Extensions;
 
 namespace MazeCreator.Core
 {
-	[Flags]
-	public enum CellInfo : byte
-	{
-		EmptyCell    = 0,
-		TopWall      = 1 << 0,
-		LeftWall     = 1 << 1,
-		BottomWall   = 1 << 2,
-		RightWall    = 1 << 3,
-		AllWalls     = TopWall | LeftWall | BottomWall | RightWall,
-		TopBorder    = 1 << 4,
-		LeftBorder   = 1 << 5,
-		BottomBorder = 1 << 6,
-		RightBorder  = 1 << 7,
-		RemoveTopWall    = ~TopWall     & 0xFF,
-		RemoveLeftWall   = ~LeftWall    & 0xFF,
-		RemoveBottomWall = ~BottomWall  & 0xFF,
-		RemoveRightWall  = ~RightWall   & 0xFF,
-	}
-
-	public enum Direction : byte
-	{
-		Up,
-		Left,
-		Down,
-		Right,
-	}
-
 	public struct Cell
 	{
 		CellInfo info;
 
-		readonly static CellInfo [] removeWallFlagsStart = {
+		readonly static CellInfo [] removeWallFlags = {
 			CellInfo.RemoveTopWall,
 			CellInfo.RemoveLeftWall,
 			CellInfo.RemoveBottomWall,
 			CellInfo.RemoveRightWall,
-		};
-
-		readonly static CellInfo [] removeWallFlagsEnd = {
-			CellInfo.RemoveBottomWall,
-			CellInfo.RemoveRightWall,
-			CellInfo.RemoveTopWall,
-			CellInfo.RemoveLeftWall,
 		};
 
 		public Cell (CellInfo info)
@@ -144,12 +110,12 @@ namespace MazeCreator.Core
 
 		public void RemoveStartWall (Direction direction)
 		{
-			info &= removeWallFlagsStart [(int)direction];
+			info &= removeWallFlags [(int)direction];
 		}
 
 		public void RemoveEndWall (Direction direction)
 		{
-			info &= removeWallFlagsEnd [(int)direction];
+			info &= removeWallFlags [(int)direction.Oposite()];
 		}
 
 		public override bool Equals (object obj)

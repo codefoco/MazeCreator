@@ -42,12 +42,13 @@ namespace MazeCreator.Core
 
 		readonly Cell [] cells;
 
+
 		public Maze (int lines, int columns)
 		{
 			Columns = columns;
 			Lines = lines;
 
-			cells = new Cell [lines * columns];
+			cells = new Cell [TotalCells];
 			for (int i = 0; i < TotalCells; i++)
 				cells [i] = new Cell (CellInfo.AllWalls);
 			                                             
@@ -68,39 +69,9 @@ namespace MazeCreator.Core
 			}
 		}
 
-		public static Position GetNextPosition (Position position, Direction direction)
+		int IndexFromPosition (Position position)
 		{
-			switch (direction) {
-				case Direction.Up:
-					return new Position (position.Line - 1, position.Column);
-				case Direction.Left:
-					return new Position (position.Line, position.Column - 1);
-				case Direction.Down:
-					return new Position (position.Line + 1, position.Column);
-				case Direction.Right:
-					return new Position (position.Line, position.Column + 1);
-				}
-			return position;
-		}
-
-		public static Position GetPreviousPosition (Position position, Direction direction)
-		{
-			switch (direction) {
-			case Direction.Up:
-				return new Position (position.Line + 1, position.Column);
-			case Direction.Left:
-				return new Position (position.Line, position.Column + 1);
-			case Direction.Down:
-				return new Position (position.Line - 1, position.Column);
-			case Direction.Right:
-				return new Position (position.Line, position.Column - 1);
-			}
-			return position;
-		}
-
-		public int IndexFromPosition (Position position)
-		{
-			return Columns * position.Line + position.Column;
+			return Position.IndexFromPosition (position, Columns);
 		}
 
 		bool IsValidPosition (Position position)

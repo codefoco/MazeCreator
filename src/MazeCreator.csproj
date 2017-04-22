@@ -47,6 +47,16 @@
     <Compile Include="Core\Position.cs" />
     <Compile Include="Extensions\MazeExtensions.cs" />
     <Compile Include="CellBoxDrawing\CellToString.cs" />
+    <Compile Include="Solver\DefaultSolver.cs" />
+    <Compile Include="Core\PositionDirection.cs" />
+    <Compile Include="Solver\IMazeSolver.cs" />
+    <Compile Include="Solver\Solver.cs" />
+    <Compile Include="Core\CellInfo.cs" />
+    <Compile Include="Core\Direction.cs" />
+    <Compile Include="Solver\VisitInfo.cs" />
+    <Compile Include="Solver\CellVisitBuffer.cs" />
+    <Compile Include="Solver\CellVisit.cs" />
+    <Compile Include="Extensions\DirectionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Creator\" />
@@ -54,6 +64,7 @@
     <Folder Include="Core\" />
     <Folder Include="Extensions\" />
     <Folder Include="CellBoxDrawing\" />
+    <Folder Include="Solver\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Core\packages.config" />
