@@ -6,19 +6,21 @@ namespace MazeCreator
 	{
 		VisitInfo info;
 
-		readonly static VisitInfo [] visitWallFlagsStart = {
-			VisitInfo.CellBottomPath,
-			VisitInfo.CellLeftPath,
-			VisitInfo.CellTopPath,
-			VisitInfo.CellBottomPath,
+		readonly static VisitInfo [] visitPathFlags = {
+			VisitInfo.TopPath,
+			VisitInfo.LeftPath,
+			VisitInfo.BottomPath,
+			VisitInfo.RightPath,
 		};
 
-		readonly static VisitInfo [] visitWallFlagsEnd = {
-			VisitInfo.TopPath,
-			VisitInfo.RightPath,
-			VisitInfo.BottomPath,
-			VisitInfo.LeftPath,
+
+		readonly static VisitInfo [] visitBackPathFlags = {
+			VisitInfo.TopBack,
+			VisitInfo.LeftBack,
+			VisitInfo.BottomBack,
+			VisitInfo.RightBack,
 		};
+
 
 		public CellVisit (VisitInfo info)
 		{
@@ -49,16 +51,27 @@ namespace MazeCreator
 			}
 		}
 
-		public void MarkStartCell (Direction direction)
+		public void MarkStartCellPath (Direction direction)
 		{
-			info |= visitWallFlagsStart [(int)direction];
+			info |= visitPathFlags [(int)direction] | VisitInfo.Visited;
 		}
 
-		public void MarkEndCell (Direction direction)
+		public void MarkEndCellPath (Direction direction)
 		{
-			info |= visitWallFlagsEnd [(int)direction];
+			info |= visitPathFlags [(int)direction];
 		}
 
+		public void MarkStartCellBackPath (Direction direction)
+		{
+			VisitInfo flag = visitPathFlags [(int)direction];
+			info &= ~flag;
+			info |= visitBackPathFlags [(int)direction] | VisitInfo.Visited;
+		}
 
+		public void MarkEndCellBackPath (Direction direction)
+		{
+			info &= ~(visitPathFlags[(int)direction]);
+			info |= visitBackPathFlags [(int)direction];
+		}
 	}
 }

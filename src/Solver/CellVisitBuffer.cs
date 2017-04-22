@@ -1,4 +1,5 @@
 ﻿using MazeCreator.Core;
+using MazeCreator.Extensions;
 
 namespace MazeCreator
 {
@@ -70,8 +71,20 @@ namespace MazeCreator
 			CellVisit start = this [position];
 			CellVisit end = this [nextPosition];
 
-			start.MarkStartCell (direction);
-			end.MarkEndCell (direction);
+			start.MarkStartCellPath (direction.Oposite ());
+			end.MarkEndCellPath (direction);
+
+			this [position] = start;
+			this [nextPosition] = end;
+		}
+
+		public void WalkBackPath (Position position, Position nextPosition, Direction direction)
+		{
+			CellVisit start = this [position];
+			CellVisit end = this [nextPosition];
+
+			start.MarkStartCellBackPath (direction.Oposite ());
+			end.MarkEndCellBackPath (direction);
 
 			this [position] = start;
 			this [nextPosition] = end;

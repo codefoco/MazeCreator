@@ -1,4 +1,4 @@
-﻿/*
+﻿﻿/*
  * This file is part of MazeCreator.
  * 
  * Copyright (c) 2017 Vinicius Jarina (viniciusjarina@gmail.com)
@@ -32,24 +32,24 @@ using MazeCreator;
 namespace MazeCreatorTest.Tests
 {
 	[TestFixture]
-	public class SolverTests
+	public class Solver
 	{
 		[Test]
 		public void DefaultSolver ()
 		{
 			var random = new TestRandomGenerator ();
-			ICreator creator = Creator.GetCreator (Algorithm.DFS, random);
+			ICreator creator = MazeCreator.Core.Creator.GetCreator (Algorithm.DFS, random);
 			Maze maze = creator.Create (3, 3);
 
-			IMazeSolver solver = Solver.Create (random);
+			IMazeSolver solver = MazeCreator.Solver.Create (random);
 
-			PositionDirection [] steps = solver.Solve (maze, new Position (0, 0), new Position (2, 2));
+			Direction [] steps = solver.Solve (maze, new Position (0, 0), new Position (2, 2));
 
-			PositionDirection [] expected = {
-				new PositionDirection (new Position (0,0), Direction.Left),
-				new PositionDirection (new Position (0,1), Direction.Down),
-				new PositionDirection (new Position (1,1), Direction.Left),
-				new PositionDirection (new Position (1,2), Direction.Down),
+			Direction [] expected = {
+				Direction.Down,
+				Direction.Down,
+				Direction.Right,
+				Direction.Right,
 			};
 			Assert.True (expected.SequenceEqual (steps), "#1");
 		}

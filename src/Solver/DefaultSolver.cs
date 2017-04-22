@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using MazeCreator.Core;
+using MazeCreator.Extensions;
 
 namespace MazeCreator
 {
@@ -38,21 +39,17 @@ namespace MazeCreator
 		public Action<Maze, Position> PositionVisited { get; set; }
 		public Action<Maze, Position> WalkBack { get; set; }
 
-		public PositionDirection [] Solve (Maze maze, Position start, Position end)
+		public Direction [] Solve (Maze maze, Position start, Position end)
 		{
-			var backtrack         = new Direction [maze.TotalCells];
+			var backtrack = new Direction [maze.TotalCells];
 			int backtrackPosition = 0;
 
 			Position position = start;
 
-			var steps = new List<PositionDirection> ();
-
 			CellVisitBuffer buffer = new CellVisitBuffer (maze.Lines, maze.Columns);
 
-			buffer [start] = CellVisit.VisitedCell;
-
 			while (position != end) {
-				
+
 				Direction [] directions = GetAvailableDirections (buffer, maze, position);
 
 				if (directions.Any ()) {
@@ -69,15 +66,21 @@ namespace MazeCreator
 					if (PositionVisited != null)
 						PositionVisited (maze, position);
 
-
 				} else {
 					backtrackPosition--;
-					Direction direction = backtrack [backtrackPosition];
+					Direction direction = backtrack [backtrackPosition].Oposite ();
+
+					if (WalkBack != null)
+						WalkBack (maze, position);
+
+					Position nextPosition = Position.GetNextPosition (position, direction);
+					buffer.WalkBackPath (position, nextPosition, direction);
+					position = nextPosition;
 				}
 			}
-		
-
-			return steps.ToArray ();
+			var result = new Direction [backtrackPosition];
+			Array.Copy (backtrack, result, backtrackPosition);
+			return result;
 		}
 
 		Direction GetRandomDirection (Direction [] directions)

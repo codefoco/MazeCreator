@@ -5,7 +5,7 @@ namespace MazeCreator
 {
 	public interface IMazeSolver
 	{
-		PositionDirection[] Solve (Maze maze, Position start, Position end);
+		Direction[] Solve (Maze maze, Position start, Position end);
 
 		IRandomGenerator Random { get; set; }
 

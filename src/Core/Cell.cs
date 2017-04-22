@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-using System;
+using MazeCreator.Extensions;
 
 namespace MazeCreator.Core
 {
@@ -30,18 +30,11 @@ namespace MazeCreator.Core
 	{
 		CellInfo info;
 
-		readonly static CellInfo [] removeWallFlagsStart = {
+		readonly static CellInfo [] removeWallFlags = {
 			CellInfo.RemoveTopWall,
 			CellInfo.RemoveLeftWall,
 			CellInfo.RemoveBottomWall,
 			CellInfo.RemoveRightWall,
-		};
-
-		readonly static CellInfo [] removeWallFlagsEnd = {
-			CellInfo.RemoveBottomWall,
-			CellInfo.RemoveRightWall,
-			CellInfo.RemoveTopWall,
-			CellInfo.RemoveLeftWall,
 		};
 
 		public Cell (CellInfo info)
@@ -117,12 +110,12 @@ namespace MazeCreator.Core
 
 		public void RemoveStartWall (Direction direction)
 		{
-			info &= removeWallFlagsStart [(int)direction];
+			info &= removeWallFlags [(int)direction];
 		}
 
 		public void RemoveEndWall (Direction direction)
 		{
-			info &= removeWallFlagsEnd [(int)direction];
+			info &= removeWallFlags [(int)direction.Oposite()];
 		}
 
 		public override bool Equals (object obj)
