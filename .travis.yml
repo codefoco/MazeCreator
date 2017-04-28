@@ -11,7 +11,7 @@ install:
   - sudo apt-get install mono-devel nunit
 
 script:
-  - msbuild /p:Configuration=Release
+  - xbuild /p:Configuration=Release
   - nunit-console ./tests/bin/Release/MazeCreatorTest.dll
 
 # Execute additional tests or commands
