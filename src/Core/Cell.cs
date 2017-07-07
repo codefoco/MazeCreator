@@ -22,11 +22,12 @@
  * THE SOFTWARE.
  */
 
+using System;
 using MazeCreator.Extensions;
 
 namespace MazeCreator.Core
 {
-	public struct Cell
+	public struct Cell : IEquatable<Cell>
 	{
 		CellInfo info;
 
@@ -123,7 +124,12 @@ namespace MazeCreator.Core
 			var cell = obj as Cell?;
 			if (cell == null)
 				return false;
-			return this == cell;
+			return Equals(cell);
+		}
+
+		public bool Equals (Cell other)
+		{
+			return this == other;
 		}
 
 		public static bool operator == (Cell lhs, Cell rhs)
@@ -140,5 +146,7 @@ namespace MazeCreator.Core
 		{
 			return CellInfo.GetHashCode ();
 		}
+
+
 	}
 }

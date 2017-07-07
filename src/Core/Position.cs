@@ -23,9 +23,11 @@
  * THE SOFTWARE.
  */
 
+using System;
+
 namespace MazeCreator.Core
 {
-	public struct Position
+	public struct Position : IEquatable<Position>
 	{
 		public Position (int line, int column)
 		{
@@ -118,7 +120,7 @@ namespace MazeCreator.Core
 			var position = obj as Position?;
 			if (position == null)
 				return false;
-			return this == position;
+			return Equals (position);
 		}
 
 		public static bool operator == (Position lhs, Position rhs)
@@ -139,6 +141,11 @@ namespace MazeCreator.Core
 		public override string ToString ()
 		{
 			return string.Format ("[Position: Line={0}, Column={1}]", Line, Column);
+		}
+
+		public bool Equals (Position other)
+		{
+			return this == other;
 		}
 	}
 }
