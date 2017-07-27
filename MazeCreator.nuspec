@@ -14,4 +14,9 @@
     <copyright>Copyright © Code Foco 2017</copyright>
     <tags>maze dfs</tags>
   </metadata>
+  <files>
+    <file src="bin\Release\net462\*.dll" target="lib\net462" />
+    <file src="bin\Release\netstandard1.0\*.dll" target="lib\netstandard1.0" />
+    <file src="bin\Release\portable-net45+win8+wp8\*.dll" target="lib\portable-net45+win8+wp8" />
+  </files>
 </package>

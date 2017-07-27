@@ -1,37 +1,53 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreatorTest", "tests\MazeCreatorTest.csproj", "{CFC2AE61-4DAF-4B2E-B916-7AE826212432}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreatorTest", "tests\MazeCreatorTest.csproj", "{20AE709C-FB97-48E3-89B0-A34A5C3DA1DB}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MazeCreator.Shared", "src\MazeCreator.Shared.shproj", "{BD205AD6-760E-48F3-BAB2-21447396BD17}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MazeCreator", "MazeCreator", "{4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator", "build\net462\MazeCreator.csproj", "{C45805A8-6436-4738-BD9F-4632EEA63BBC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.Profile78", "build\portable-net45+win8+wp8\MazeCreator.Profile78.csproj", "{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.net462", "build\net462\MazeCreator.net462.csproj", "{C45805A8-6436-4738-BD9F-4632EEA63BBC}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MazeCreator.Shared", "src\MazeCreator.Shared.shproj", "{BD205AD6-760E-48F3-BAB2-21447396BD17}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MazeCreator", "MazeCreator", "{872EB43F-FFB4-496C-9A5C-D50F265041AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard1.0", "build\netstandard1.0\MazeCreator.netstandard1.0.csproj", "{C262673A-0699-42AD-93E2-C714994E45FB}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\MazeCreator.Core.projitems*{bd205ad6-760e-48f3-bab2-21447396bd17}*SharedItemsImports = 13
+		src\MazeCreator.Core.projitems*{c45805a8-6436-4738-bd9f-4632eea63bbc}*SharedItemsImports = 4
+		src\MazeCreator.Core.projitems*{dadbf7af-b6f7-40a1-b7d1-d4a60df10db5}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x86 = Debug|x86
-		Release|x86 = Release|x86
-		Debug.Profile78|Any CPU = Debug.Profile78|Any CPU
-		Release.Profile78|Any CPU = Release.Profile78|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20AE709C-FB97-48E3-89B0-A34A5C3DA1DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20AE709C-FB97-48E3-89B0-A34A5C3DA1DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20AE709C-FB97-48E3-89B0-A34A5C3DA1DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20AE709C-FB97-48E3-89B0-A34A5C3DA1DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C45805A8-6436-4738-BD9F-4632EEA63BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C45805A8-6436-4738-BD9F-4632EEA63BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C45805A8-6436-4738-BD9F-4632EEA63BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C45805A8-6436-4738-BD9F-4632EEA63BBC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C262673A-0699-42AD-93E2-C714994E45FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C262673A-0699-42AD-93E2-C714994E45FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C262673A-0699-42AD-93E2-C714994E45FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C45805A8-6436-4738-BD9F-4632EEA63BBC} = {872EB43F-FFB4-496C-9A5C-D50F265041AC}
-		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5} = {872EB43F-FFB4-496C-9A5C-D50F265041AC}
-		{BD205AD6-760E-48F3-BAB2-21447396BD17} = {872EB43F-FFB4-496C-9A5C-D50F265041AC}
+		{C45805A8-6436-4738-BD9F-4632EEA63BBC} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
+		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
+		{BD205AD6-760E-48F3-BAB2-21447396BD17} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
+		{C262673A-0699-42AD-93E2-C714994E45FB} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
 	EndGlobalSection
 EndGlobal

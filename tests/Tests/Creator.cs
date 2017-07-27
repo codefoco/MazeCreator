@@ -58,7 +58,6 @@ namespace MazeCreatorTest.Tests
 │ │ ╶─┘ ╷ ╵ └─┐ ╶─┘ │ 
 └─┴─────┴─────┴─────┘ 
 ";
-			expected = expected.Replace ("\n", Environment.NewLine);
 			Assert.AreEqual (expected, s);
 		}
 
@@ -83,7 +82,6 @@ namespace MazeCreatorTest.Tests
 │ ╵ └─┘ │ ╷ ┌───┘ ╶─┤ 
 └───────┴─┴─┴───────┘ 
 ";
-			expected = expected.Replace ("\n", Environment.NewLine);
 			Assert.AreEqual (expected, s);
 		}
 
@@ -108,7 +106,6 @@ namespace MazeCreatorTest.Tests
 │ └─┼─╴ ╷ ├───┴─┘ └─┤ 
 └───┴───┴─┴─────────┘ 
 ";
-			expected = expected.Replace ("\n", Environment.NewLine);
 			Assert.AreEqual (expected, s);
 		}
 
