@@ -1,23 +1,37 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator", "src\MazeCreator.csproj", "{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreatorTest", "tests\MazeCreatorTest.csproj", "{CFC2AE61-4DAF-4B2E-B916-7AE826212432}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MazeCreator.Shared", "src\MazeCreator.Shared.shproj", "{BD205AD6-760E-48F3-BAB2-21447396BD17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.Profile78", "build\portable-net45+win8+wp8\MazeCreator.Profile78.csproj", "{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.net462", "build\net462\MazeCreator.net462.csproj", "{C45805A8-6436-4738-BD9F-4632EEA63BBC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MazeCreator", "MazeCreator", "{872EB43F-FFB4-496C-9A5C-D50F265041AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
+		Debug.Profile78|Any CPU = Debug.Profile78|Any CPU
+		Release.Profile78|Any CPU = Release.Profile78|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Debug|x86.Build.0 = Debug|Any CPU
-		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Release|x86.ActiveCfg = Release|Any CPU
-		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Release|x86.Build.0 = Release|Any CPU
-		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Debug|x86.Build.0 = Debug|Any CPU
-		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Release|x86.ActiveCfg = Release|Any CPU
-		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Release|x86.Build.0 = Release|Any CPU
+		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFC2AE61-4DAF-4B2E-B916-7AE826212432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C45805A8-6436-4738-BD9F-4632EEA63BBC} = {872EB43F-FFB4-496C-9A5C-D50F265041AC}
+		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5} = {872EB43F-FFB4-496C-9A5C-D50F265041AC}
+		{BD205AD6-760E-48F3-BAB2-21447396BD17} = {872EB43F-FFB4-496C-9A5C-D50F265041AC}
 	EndGlobalSection
 EndGlobal

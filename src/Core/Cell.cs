@@ -146,7 +146,5 @@ namespace MazeCreator.Core
 		{
 			return CellInfo.GetHashCode ();
 		}
-
-
 	}
 }
