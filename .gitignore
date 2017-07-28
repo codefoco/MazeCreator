@@ -4,3 +4,13 @@ src/obj
 tests/bin
 tests/obj
 packages
+build/net462/obj/
+build/netstandard1.0/bin/
+build/netstandard1.0/obj/
+build/netstandard1.3/bin/
+build/netstandard1.3/obj/
+build/netstandard1.6/bin/
+build/netstandard1.6/obj/
+build/portable-net45+win8+wp8/obj/
+build/portable-net45+win8+wpa81/obj/Debug/CoreCompileInputs.cache
+build/portable-net45+win8+wpa81/obj/
