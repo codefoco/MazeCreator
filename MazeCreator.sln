@@ -13,10 +13,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.Profile78", "bu
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MazeCreator.Shared", "src\MazeCreator.Shared.shproj", "{BD205AD6-760E-48F3-BAB2-21447396BD17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.netstandard1.0", "build\netstandard1.0\MazeCreator.netstandard1.0.csproj", "{6CD688F7-1E49-40EF-B9E9-7B191743B622}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard1.0", "build\netstandard1.0\MazeCreator.netstandard1.0.csproj", "{6CD688F7-1E49-40EF-B9E9-7B191743B622}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.Profile111", "build\portable-net45+win8+wpa81\MazeCreator.Profile111.csproj", "{46FEED9E-ABAF-47DD-B51F-4E1BDF4B3A77}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard1.3", "build\netstandard1.3\MazeCreator.netstandard1.3.csproj", "{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard1.6", "build\netstandard1.6\MazeCreator.netstandard1.6.csproj", "{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\MazeCreator.Core.projitems*{46feed9e-abaf-47dd-b51f-4e1bdf4b3a77}*SharedItemsImports = 4
 		src\MazeCreator.Core.projitems*{bd205ad6-760e-48f3-bab2-21447396bd17}*SharedItemsImports = 13
 		src\MazeCreator.Core.projitems*{c45805a8-6436-4738-bd9f-4632eea63bbc}*SharedItemsImports = 4
 		src\MazeCreator.Core.projitems*{dadbf7af-b6f7-40a1-b7d1-d4a60df10db5}*SharedItemsImports = 4
@@ -37,10 +44,18 @@ Global
 		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CD688F7-1E49-40EF-B9E9-7B191743B622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6CD688F7-1E49-40EF-B9E9-7B191743B622}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CD688F7-1E49-40EF-B9E9-7B191743B622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46FEED9E-ABAF-47DD-B51F-4E1BDF4B3A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FEED9E-ABAF-47DD-B51F-4E1BDF4B3A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46FEED9E-ABAF-47DD-B51F-4E1BDF4B3A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +65,8 @@ Global
 		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
 		{BD205AD6-760E-48F3-BAB2-21447396BD17} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
 		{6CD688F7-1E49-40EF-B9E9-7B191743B622} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
+		{46FEED9E-ABAF-47DD-B51F-4E1BDF4B3A77} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
+		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
+		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
 	EndGlobalSection
 EndGlobal

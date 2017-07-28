@@ -34,6 +34,12 @@ namespace MazeCreatorTest.Tests
 	[TestFixture]
 	public class Creator
 	{
+		void AssertStringEqualIgnoreLineEnd (string expected, string actual, string message)
+		{
+			expected = expected.Replace ("\r\n", "\n");
+			actual = actual.Replace ("\r\n", "\n");
+			Assert.AreEqual (expected, actual, message);
+		}
 		[Test]
 		public void DFS ()
 		{
@@ -43,7 +49,7 @@ namespace MazeCreatorTest.Tests
 			Maze maze3 = creator.Create (3, 3);
 
 			string x = maze3.ToBoxString ();
-			string s = maze.ToBoxString();
+			string s = maze.ToBoxString ();
 
 			string expected =
 @"┌───────────┬─┬─┬───┐ 
@@ -58,7 +64,7 @@ namespace MazeCreatorTest.Tests
 │ │ ╶─┘ ╷ ╵ └─┐ ╶─┘ │ 
 └─┴─────┴─────┴─────┘ 
 ";
-			Assert.AreEqual (expected, s);
+			AssertStringEqualIgnoreLineEnd (expected, s, "#1");
 		}
 
 		[Test]
@@ -82,7 +88,7 @@ namespace MazeCreatorTest.Tests
 │ ╵ └─┘ │ ╷ ┌───┘ ╶─┤ 
 └───────┴─┴─┴───────┘ 
 ";
-			Assert.AreEqual (expected, s);
+			AssertStringEqualIgnoreLineEnd (expected, s, "#1");
 		}
 
 		[Test]
@@ -106,7 +112,7 @@ namespace MazeCreatorTest.Tests
 │ └─┼─╴ ╷ ├───┴─┘ └─┤ 
 └───┴───┴─┴─────────┘ 
 ";
-			Assert.AreEqual (expected, s);
+			AssertStringEqualIgnoreLineEnd (expected, s, "#1");
 		}
 
 		[Test]
