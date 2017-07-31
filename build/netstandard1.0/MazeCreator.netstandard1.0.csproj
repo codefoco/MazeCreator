@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
     <RootNamespace>MazeCreator</RootNamespace>
+    <AssemblyName>MazeCreator</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
