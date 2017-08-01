@@ -117,10 +117,7 @@ namespace MazeCreator.Core
 
 		public override bool Equals (object obj)
 		{
-			var position = obj as Position?;
-			if (position == null)
-				return false;
-			return Equals (position);
+			return obj is Position && Equals ((Position)obj);
 		}
 
 		public static bool operator == (Position lhs, Position rhs)
