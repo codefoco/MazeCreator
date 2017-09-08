@@ -34,6 +34,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Solver\IMazeSolver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solver\Solver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solver\VisitInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ICreatorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Core\packages.config" />
