@@ -23,7 +23,7 @@
  */
 
 using System;
-
+using System.Threading.Tasks;
 using MazeCreator.Core;
 using MazeCreator.Extensions;
 
@@ -34,24 +34,7 @@ namespace MazeCreatorTest.Tests
 	[TestFixture]
 	public class Creator
 	{
-		void AssertStringEqualIgnoreLineEnd (string expected, string actual, string message)
-		{
-			expected = expected.Replace ("\r\n", "\n");
-			actual = actual.Replace ("\r\n", "\n");
-			Assert.AreEqual (expected, actual, message);
-		}
-		[Test]
-		public void DFS ()
-		{
-			var random = new TestRandomGenerator ();
-			ICreator creator = MazeCreator.Core.Creator.GetCreator (Algorithm.DFS, random);
-			Maze maze = creator.Create (10, 10);
-			Maze maze3 = creator.Create (3, 3);
-
-			string x = maze3.ToBoxString ();
-			string s = maze.ToBoxString ();
-
-			string expected =
+				const string dfsExpected =
 @"┌───────────┬─┬─┬───┐ 
 │ ┌───┬─╴ ╷ │ │ ╵ ╷ │ 
 ├─┘ ╷ ╵ ┌─┤ │ └───┤ │ 
@@ -64,7 +47,22 @@ namespace MazeCreatorTest.Tests
 │ │ ╶─┘ ╷ ╵ └─┐ ╶─┘ │ 
 └─┴─────┴─────┴─────┘ 
 ";
-			AssertStringEqualIgnoreLineEnd (expected, s, "#1");
+
+		void AssertStringEqualIgnoreLineEnd (string expected, string actual, string message)
+		{
+			expected = expected.Replace ("\r\n", "\n");
+			actual = actual.Replace ("\r\n", "\n");
+			Assert.AreEqual (expected, actual, message);
+		}
+
+		[Test]
+		public void DFS ()
+		{
+			var random = new TestRandomGenerator ();
+			ICreator creator = MazeCreator.Core.Creator.GetCreator (Algorithm.DFS, random);
+			Maze maze = creator.Create (10, 10);
+
+			AssertStringEqualIgnoreLineEnd (dfsExpected, maze.ToBoxString (), "#1");
 		}
 
 		[Test]
@@ -135,6 +133,17 @@ namespace MazeCreatorTest.Tests
 			Assert.AreEqual (167, position);
 			Assert.AreEqual (99, walls);
 		}
-		
+
+		[Test]
+		public async Task CreateAsync ()
+		{
+			Maze maze;
+			var random = new TestRandomGenerator ();
+			ICreator creator = MazeCreator.Core.Creator.GetCreator (Algorithm.DFS, random);
+
+			maze = await creator.CreateAsync (10, 10);
+
+			AssertStringEqualIgnoreLineEnd (dfsExpected, maze.ToBoxString (), "#1");
+		}
 	}
 }
