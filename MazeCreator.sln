@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreatorTest", "tests\MazeCreatorTest.csproj", "{20AE709C-FB97-48E3-89B0-A34A5C3DA1DB}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard1.3", "build\netstandard1.3\MazeCreator.netstandard1.3.csproj", "{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard1.6", "build\netstandard1.6\MazeCreator.netstandard1.6.csproj", "{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard2.0", "build\netstandard2.0\MazeCreator.netstandard2.0.csproj", "{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -56,6 +58,10 @@ Global
 		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,5 +74,9 @@ Global
 		{46FEED9E-ABAF-47DD-B51F-4E1BDF4B3A77} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
 		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
 		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
+		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4720E610-698B-48DD-BBD7-03AC99E9BC90}
 	EndGlobalSection
 EndGlobal

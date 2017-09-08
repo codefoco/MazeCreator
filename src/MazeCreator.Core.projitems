@@ -26,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Creator\Kruskal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Creator\Prim.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\DirectionExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ICreatorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\MazeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solver\CellVisit.cs" />
@@ -34,7 +35,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Solver\IMazeSolver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solver\Solver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solver\VisitInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ICreatorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Core\packages.config" />

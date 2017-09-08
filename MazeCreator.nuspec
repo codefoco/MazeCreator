@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MazeCreator</id>
-    <version>1.0.0.1</version>
+    <version>1.0.0.31</version>
     <authors>Codefoco</authors>
     <owners>Vinicius Jarina</owners>
     <licenseUrl>https://github.com/codefoco/MazeCreator/blob/master/LICENSE</licenseUrl>
@@ -19,6 +19,7 @@
     <file src="lib\Release\netstandard1.0\*.dll" target="lib\netstandard1.0" />
     <file src="lib\Release\netstandard1.3\*.dll" target="lib\netstandard1.3" />
     <file src="lib\Release\netstandard1.6\*.dll" target="lib\netstandard1.6" />
+    <file src="lib\Release\netstandard2.0\*.dll" target="lib\netstandard2.0" />
     <file src="lib\Release\portable-net45+win8+wp8\*.dll" target="lib\portable-net45+win8+wp8" />
     <file src="lib\Release\portable-net45+win8+wpa81\*.dll" target="lib\portable-net45+win8+wpa81" />
   </files>

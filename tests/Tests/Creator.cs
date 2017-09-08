@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-using System;
 using System.Threading.Tasks;
 using MazeCreator.Core;
 using MazeCreator.Extensions;
@@ -140,7 +139,7 @@ namespace MazeCreatorTest.Tests
 			Maze maze;
 			var random = new TestRandomGenerator ();
 			ICreator creator = MazeCreator.Core.Creator.GetCreator (Algorithm.DFS, random);
-
+			
 			maze = await creator.CreateAsync (10, 10);
 
 			AssertStringEqualIgnoreLineEnd (dfsExpected, maze.ToBoxString (), "#1");

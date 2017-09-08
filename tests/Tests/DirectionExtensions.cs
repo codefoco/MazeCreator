@@ -22,13 +22,11 @@
 * THE SOFTWARE.
 */
 
-using System.Linq;
 
 using NUnit.Framework;
 
 using MazeCreator.Core;
 using MazeCreator.Extensions;
-using MazeCreator;
 
 namespace MazeCreatorTest.Tests
 {
