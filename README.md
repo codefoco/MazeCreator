@@ -2,6 +2,10 @@
 Maze Creator
 =============
 
+| NuGet |
+| ------|
+|[![nuget](https://img.shields.io/nuget/v/MazeCreator.svg?maxAge=2592000)](https://www.nuget.org/packages/MazeCreator)|
+
 |  | Status | 
 | :------ | :------: | 
 | **Linux**   | [![Linux](https://travis-ci.org/codefoco/MazeCreator.svg?branch=master)](https://travis-ci.org/codefoco/MazeCreator) |
