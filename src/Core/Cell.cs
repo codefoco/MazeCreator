@@ -52,6 +52,9 @@ namespace MazeCreator.Core
 		public CellInfo CellInfo {
 			get {
 				return info;
+			} 
+			set {
+				info = value;
 			}
 		}
 
