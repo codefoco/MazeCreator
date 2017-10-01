@@ -87,10 +87,10 @@ namespace MazeCreator.Creator
 
 
 
-		public Maze Create (int lines, int columns)
+		public Maze Create (int rows, int columns)
 		{
-			Maze maze = new Maze (lines, columns);
-			Position position = Position.RandomPosition (lines, columns, Random);
+			Maze maze = new Maze (rows, columns);
+			Position position = Position.RandomPosition (rows, columns, Random);
 
 			int totalCells = maze.TotalCells;
 			var backtrack = new Direction [totalCells];

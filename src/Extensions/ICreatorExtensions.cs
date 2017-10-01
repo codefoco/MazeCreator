@@ -6,9 +6,9 @@ namespace MazeCreator.Extensions
 {
 	public static class ICreatorExtensions
 	{
-		public static Task<Maze> CreateAsync (this ICreator creator, int lines, int columns)
+		public static Task<Maze> CreateAsync (this ICreator creator, int rows, int columns)
 		{
-			return Task.Run (() => creator.Create (lines, columns));
+			return Task.Run (() => creator.Create (rows, columns));
 		}
 	}
 }

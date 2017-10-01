@@ -9,23 +9,23 @@ namespace MazeCreator
 			get;
 		}
 
-		public int Lines {
+		public int Rows {
 			get;
 		}
 
 		public int TotalCells {
 			get {
-				return Columns * Lines;
+				return Columns * Rows;
 			}
 		}
 
 		readonly CellVisit [] cells;
 
 
-		public CellVisitBuffer (int lines, int columns)
+		public CellVisitBuffer (int rows, int columns)
 		{
 			Columns = columns;
-			Lines = lines;
+			Rows = rows;
 
 			cells = new CellVisit [TotalCells];
 			for (int i = 0; i < TotalCells; i++)
@@ -39,13 +39,13 @@ namespace MazeCreator
 
 		bool IsValidPosition (Position position)
 		{
-			return 0 <= position.Line && position.Line < Lines &&
+			return 0 <= position.Row && position.Row < Rows &&
 				   0 <= position.Column && position.Column < Columns;
 		}
 
-		public CellVisit this [int line, int column] {
+		public CellVisit this [int row, int column] {
 			get {
-				return this [new Position (line, column)];
+				return this [new Position (row, column)];
 			}
 		}
 

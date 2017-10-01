@@ -29,13 +29,13 @@ namespace MazeCreator.Core
 {
 	public struct Position : IEquatable<Position>
 	{
-		public Position (int line, int column)
+		public Position (int row, int column)
 		{
-			Line = line;
+			Row = row;
 			Column = column;
 		}
 
-		public int Line {
+		public int Row {
 			get; set;
 		}
 
@@ -45,52 +45,52 @@ namespace MazeCreator.Core
 
 		public Position Up {
 			get {
-				return new Position (Line - 1, Column);
+				return new Position (Row - 1, Column);
 			}
 		}
 
 		public Position UpLeft {
 			get {
-				return new Position (Line - 1, Column - 1);
+				return new Position (Row - 1, Column - 1);
 			}
 		}
 
 		public Position Left {
 			get {
-				return new Position (Line, Column - 1);
+				return new Position (Row, Column - 1);
 			}
 		}
 
 		public Position Down {
 			get {
-				return new Position (Line + 1, Column);
+				return new Position (Row + 1, Column);
 			}
 		}
 
 		public Position Right {
 			get {
-				return new Position (Line, Column + 1);
+				return new Position (Row, Column + 1);
 			}
 		}
 
-		public static Position RandomPosition (int maxLine, int maxColumn, IRandomGenerator random)
+		public static Position RandomPosition (int maxRow, int maxColumn, IRandomGenerator random)
 		{
-			int line = random.Next (maxLine);
+			int row = random.Next (maxRow);
 			int column = random.Next (maxColumn);
-			return new Position (line, column);
+			return new Position (row, column);
 		}
 
 		public static Position GetNextPosition (Position position, Direction direction)
 		{
 			switch (direction) {
 			case Direction.Up:
-				return new Position (position.Line - 1, position.Column);
+				return new Position (position.Row - 1, position.Column);
 			case Direction.Left:
-				return new Position (position.Line, position.Column - 1);
+				return new Position (position.Row, position.Column - 1);
 			case Direction.Down:
-				return new Position (position.Line + 1, position.Column);
+				return new Position (position.Row + 1, position.Column);
 			case Direction.Right:
-				return new Position (position.Line, position.Column + 1);
+				return new Position (position.Row, position.Column + 1);
 			}
 			return position;
 		}
@@ -99,20 +99,20 @@ namespace MazeCreator.Core
 		{
 			switch (direction) {
 			case Direction.Up:
-				return new Position (position.Line + 1, position.Column);
+				return new Position (position.Row + 1, position.Column);
 			case Direction.Left:
-				return new Position (position.Line, position.Column + 1);
+				return new Position (position.Row, position.Column + 1);
 			case Direction.Down:
-				return new Position (position.Line - 1, position.Column);
+				return new Position (position.Row - 1, position.Column);
 			case Direction.Right:
-				return new Position (position.Line, position.Column - 1);
+				return new Position (position.Row, position.Column - 1);
 			}
 			return position;
 		}
 
 		public static int IndexFromPosition (Position position, int columns)
 		{
-			return columns * position.Line + position.Column;
+			return columns * position.Row + position.Column;
 		}
 
 		public override bool Equals (object obj)
@@ -122,7 +122,7 @@ namespace MazeCreator.Core
 
 		public static bool operator == (Position lhs, Position rhs)
 		{
-			return lhs.Line == rhs.Line && lhs.Column == rhs.Column;
+			return lhs.Row == rhs.Row && lhs.Column == rhs.Column;
 		}
 
 		public static bool operator != (Position lhs, Position rhs)
@@ -132,12 +132,12 @@ namespace MazeCreator.Core
 
 		public override int GetHashCode ()
 		{
-			return Line.GetHashCode () ^ Column.GetHashCode ();
+			return Row.GetHashCode () ^ Column.GetHashCode ();
 		}
 
 		public override string ToString ()
 		{
-			return string.Format ("[Position: Line={0}, Column={1}]", Line, Column);
+			return string.Format ("[Position: Row={0}, Column={1}]", Row, Column);
 		}
 
 		public bool Equals (Position other)

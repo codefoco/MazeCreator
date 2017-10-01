@@ -46,7 +46,7 @@ namespace MazeCreator
 
 			Position position = start;
 
-			CellVisitBuffer buffer = new CellVisitBuffer (maze.Lines, maze.Columns);
+			CellVisitBuffer buffer = new CellVisitBuffer (maze.Rows, maze.Columns);
 
 			while (position != end) {
 

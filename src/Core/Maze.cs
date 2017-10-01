@@ -30,29 +30,29 @@ namespace MazeCreator.Core
 			get;
 		}
 
-		public int Lines {
+		public int Rows {
 			get;
 		}
 
 		public int TotalCells {
 			get {
-				return Columns * Lines;
+				return Columns * Rows;
 			}
 		}
 
 		readonly Cell [] cells;
 
 
-		public Maze (int lines, int columns)
+		public Maze (int rows, int columns)
 		{
 			Columns = columns;
-			Lines = lines;
+			Rows = rows;
 
 			cells = new Cell [TotalCells];
 			for (int i = 0; i < TotalCells; i++)
 				cells [i] = new Cell (CellInfo.AllWalls);
 			                                             
-			for (int i = 0; i < Lines; i++) {
+			for (int i = 0; i < Rows; i++) {
 				int index = IndexFromPosition (new Position (i, 0));
 				cells [index] = new Cell (CellInfo.AllWalls | CellInfo.LeftBorder);
 
@@ -64,7 +64,7 @@ namespace MazeCreator.Core
 				int index = IndexFromPosition (new Position (0, i));
 				cells [index] = new Cell (CellInfo.AllWalls | CellInfo.TopBorder);
 
-				index = IndexFromPosition (new Position (Lines - 1, i));
+				index = IndexFromPosition (new Position (Rows - 1, i));
 				cells [index] = new Cell (CellInfo.AllWalls | CellInfo.BottomBorder);
 			}
 		}
@@ -76,7 +76,7 @@ namespace MazeCreator.Core
 
 		bool IsValidPosition (Position position)
 		{
-			return 0 <= position.Line && position.Line < Lines &&
+			return 0 <= position.Row && position.Row < Rows &&
 				   0 <= position.Column && position.Column < Columns;
 		}
 
@@ -85,14 +85,14 @@ namespace MazeCreator.Core
 			return this [position];
 		}
 
-		public Cell CellAt (int line, int column)
+		public Cell CellAt (int row, int column)
 		{
-			return this [new Position (line, column)];
+			return this [new Position (row, column)];
 		}
 
-		public Cell this [int line, int column] {
+		public Cell this [int row, int column] {
 			get {
-				return this [new Position (line, column)];
+				return this [new Position (row, column)];
 			}
 		}
 

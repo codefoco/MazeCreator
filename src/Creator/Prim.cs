@@ -47,9 +47,9 @@ namespace MazeCreator.Creator
 			from.RemoveAt (index);
 		}
 
-		public Maze Create (int lines, int columns)
+		public Maze Create (int rows, int columns)
 		{
-			Maze maze = new Maze (lines, columns);
+			Maze maze = new Maze (rows, columns);
 
 			int totalCells = maze.TotalCells;
 
@@ -69,7 +69,7 @@ namespace MazeCreator.Creator
 			int candidates = 0;
 
 			for (int i = 0; i < columns; i++) {
-				for (int j = 0; j < lines; j++) {
+				for (int j = 0; j < rows; j++) {
 					output.Add (new Position (i, j));
 				}
 			}
@@ -80,16 +80,16 @@ namespace MazeCreator.Creator
 			MoveCell (output, input, index);
 
 			if (position.Column > 0)
-				MoveCell (output, frontier, output.IndexOf (new Position (position.Line, position.Column - 1)));
+				MoveCell (output, frontier, output.IndexOf (new Position (position.Row, position.Column - 1)));
 			
-			if (position.Line > 0)
-				MoveCell (output, frontier, output.IndexOf (new Position (position.Line - 1, position.Column)));
+			if (position.Row > 0)
+				MoveCell (output, frontier, output.IndexOf (new Position (position.Row - 1, position.Column)));
 			
 			if (position.Column < (columns - 1))
-				MoveCell (output, frontier, output.IndexOf (new Position (position.Line, position.Column + 1)));
+				MoveCell (output, frontier, output.IndexOf (new Position (position.Row, position.Column + 1)));
 			
-			if (position.Line < (lines - 1))
-				MoveCell (output, frontier, output.IndexOf (new Position (position.Line + 1, position.Column)));
+			if (position.Row < (rows - 1))
+				MoveCell (output, frontier, output.IndexOf (new Position (position.Row + 1, position.Column)));
 
 			while (frontier.Any ()) {
 				
@@ -100,25 +100,25 @@ namespace MazeCreator.Creator
 
 				if (position.Column > 0) {
 					leftCell.Column = position.Column - 1;
-					leftCell.Line   = position.Line;
+					leftCell.Row   = position.Row;
 					MoveCell (output, frontier, output.IndexOf (leftCell));
 				}
 
-				if (position.Line > 0) {
+				if (position.Row > 0) {
 					upCell.Column = position.Column;
-					upCell.Line   = position.Line - 1;
+					upCell.Row   = position.Row - 1;
 					MoveCell (output, frontier, output.IndexOf (upCell));
 				}
 
 				if (position.Column < (columns - 1)) {
 					rightCell.Column = position.Column + 1;
-					rightCell.Line   = position.Line;
+					rightCell.Row   = position.Row;
 					MoveCell (output, frontier, output.IndexOf (rightCell));
 				}
 
-				if (position.Line < (lines - 1)) {
+				if (position.Row < (rows - 1)) {
 					downCell.Column = position.Column; 
-					downCell.Line   = position.Line + 1;
+					downCell.Row   = position.Row + 1;
 					MoveCell (output, frontier, output.IndexOf (downCell));
 				}
 
@@ -127,13 +127,13 @@ namespace MazeCreator.Creator
 				if (position.Column > 0 && input.IndexOf (leftCell) >= 0)
 					directions [candidates++] = Direction.Left;
 				
-				if (position.Line > 0 && input.IndexOf (upCell) >= 0)
+				if (position.Row > 0 && input.IndexOf (upCell) >= 0)
 					directions [candidates++] = Direction.Up;
 				
 				if (position.Column < (columns - 1) && input.IndexOf (rightCell) >= 0)
 					directions [candidates++] = Direction.Right;
 				
-				if (position.Line < (lines - 1) && input.IndexOf (downCell) >= 0)
+				if (position.Row < (rows - 1) && input.IndexOf (downCell) >= 0)
 					directions [candidates++] = Direction.Down;
 				
 				Direction direction = directions [Random.Next (candidates)];

@@ -28,7 +28,7 @@ namespace MazeCreator.Core
 {
 	public interface ICreator
 	{
-		Maze Create (int lines, int columns);
+		Maze Create (int rows, int columns);
 
 		IRandomGenerator Random { get; set; }
 		Action<Maze, Position> PositionVisited { get; set; }

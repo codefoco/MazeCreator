@@ -54,13 +54,13 @@ namespace MazeCreator.Creator
 			}
 		}
 
-		public Maze Create (int lines, int columns)
+		public Maze Create (int rows, int columns)
 		{
-			Maze maze = new Maze (lines, columns);
+			Maze maze = new Maze (rows, columns);
 			int totalCells = maze.TotalCells;
 			unionFind = new int [totalCells];
 
-			var walls = new PositionDirection [(totalCells * 2) - columns - lines];
+			var walls = new PositionDirection [(totalCells * 2) - columns - rows];
 			int wallIndex = 0;
 			int index = 0;
 			int visited = 1;
@@ -71,7 +71,7 @@ namespace MazeCreator.Creator
 			Position end   = new Position (0, 0);
 
 			for (int i = 0; i < columns; i++) {
-				for (int j = 0; j < lines; j++) {
+				for (int j = 0; j < rows; j++) {
 					
 					unionFind [(j * columns) + i] = -1;
 

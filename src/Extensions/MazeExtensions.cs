@@ -18,9 +18,9 @@ namespace MazeCreator.Extensions
 			Cell bottomLeft = Cell.EmptyCell; ;
 			Cell bottomRight = Cell.EmptyCell; ;
 
-			for (int line = 0; line <= maze.Lines; line++) {
+			for (int row = 0; row <= maze.Rows; row++) {
 				for (int column = 0; column <= maze.Columns; column++) {
-					position.Line = line;
+					position.Row= row;
 					position.Column = column;
 
 					topLeft = maze [position.UpLeft];
