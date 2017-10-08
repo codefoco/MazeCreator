@@ -13,15 +13,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.Profile78", "bu
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MazeCreator.Shared", "src\MazeCreator.Shared.shproj", "{BD205AD6-760E-48F3-BAB2-21447396BD17}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard1.0", "build\netstandard1.0\MazeCreator.netstandard1.0.csproj", "{6CD688F7-1E49-40EF-B9E9-7B191743B622}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.netstandard1.0", "build\netstandard1.0\MazeCreator.netstandard1.0.csproj", "{6CD688F7-1E49-40EF-B9E9-7B191743B622}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.Profile111", "build\portable-net45+win8+wpa81\MazeCreator.Profile111.csproj", "{46FEED9E-ABAF-47DD-B51F-4E1BDF4B3A77}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard1.3", "build\netstandard1.3\MazeCreator.netstandard1.3.csproj", "{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.netstandard1.3", "build\netstandard1.3\MazeCreator.netstandard1.3.csproj", "{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard1.6", "build\netstandard1.6\MazeCreator.netstandard1.6.csproj", "{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.netstandard1.6", "build\netstandard1.6\MazeCreator.netstandard1.6.csproj", "{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard2.0", "build\netstandard2.0\MazeCreator.netstandard2.0.csproj", "{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.netstandard2.0", "build\netstandard2.0\MazeCreator.netstandard2.0.csproj", "{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.XamarinMac", "build\XamarinMac\MazeCreator.XamarinMac.csproj", "{CFE2185E-C344-4503-9B94-9046744CEF37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.WatchOS", "build\WatchOS\MazeCreator.WatchOS.csproj", "{BF6A650F-AA7A-4A08-8ADA-08D9E73E1238}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.TVOS", "build\TVOS\MazeCreator.TVOS.csproj", "{9238F6AA-2D63-4804-99D1-C279871F5669}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -33,35 +39,71 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		DebugMac|Any CPU = DebugMac|Any CPU
+		ReleaseMac|Any CPU = ReleaseMac|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{20AE709C-FB97-48E3-89B0-A34A5C3DA1DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{20AE709C-FB97-48E3-89B0-A34A5C3DA1DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20AE709C-FB97-48E3-89B0-A34A5C3DA1DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20AE709C-FB97-48E3-89B0-A34A5C3DA1DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20AE709C-FB97-48E3-89B0-A34A5C3DA1DB}.DebugMac|Any CPU.ActiveCfg = Debug|Any CPU
+		{20AE709C-FB97-48E3-89B0-A34A5C3DA1DB}.ReleaseMac|Any CPU.ActiveCfg = Debug|Any CPU
 		{C45805A8-6436-4738-BD9F-4632EEA63BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C45805A8-6436-4738-BD9F-4632EEA63BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C45805A8-6436-4738-BD9F-4632EEA63BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C45805A8-6436-4738-BD9F-4632EEA63BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C45805A8-6436-4738-BD9F-4632EEA63BBC}.DebugMac|Any CPU.ActiveCfg = Debug|Any CPU
+		{C45805A8-6436-4738-BD9F-4632EEA63BBC}.ReleaseMac|Any CPU.ActiveCfg = Debug|Any CPU
 		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.DebugMac|Any CPU.ActiveCfg = Debug|Any CPU
+		{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}.ReleaseMac|Any CPU.ActiveCfg = Debug|Any CPU
 		{6CD688F7-1E49-40EF-B9E9-7B191743B622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6CD688F7-1E49-40EF-B9E9-7B191743B622}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CD688F7-1E49-40EF-B9E9-7B191743B622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CD688F7-1E49-40EF-B9E9-7B191743B622}.DebugMac|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CD688F7-1E49-40EF-B9E9-7B191743B622}.ReleaseMac|Any CPU.ActiveCfg = Debug|Any CPU
 		{46FEED9E-ABAF-47DD-B51F-4E1BDF4B3A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{46FEED9E-ABAF-47DD-B51F-4E1BDF4B3A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46FEED9E-ABAF-47DD-B51F-4E1BDF4B3A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46FEED9E-ABAF-47DD-B51F-4E1BDF4B3A77}.DebugMac|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FEED9E-ABAF-47DD-B51F-4E1BDF4B3A77}.ReleaseMac|Any CPU.ActiveCfg = Debug|Any CPU
 		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}.DebugMac|Any CPU.ActiveCfg = Debug|Any CPU
+		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}.ReleaseMac|Any CPU.ActiveCfg = Debug|Any CPU
 		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.DebugMac|Any CPU.ActiveCfg = Debug|Any CPU
+		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.ReleaseMac|Any CPU.ActiveCfg = Debug|Any CPU
 		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}.DebugMac|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}.ReleaseMac|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFE2185E-C344-4503-9B94-9046744CEF37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFE2185E-C344-4503-9B94-9046744CEF37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFE2185E-C344-4503-9B94-9046744CEF37}.DebugMac|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFE2185E-C344-4503-9B94-9046744CEF37}.DebugMac|Any CPU.Build.0 = Debug|Any CPU
+		{CFE2185E-C344-4503-9B94-9046744CEF37}.ReleaseMac|Any CPU.ActiveCfg = Release|Any CPU
+		{CFE2185E-C344-4503-9B94-9046744CEF37}.ReleaseMac|Any CPU.Build.0 = Release|Any CPU
+		{BF6A650F-AA7A-4A08-8ADA-08D9E73E1238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF6A650F-AA7A-4A08-8ADA-08D9E73E1238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF6A650F-AA7A-4A08-8ADA-08D9E73E1238}.DebugMac|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF6A650F-AA7A-4A08-8ADA-08D9E73E1238}.DebugMac|Any CPU.Build.0 = Debug|Any CPU
+		{BF6A650F-AA7A-4A08-8ADA-08D9E73E1238}.ReleaseMac|Any CPU.ActiveCfg = Release|Any CPU
+		{BF6A650F-AA7A-4A08-8ADA-08D9E73E1238}.ReleaseMac|Any CPU.Build.0 = Release|Any CPU
+		{9238F6AA-2D63-4804-99D1-C279871F5669}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9238F6AA-2D63-4804-99D1-C279871F5669}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9238F6AA-2D63-4804-99D1-C279871F5669}.DebugMac|Any CPU.ActiveCfg = Debug|Any CPU
+		{9238F6AA-2D63-4804-99D1-C279871F5669}.DebugMac|Any CPU.Build.0 = Debug|Any CPU
+		{9238F6AA-2D63-4804-99D1-C279871F5669}.ReleaseMac|Any CPU.ActiveCfg = Release|Any CPU
+		{9238F6AA-2D63-4804-99D1-C279871F5669}.ReleaseMac|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +117,9 @@ Global
 		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
 		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
 		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
+		{CFE2185E-C344-4503-9B94-9046744CEF37} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
+		{BF6A650F-AA7A-4A08-8ADA-08D9E73E1238} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
+		{9238F6AA-2D63-4804-99D1-C279871F5669} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4720E610-698B-48DD-BBD7-03AC99E9BC90}
