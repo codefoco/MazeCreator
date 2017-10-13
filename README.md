@@ -4,7 +4,7 @@ Maze Creator
 
 | NuGet |
 | ------|
-|[![nuget](https://img.shields.io/nuget/v/MazeCreator.svg?maxAge=2592000)](https://www.nuget.org/packages/MazeCreator)|
+|[![nuget](https://img.shields.io/nuget/v/MazeCreator.svg)](https://www.nuget.org/packages/MazeCreator)|
 
 |  | Status | 
 | :------ | :------: | 
