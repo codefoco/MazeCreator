@@ -1,5 +1,3 @@
-#if !NETSTANDARD1_0 && !NETSTANDARD1_3 && !NETSTANDARD1_6 && !NETSTANDARD2_0
-
 using System.Reflection;
 
 // Information about this assembly is defined by the following attributes. 
@@ -27,4 +25,3 @@ using System.Reflection;
 
 //[assembly: AssemblyKeyFile("")]
 
-#endif

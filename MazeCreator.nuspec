@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
     <id>MazeCreator</id>
-    <version>1.0.0.31</version>
+    <version>1.0.1</version>
     <authors>Codefoco</authors>
     <owners>Vinicius Jarina</owners>
     <licenseUrl>https://github.com/codefoco/MazeCreator/blob/master/LICENSE</licenseUrl>
