@@ -17,7 +17,7 @@ function Get-Published-Package-Version ($PackageId) {
 }
 
 function Get-Git-Package-Version () {
-	return [string](gitversion /showvariable NuGetVersionV2)
+	return [string](gitversion /showvariable MajorMinorPatch)
 }
 
 function Get-Git-Build-MetaData () {
