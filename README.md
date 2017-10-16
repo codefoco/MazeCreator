@@ -2,15 +2,16 @@
 Maze Creator
 =============
 
-| NuGet |
-| ------|
-|[![nuget](https://img.shields.io/nuget/v/MazeCreator.svg)](https://www.nuget.org/packages/MazeCreator)|
+| NuGet | NuGet (Pre-Release) |
+| ------|------|
+|[![nuget](https://img.shields.io/nuget/v/MazeCreator.svg)](https://www.nuget.org/packages/MazeCreator)|[![nuget](https://img.shields.io/nuget/vpre/MazeCreator.svg)](https://www.nuget.org/packages/MazeCreator)|
 
 |  | Status | 
 | :------ | :------: | 
 | **Linux**   | [![Linux](https://travis-ci.org/codefoco/MazeCreator.svg?branch=master)](https://travis-ci.org/codefoco/MazeCreator) |
-| **Windows** | [![Build status](https://ci.appveyor.com/api/projects/status/jkqcy9m9k35jwolx?svg=true)](https://ci.appveyor.com/project/viniciusjarina/mazecreator)|
-|**Mac** | [![Build Status](http://codefoco.ddns.net:8085/buildStatus/icon?job=MazeCreator.Mac)](http://codefoco.ddns.net:8085/job/MazeCreator.Mac) |
+| **AppVeyor** | [![Build status](https://ci.appveyor.com/api/projects/status/jkqcy9m9k35jwolx?svg=true)](https://ci.appveyor.com/project/viniciusjarina/mazecreator)|
+|**Mac (Jenkins)** | [![Build Status](http://codefoco.ddns.net:8085/buildStatus/icon?job=MazeCreator.Mac)](http://codefoco.ddns.net:8085/job/MazeCreator.Mac/) |
+|**Windows (Jenkins)** | [![Build Status](http://codefoco.ddns.net:8085/buildStatus/icon?job=MazeCreator.Windows)](http://codefoco.ddns.net:8085/job/MazeCreator.Windows/) |
 
 
 This library will help you to create simple Mazes.
