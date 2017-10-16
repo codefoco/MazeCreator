@@ -1,14 +1,27 @@
 ﻿
-$PackageId = "MazeCreator"
+param ([string] $PackageId, [string] $NuSpecFile)
+
+
+function Get-Published-PreRelase-Package-Version ($PackageId) {
+	$out = [string](nuget list -PreRelease id:$PackageId)
+	$version = $out.Split(' ')[1]
+	$version = $version.Split('-')[0]
+	return $version
+}
 
 function Get-Published-Package-Version ($PackageId) {
 	$out = [string](nuget list id:$PackageId)
-	$_, $version = $out.Split(' ')
+	$version = $out.Split(' ')[1]
+	$version = $version.Split('-')[0]
 	return $version
 }
 
 function Get-Git-Package-Version () {
 	return [string](gitversion /showvariable NuGetVersionV2)
+}
+
+function Get-Git-Build-MetaData () {
+	return [string](gitversion /showvariable BuildMetaData)
 }
 
 function Update-NuSpec-Version($File, $Version) {
@@ -86,10 +99,34 @@ function Set-XmlElementsTextValue([xml]$XmlDocument, [string]$ElementPath, [stri
 	}
 }
 
-$published = Get-Published-Package-Version ($PackageId)
-$current   = Get-Git-Package-Version
-
-if ($published -ne $current) {
-	$nuspecFile = $PackageId + ".nuspec"
-	Update-NuSpec-Version  $nuspecFile $current
+function Test-Stable-Release ($stableVersion, $preReleaseVersion, $nugetGitVersion)
+{
+	if ($stableVersion -ne $preReleaseVersion -and $preReleaseVersion -ne $nugetGitVersion) {
+		return $true
+	}
+	return $false
 }
+
+function Set-Forced-Git-Version ($version)
+{
+	Write-Output "next-version: $version" > GitVersion.yml
+}
+
+
+$stableVersion      = Get-Published-Package-Version ($PackageId)
+$preReleaseVersion  = Get-Published-PreRelase-Package-Version ($PackageId)
+
+$nugetGitVersion   = Get-Git-Package-Version
+$buildMetaData = Get-Git-Build-MetaData
+
+$nextVersion = ""
+
+if (Test-Stable-Release $stableVersion $preReleaseVersion $nugetGitVersion) {
+	$nextVersion = $preReleaseVersion
+	Set-Forced-Git-Version $nextVersion
+} else {
+	$nextVersion = "$($nugetGitVersion)-beta-build$($buildMetaData)" 
+}
+
+Update-NuSpec-Version  $NuSpecFile $nextVersion
+gitversion /updateassemblyinfo
