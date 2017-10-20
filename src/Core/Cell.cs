@@ -43,11 +43,9 @@ namespace MazeCreator.Core
 			this.info = info;
 		}
 
-		public static Cell EmptyCell {
-			get {
-				return new Cell (CellInfo.EmptyCell);
-			}
-		}
+		public static Cell EmptyCell => new Cell (CellInfo.EmptyCell);
+
+		public byte Code => (byte)info;
 
 		public CellInfo CellInfo {
 			get {
@@ -58,68 +56,26 @@ namespace MazeCreator.Core
 			}
 		}
 
-		public bool HasLeftBorder {
-			get {
-				return (info & CellInfo.LeftBorder) == CellInfo.LeftBorder;
-			}
-		}
+		public bool HasTopBorder    => (info | CellInfo.TopBorder)    == CellInfo.TopBorder;
+		public bool HasLeftBorder   => (info | CellInfo.LeftBorder)   == CellInfo.LeftBorder;
+		public bool HasBottomBorder => (info | CellInfo.BottomBorder) == CellInfo.BottomBorder;
+		public bool HasRightBorder  => (info | CellInfo.RightBorder)  == CellInfo.RightBorder;
+	
+		public bool HasLeftWall   => (info | CellInfo.LeftWall)   == CellInfo.LeftWall;
+		public bool HasTopWall    => (info | CellInfo.TopWall)    == CellInfo.TopWall;
+		public bool HasBottomWall => (info | CellInfo.BottomWall) == CellInfo.BottomWall;
+		public bool HasRightWall  => (info | CellInfo.RightWall)  == CellInfo.RightWall;
 
-		public bool HasTopBorder {
-			get {
-				return (info & CellInfo.TopBorder) == CellInfo.TopBorder;
-			}
-		}
-
-		public bool HasBottomBorder {
-			get {
-				return (info & CellInfo.BottomBorder) == CellInfo.BottomBorder;
-			}
-		}
-
-		public bool HasRightBorder {
-			get {
-				return (info & CellInfo.RightBorder) == CellInfo.RightBorder;
-			}
-		}
-
-		public bool HasLeftWall {
-			get {
-				return (info & CellInfo.LeftWall) == CellInfo.LeftWall;
-			}
-		}
-
-		public bool HasTopWall {
-			get {
-				return (info & CellInfo.TopWall) == CellInfo.TopWall;
-			}
-		}
-
-		public bool HasBottomWall {
-			get {
-				return (info & CellInfo.BottomWall) == CellInfo.BottomWall;
-			}
-		}
-
-		public bool HasRightWall {
-			get {
-				return (info & CellInfo.RightWall) == CellInfo.RightWall;
-			}
-		}
-
-		public bool HasAllWalls {
-			get {
-				return (info & CellInfo.AllWalls) == CellInfo.AllWalls;
-			}
-		}
+		public bool HasAllWalls   => (info | CellInfo.AllWalls) == CellInfo.AllWalls;
 
 		public void RemoveStartWall (Direction direction)
 		{
-			info &= removeWallFlags [(int)direction];
+			info |= removeWallFlags [(int)direction];
 		}
 
 		public void RemoveEndWall (Direction direction)
 		{
-			info &= removeWallFlags [(int)direction.Oposite()];
+			info |= removeWallFlags [(int)direction.Oposite()];
 		}
 
 		public override bool Equals (object obj)

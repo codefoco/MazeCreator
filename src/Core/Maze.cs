@@ -54,18 +54,18 @@ namespace MazeCreator.Core
 			                                             
 			for (int i = 0; i < Rows; i++) {
 				int index = IndexFromPosition (new Position (i, 0));
-				cells [index] = new Cell (CellInfo.AllWalls | CellInfo.LeftBorder);
+				cells [index] = new Cell (cells [index].CellInfo & CellInfo.LeftBorder);
 
 				index = IndexFromPosition (new Position (i, Columns - 1));
-				cells [index] = new Cell (CellInfo.AllWalls | CellInfo.RightBorder);
+				cells [index] = new Cell (cells [index].CellInfo & CellInfo.RightBorder);
 			}
 
 			for (int i = 0; i < Columns; i++) {
 				int index = IndexFromPosition (new Position (0, i));
-				cells [index] = new Cell (CellInfo.AllWalls | CellInfo.TopBorder);
+				cells [index] = new Cell (cells [index].CellInfo & CellInfo.TopBorder);
 
 				index = IndexFromPosition (new Position (Rows - 1, i));
-				cells [index] = new Cell (CellInfo.AllWalls | CellInfo.BottomBorder);
+				cells [index] = new Cell (cells [index].CellInfo & CellInfo.BottomBorder);
 			}
 		}
 

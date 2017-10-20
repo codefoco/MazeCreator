@@ -14,13 +14,13 @@ namespace MazeCreator.Extensions
 			var builder = new StringBuilder ();
 
 			Cell topLeft = Cell.EmptyCell;
-			Cell topRight = Cell.EmptyCell; ;
-			Cell bottomLeft = Cell.EmptyCell; ;
-			Cell bottomRight = Cell.EmptyCell; ;
+			Cell topRight = Cell.EmptyCell;
+			Cell bottomLeft = Cell.EmptyCell;
+			Cell bottomRight = Cell.EmptyCell;
 
 			for (int row = 0; row <= maze.Rows; row++) {
 				for (int column = 0; column <= maze.Columns; column++) {
-					position.Row= row;
+					position.Row    = row;
 					position.Column = column;
 
 					topLeft = maze [position.UpLeft];
