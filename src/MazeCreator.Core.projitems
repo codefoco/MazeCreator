@@ -36,7 +36,4 @@
     <Compile Include="$(MSBuildThisFileDirectory)Solver\Solver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Solver\VisitInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)Core\packages.config" />
-  </ItemGroup>
 </Project>
