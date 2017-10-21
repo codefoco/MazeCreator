@@ -1,4 +1,6 @@
 ﻿
+
+
 param ([string] $PackageId, [string] $NuSpecFile)
 
 
@@ -22,6 +24,10 @@ function Get-Git-Package-Version () {
 
 function Get-Git-Build-MetaData () {
 	return [string](gitversion /showvariable BuildMetaData)
+}
+
+function Get-Git-Full-Sem-Ver () {
+	return [string](gitversion /showvariable FullSemVer)
 }
 
 function Update-NuSpec-Version($File, $Version) {
@@ -99,9 +105,13 @@ function Set-XmlElementsTextValue([xml]$XmlDocument, [string]$ElementPath, [stri
 	}
 }
 
-function Test-Stable-Release ($stableVersion, $preReleaseVersion, $nugetGitVersion)
+function Test-Stable-Release ($stableVersion, $preReleaseVersion, $nugetGitVersion, $buildMetaData, $fullSemVer)
 {
+	# This is unlikelly to heppen, but could happen if the tag creation didn't triggered the Package
 	if ($stableVersion -ne $preReleaseVersion -and $preReleaseVersion -ne $nugetGitVersion) {
+		return $true
+	}
+	if ([string]::IsNullOrEmpty($buildMetaData) -and $fullSemVer -eq $nugetGitVersion) {
 		return $true
 	}
 	return $false
@@ -118,10 +128,11 @@ $preReleaseVersion  = Get-Published-PreRelase-Package-Version ($PackageId)
 
 $nugetGitVersion   = Get-Git-Package-Version
 $buildMetaData = Get-Git-Build-MetaData
+$fullSemVer = Get-Git-Full-Sem-Ver
 
 $nextVersion = ""
 
-if (Test-Stable-Release $stableVersion $preReleaseVersion $nugetGitVersion) {
+if (Test-Stable-Release $stableVersion $preReleaseVersion $nugetGitVersion $buildMetaData $fullSemVer) {
 	$nextVersion = $preReleaseVersion
 	Set-Forced-Git-Version $nextVersion
 } else {
