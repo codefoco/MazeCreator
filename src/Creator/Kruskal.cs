@@ -24,6 +24,7 @@
 using System;
 
 using MazeCreator.Core;
+using MazeCreator.Extensions;
 
 namespace MazeCreator.Creator
 {
@@ -118,6 +119,7 @@ namespace MazeCreator.Creator
 						maze.RemoveWalls (start, end, Direction.Left);
 				}
 			}
+			maze.PostProcessCellWalls ();
 			return maze;
 		}
 	}

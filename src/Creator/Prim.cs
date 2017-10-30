@@ -27,6 +27,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using MazeCreator.Core;
+using MazeCreator.Extensions;
 
 namespace MazeCreator.Creator
 {
@@ -141,7 +142,7 @@ namespace MazeCreator.Creator
 				var nextPosition = Position.GetNextPosition (position, direction);
 				maze.RemoveWalls (position, nextPosition, direction);
 			}
-
+			maze.PostProcessCellWalls ();
 			return maze;
 		}
 	}

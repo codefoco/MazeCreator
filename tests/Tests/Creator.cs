@@ -144,5 +144,49 @@ namespace MazeCreatorTest.Tests
 
 			AssertStringEqualIgnoreLineEnd (dfsExpected, maze.ToBoxString (), "#1");
 		}
+
+		[Test]
+		public void TestCellCodeRangeDFS ()
+		{
+			TestCellCodeRangeDFS (Algorithm.DFS);
+		}
+
+		[Test]
+		public void TestCellCodeRangeKruskal ()
+		{
+			TestCellCodeRangeDFS (Algorithm.Kruskal);
+		}
+
+		[Test]
+		public void TestCellCodeRangePrim ()
+		{
+			TestCellCodeRangeDFS (Algorithm.Prim);
+		}
+
+		public void TestCellCodeRangeDFS (Algorithm algorithm)
+		{
+			Maze maze;
+			var random = new TestRandomGenerator ();
+			ICreator creator = MazeCreator.Core.Creator.GetCreator (algorithm, random);
+
+			maze = creator.Create (50, 50);
+
+			byte min = byte.MaxValue;
+			byte max = byte.MinValue;
+
+			for (int row = 0; row < maze.Rows; row++) {
+				for (int columns = 0; columns < maze.Columns; columns++) {
+					
+					byte code = maze [row, columns].Code;
+					if (code > max)
+						max = code;
+					if (code < min)
+						min = code;
+				}
+			}
+
+			Assert.True (min <= 1);
+			Assert.True (max <= 15);
+		}
 	}
 }

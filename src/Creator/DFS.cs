@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using MazeCreator.Core;
+using MazeCreator.Extensions;
 
 namespace MazeCreator.Creator
 {
@@ -126,7 +127,7 @@ namespace MazeCreator.Creator
 					position = Position.GetPreviousPosition (position, backtrack [backtrackPosition]);
 				}
 			}
-
+			maze.PostProcessCellWalls ();
 			return maze;
 		}
 

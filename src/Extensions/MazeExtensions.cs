@@ -35,6 +35,40 @@ namespace MazeCreator.Extensions
 			return builder.ToString ();
 		}
 
+		public static void PostProcessCellWalls (this Maze maze)
+		{
+			int rows = maze.Rows;
+			int columns = maze.Columns;
+
+			for (int row = 0; row < rows; row++) {
+				for (int column = 0; column < columns; column++) {
+
+					Position position = new Position (row, column);
+					Cell cell = maze [position];
+
+					cell.CellInfo = cell.CellInfo | ~(CellInfo.RightBorder & CellInfo.TopBorder & CellInfo.LeftBorder & CellInfo.BottomBorder);
+					Cell upCell = maze [position.Up];
+					Cell leftCell = maze [position.Left];
+					Cell downCell = maze [position.Down];
+					Cell rightCell = maze [position.Right];
+
+					if (cell.HasTopWall || cell.HasLeftWall || leftCell.HasTopWall || upCell.HasLeftWall)
+						cell.CellInfo &= CellInfo.TopBorder;
+					
+					if (cell.HasTopWall || cell.HasRightWall || rightCell.HasTopWall || upCell.HasRightWall)
+						cell.CellInfo &= CellInfo.RightBorder;
+					
+					if (cell.HasBottomWall || cell.HasLeftWall || leftCell.HasBottomWall || downCell.HasLeftWall)
+						cell.CellInfo &= CellInfo.BottomBorder;
+					
+					if (cell.HasBottomWall || cell.HasRightWall || rightCell.HasBottomWall || downCell.HasRightWall)
+						cell.CellInfo &= CellInfo.LeftBorder;
+
+					maze [position] = cell;
+				}
+			}
+		}
+
 
 	}
 }
