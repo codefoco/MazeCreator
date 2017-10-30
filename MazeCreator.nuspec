@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>MazeCreator</id>
-    <version>1.0.1-beta-build4</version>
+    <version>1.0.2-beta-build1</version>
     <authors>Codefoco</authors>
     <owners>Vinicius Jarina</owners>
     <licenseUrl>https://github.com/codefoco/MazeCreator/blob/master/LICENSE</licenseUrl>
@@ -10,7 +10,7 @@
     <iconUrl>https://raw.githubusercontent.com/codefoco/MazeCreator/master/MazeCreator.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library to create simple Mazes</description>
-    <releaseNotes>Initial version.</releaseNotes>
+    <releaseNotes>Release: 040d1b0</releaseNotes>
     <copyright>Copyright © Code Foco 2017</copyright>
     <tags>maze dfs</tags>
   </metadata>
