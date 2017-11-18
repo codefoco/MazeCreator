@@ -24,6 +24,7 @@
     <file src="lib\Release\portable-net45+win8+wpa81\*.dll" target="lib\portable-net45+win8+wpa81" />
     <file src="lib\Release\xamarinmac\*.dll" target="lib\xamarinmac" />
     <file src="lib\Release\xamarintvos\*.dll" target="lib\xamarintvos" />
+    <file src="lib\Release\xamarinios\*.dll" target="lib\xamarinios" />
     <file src="lib\Release\xamarinwatchos\*.dll" target="lib\xamarinwatchos" />
   </files>
 </package>
