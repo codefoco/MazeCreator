@@ -189,12 +189,12 @@ function Test-Stable-Release ($stableVersion, $preReleaseVersion, $nugetGitVersi
 {
 	# This is unlikelly to heppen, but could happen if the tag creation didn't triggered the Package
 	if ($stableVersion -ne $preReleaseVersion -and $preReleaseVersion -ne $nugetGitVersion) {
-		return $true
+		return 1
 	}
 	if (Test-Tag-Build $nugetGitVersion $buildMetaData $fullSemVer) {
-		return $true
+		return 2
 	}
-	return $false
+	return 0
 }
 
 function Set-Forced-Git-Version ($version)
@@ -224,11 +224,13 @@ function Get-Next-Version-String ($PackageId)
 	$prefix = Get-Prefix-Name
 	$nextVersion = ""
 	
-
-	if (Test-Stable-Release $stableVersion $preReleaseVersion $nugetGitVersion $buildMetaData $fullSemVer){
+	$stable = Test-Stable-Release $stableVersion $preReleaseVersion $nugetGitVersion $buildMetaData $fullSemVer
+	if ($stable -eq 1){
 		$nextVersion = $preReleaseVersion
 		Set-Forced-Git-Version $nextVersion
-    } else {
+    } elseif ($table -eq 2) {
+		$nextVersion = $nugetGitVersion
+	} else {
 		$nextVersion = "$($nugetGitVersion)-$($prefix)-build$($buildMetaData)" 
 	}
 	return $nextVersion
