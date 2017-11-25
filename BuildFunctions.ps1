@@ -228,7 +228,7 @@ function Get-Next-Version-String ($PackageId)
 	if ($stable -eq 1){
 		$nextVersion = $preReleaseVersion
 		Set-Forced-Git-Version $nextVersion
-    } elseif ($table -eq 2) {
+    } elseif ($stable -eq 2) {
 		$nextVersion = $nugetGitVersion
 	} else {
 		$nextVersion = "$($nugetGitVersion)-$($prefix)-build$($buildMetaData)" 
