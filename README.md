@@ -10,8 +10,8 @@ Maze Creator
 | :------ | :------: | 
 | **Linux**   | [![Linux](https://travis-ci.org/codefoco/MazeCreator.svg?branch=master)](https://travis-ci.org/codefoco/MazeCreator) |
 | **AppVeyor** | [![Build status](https://ci.appveyor.com/api/projects/status/jkqcy9m9k35jwolx?svg=true)](https://ci.appveyor.com/project/viniciusjarina/mazecreator)|
-|**Mac (Jenkins)** | [![Build Status](http://codefoco.ddns.net:8085/buildStatus/icon?job=MazeCreator.Mac)](http://codefoco.ddns.net:8085/job/MazeCreator.Mac/) |
-|**Windows (Jenkins)** | [![Build Status](http://codefoco.ddns.net:8085/buildStatus/icon?job=MazeCreator.Windows)](http://codefoco.ddns.net:8085/job/MazeCreator.Windows/) |
+|**Mac (Jenkins)** | [![Build Status](http://jenkins.codefoco.com:8085/buildStatus/icon?job=MazeCreator.Mac)](http://jenkins.codefoco.com:8085/job/MazeCreator.Mac/) |
+|**Windows (Jenkins)** | [![Build Status](http://jenkins.codefoco.com:8085/buildStatus/icon?job=MazeCreator.Windows)](http://jenkins.codefoco.com:8085/job/MazeCreator.Windows/) |
 
 
 This library will help you to create simple Mazes.
