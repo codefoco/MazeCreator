@@ -52,7 +52,7 @@
     <Compile Include="Tests\TestRandomGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\build\net462\MazeCreator.csproj">
+    <ProjectReference Include="..\build\net461\MazeCreator.csproj">
       <Project>{c45805a8-6436-4738-bd9f-4632eea63bbc}</Project>
       <Name>MazeCreator</Name>
     </ProjectReference>
