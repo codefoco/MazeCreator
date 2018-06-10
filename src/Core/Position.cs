@@ -132,7 +132,7 @@ namespace MazeCreator.Core
 
 		public override int GetHashCode ()
 		{
-			return Row.GetHashCode () ^ Column.GetHashCode ();
+			return (Row.GetHashCode () << 8) ^ Column.GetHashCode ();
 		}
 
 		public override string ToString ()

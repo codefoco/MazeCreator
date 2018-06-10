@@ -14,9 +14,9 @@ using System.Reflection;
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,
 // and "{Major}.{Minor}.{Build}.*" will update just the revision.
 
-[assembly: AssemblyVersion("1.0.2.0")]
-[assembly: AssemblyInformationalVersion("1.0.2+1.Branch.master.Sha.040d1b040e0d67a0186cc509c123d2ae814e06cf")]
-[assembly: AssemblyFileVersion("1.0.2.0")]
+[assembly: AssemblyVersion("1.0.7.0")]
+[assembly: AssemblyInformationalVersion("1.0.7+Branch.master.Sha.80a328a64f12ed9032a0f14a75e6ecad967514d0")]
+[assembly: AssemblyFileVersion("1.0.7.0")]
 
 //[assembly: AssemblyDelaySign(false)]
 

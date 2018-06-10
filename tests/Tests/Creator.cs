@@ -34,7 +34,8 @@ namespace MazeCreatorTest.Tests
 	public class Creator
 	{
 				const string dfsExpected =
-@"┌───────────┬─┬─┬───┐ 
+@"
+┌───────────┬─┬─┬───┐ 
 │ ┌───┬─╴ ╷ │ │ ╵ ╷ │ 
 ├─┘ ╷ ╵ ┌─┤ │ └───┤ │ 
 │ ┌─┴───┘ ╵ ├─┬─╴ │ │ 
@@ -49,8 +50,8 @@ namespace MazeCreatorTest.Tests
 
 		void AssertStringEqualIgnoreLineEnd (string expected, string actual, string message)
 		{
-			expected = expected.Replace ("\r\n", "\n");
-			actual = actual.Replace ("\r\n", "\n");
+			expected = expected.Replace ("\r\n", "\n").Trim ();
+			actual = actual.Replace ("\r\n", "\n").Trim ();
 			Assert.AreEqual (expected, actual, message);
 		}
 
@@ -59,7 +60,7 @@ namespace MazeCreatorTest.Tests
 		{
 			var random = new TestRandomGenerator ();
 			ICreator creator = MazeCreator.Core.Creator.GetCreator (Algorithm.DFS, random);
-			Maze maze = creator.Create (10, 10);
+			Maze maze = creator.Create (2, 2);
 
 			AssertStringEqualIgnoreLineEnd (dfsExpected, maze.ToBoxString (), "#1");
 		}
