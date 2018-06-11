@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 
+using System.Diagnostics;
+
 namespace MazeCreator.Core
 {
 	public class Maze
@@ -98,9 +100,8 @@ namespace MazeCreator.Core
 
 		public Cell this[Position position] {
 			get {
-				if (!IsValidPosition (position))
-					return Cell.EmptyCell;
-				
+				Debug.Assert(IsValidPosition(position));
+
 				int index = IndexFromPosition (position);
 				return cells [index];
 			}
