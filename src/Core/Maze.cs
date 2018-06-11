@@ -50,8 +50,11 @@ namespace MazeCreator.Core
 			Columns = columns;
 			Rows = rows;
 
-			cells = new Cell [TotalCells];
-			for (int i = 0; i < TotalCells; i++)
+			int totalCellWithEdge = (rows + 1) * (columns + 1);
+
+			cells = new Cell [totalCellWithEdge];
+
+			for (int i = 0; i < totalCellWithEdge; i++)
 				cells [i] = new Cell (CellInfo.AllWalls);
 			                                             
 			for (int i = 0; i < Rows; i++) {
@@ -69,27 +72,21 @@ namespace MazeCreator.Core
 				index = IndexFromPosition (new Position (Rows - 1, i));
 				cells [index] = new Cell (cells [index].CellInfo | CellInfo.BottomBorder);
 			}
+
+			for (int i = 0; i <= Rows; i++) {
+				int index = IndexFromPosition (new Position (i, Columns));
+				cells[index] = Cell.EmptyCell;
+			}
+
+			for (int i = 0; i <= Columns; i++) {
+				int index = IndexFromPosition (new Position (i, Rows));
+				cells[index] = Cell.EmptyCell;
+			}
 		}
 
 		int IndexFromPosition (Position position)
 		{
-			return Position.IndexFromPosition (position, Columns);
-		}
-
-		bool IsValidPosition (Position position)
-		{
-			return 0 <= position.Row && position.Row < Rows &&
-				   0 <= position.Column && position.Column < Columns;
-		}
-
-		public Cell CellAt (Position position)
-		{
-			return this [position];
-		}
-
-		public Cell CellAt (int row, int column)
-		{
-			return this [new Position (row, column)];
+			return Position.IndexFromPosition (position, Columns + 1);
 		}
 
 		public Cell this [int row, int column] {
@@ -100,15 +97,10 @@ namespace MazeCreator.Core
 
 		public Cell this[Position position] {
 			get {
-				Debug.Assert(IsValidPosition(position));
-
 				int index = IndexFromPosition (position);
 				return cells [index];
 			}
 			set {
-				if (!IsValidPosition (position))
-					return;
-				
 				int index = IndexFromPosition (position);
 				cells [index] = value;
 			}

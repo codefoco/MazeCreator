@@ -57,6 +57,10 @@ namespace MazeCreatorTest.Tests
 		[Test]
 		public void DFS ()
 		{
+			var mazex = new Maze (3, 3);
+			mazex.PostProcessCellWalls ();
+			string s = mazex.ToBoxString ();
+
 			var random = new TestRandomGenerator ();
 			ICreator creator = MazeCreator.Core.Creator.GetCreator (Algorithm.DFS, random);
 			Maze maze = creator.Create (10, 10);

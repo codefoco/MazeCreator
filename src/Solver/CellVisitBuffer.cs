@@ -34,7 +34,7 @@ namespace MazeCreator
 
 		int IndexFromPosition (Position position)
 		{
-			return Position.IndexFromPosition (position, Columns);
+			return Position.IndexFromPosition (position, Columns + 1);
 		}
 
 		bool IsValidPosition (Position position)
