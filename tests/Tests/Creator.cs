@@ -49,7 +49,7 @@ namespace MazeCreatorTest.Tests
 
 		void AssertStringEqualIgnoreLineEnd (string expected, string actual, string message)
 		{
-			expected = expected.Replace ("\r\n", "\n");
+			expected = expected.Replace("\r\n", "\n");
 			actual = actual.Replace ("\r\n", "\n");
 			Assert.AreEqual (expected, actual, message);
 		}

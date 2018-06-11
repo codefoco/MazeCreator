@@ -31,21 +31,28 @@ namespace MazeCreator.Core
 	{
 		// CellInfo:
 		//                           [-border--][--walls--]
-		EmptyCell    = 0xFF,      // [ 1 1 1 1 ][ 1 1 1 1 ]
-		TopWall      = 0xFE,      // [ 1 1 1 1 ][ 1 1 1 0 ]
-		LeftWall     = 0xFD,      // [ 1 1 1 1 ][ 1 1 0 1 ]
-		BottomWall   = 0xFB,      // [ 1 1 1 1 ][ 1 0 1 1 ]
-		RightWall    = 0xF7,      // [ 1 1 1 1 ][ 0 1 1 1 ]
-		AllWalls     = 0xF0,      // [ 1 1 1 1 ][ 0 1 1 1 ]
+		EmptyCell    = 0x00,      // [ 0 0 0 0 ][ 0 0 0 0 ]
+		TopWall      = 0x01,      // [ 0 0 0 0 ][ 0 0 0 1 ]
+		LeftWall     = 0x02,      // [ 0 0 0 0 ][ 0 0 1 0 ]
+		BottomWall   = 0x10,      // [ 0 0 0 1 ][ 0 0 0 0 ]
+		RightWall    = 0x20,      // [ 0 0 1 0 ][ 0 0 0 0 ]
+		AllWalls     = 0x33,      // [ 0 0 1 1 ][ 0 0 1 1 ]
 
-		TopBorder    = 0xEF,      // [ 1 1 1 0 ][ 1 1 1 1 ]
-		LeftBorder   = 0xDF,      // [ 1 1 0 1 ][ 1 1 1 1 ]
-		BottomBorder = 0xBF,      // [ 1 0 1 1 ][ 1 1 1 1 ]
-		RightBorder  = 0x7F,      // [ 0 1 1 1 ][ 1 1 1 1 ]
+		TopBorder    = 0x40,      // [ 0 1 0 0 ][ 0 0 0 0 ]
+		LeftBorder   = 0x80,      // [ 1 0 0 0 ][ 0 0 0 0 ]
+		BottomBorder = 0x04,      // [ 0 0 0 0 ][ 0 1 0 0 ]
+		RightBorder  = 0x08,      // [ 0 0 0 0 ][ 1 0 0 0 ]
 
-		RemoveTopWall    = 0x01,  // [ 0 0 0 0 ][ 0 0 0 1 ]
-		RemoveLeftWall   = 0x02,  // [ 0 0 0 0 ][ 0 0 1 0 ]
-		RemoveBottomWall = 0x04,  // [ 0 0 0 0 ][ 0 1 0 0 ]
-		RemoveRightWall  = 0x08,  // [ 0 0 0 0 ][ 1 0 0 0 ]
+		RemoveBorders = 0x33,      // [ 0 0 1 1 ][ 0 0 1 1 ]
+
+		CodeMask = 0x0F,           // [ 0 0 1 1 ][ 1 1 1 1 ]
+
+		RemoveTopWall    = 0xFE,  // [ 1 1 1 1 ][ 1 1 1 0 ]
+		RemoveLeftWall   = 0xFD,  // [ 1 1 1 1 ][ 1 1 0 1 ]
+		RemoveBottomWall = 0xEF,  // [ 1 1 1 0 ][ 1 1 1 1 ]
+		RemoveRightWall  = 0xDF,  // [ 1 1 0 1 ][ 1 1 1 1 ]
+
+		UpLeftCellRightWall  = 0x04,// [ 0 0 0 0 ][ 0 1 0 0 ]
+		UpLeftCellBottomWall = 0x08,// [ 0 0 0 0 ][ 1 0 0 0 ]
 	}
 }

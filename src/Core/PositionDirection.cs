@@ -64,7 +64,7 @@ namespace MazeCreator
 
 		public override int GetHashCode ()
 		{
-			return Position.GetHashCode () ^ Direction.GetHashCode ();
+			return (Position.GetHashCode () << 8) ^ Direction.GetHashCode ();
 		}
 
 		public override string ToString ()

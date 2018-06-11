@@ -45,7 +45,7 @@ namespace MazeCreator.Core
 
 		public static Cell EmptyCell => new Cell (CellInfo.EmptyCell);
 
-		public byte Code => (byte)info;
+		public byte Code => (byte)(CellInfo.CodeMask & info);
 
 		public CellInfo CellInfo {
 			get {
@@ -56,26 +56,30 @@ namespace MazeCreator.Core
 			}
 		}
 
-		public bool HasTopBorder    => (info | CellInfo.TopBorder)    == CellInfo.TopBorder;
-		public bool HasLeftBorder   => (info | CellInfo.LeftBorder)   == CellInfo.LeftBorder;
-		public bool HasBottomBorder => (info | CellInfo.BottomBorder) == CellInfo.BottomBorder;
-		public bool HasRightBorder  => (info | CellInfo.RightBorder)  == CellInfo.RightBorder;
+		public bool HasTopBorder    => (info & CellInfo.TopBorder)    == CellInfo.TopBorder;
+		public bool HasLeftBorder   => (info & CellInfo.LeftBorder)   == CellInfo.LeftBorder;
+		public bool HasBottomBorder => (info & CellInfo.BottomBorder) == CellInfo.BottomBorder;
+		public bool HasRightBorder  => (info & CellInfo.RightBorder)  == CellInfo.RightBorder;
 	
-		public bool HasLeftWall   => (info | CellInfo.LeftWall)   == CellInfo.LeftWall;
-		public bool HasTopWall    => (info | CellInfo.TopWall)    == CellInfo.TopWall;
-		public bool HasBottomWall => (info | CellInfo.BottomWall) == CellInfo.BottomWall;
-		public bool HasRightWall  => (info | CellInfo.RightWall)  == CellInfo.RightWall;
+		public bool HasLeftWall   => (info & CellInfo.LeftWall)   == CellInfo.LeftWall;
+		public bool HasTopWall    => (info & CellInfo.TopWall)    == CellInfo.TopWall;
+		public bool HasBottomWall => (info & CellInfo.BottomWall) == CellInfo.BottomWall;
+		public bool HasRightWall  => (info & CellInfo.RightWall)  == CellInfo.RightWall;
 
-		public bool HasAllWalls   => (info | CellInfo.AllWalls) == CellInfo.AllWalls;
+		public bool HasAllWalls   => (info & CellInfo.AllWalls) == CellInfo.AllWalls;
+
+		public bool HasUpLeftRightWall => (info & CellInfo.UpLeftCellRightWall) == CellInfo.UpLeftCellRightWall;
+		public bool HasUpLeftBottomWall => (info & CellInfo.UpLeftCellBottomWall) == CellInfo.UpLeftCellBottomWall;
+
 
 		public void RemoveStartWall (Direction direction)
 		{
-			info |= removeWallFlags [(int)direction];
+			info &= removeWallFlags [(int)direction];
 		}
 
 		public void RemoveEndWall (Direction direction)
 		{
-			info |= removeWallFlags [(int)direction.Oposite()];
+			info &= removeWallFlags [(int)direction.Oposite()];
 		}
 
 		public override bool Equals (object obj)
