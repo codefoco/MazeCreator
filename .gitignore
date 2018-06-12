@@ -3,7 +3,6 @@ src/bin
 src/obj
 tests/bin
 tests/obj
-packages
 build/net461/obj/
 build/netstandard1.0/bin/
 build/netstandard1.0/obj/

@@ -8,9 +8,10 @@ before_install:
   - export PATH=/opt/mono/bin:$PATH
 
 install:
-  - sudo apt-get install mono-devel nunit
+  - sudo apt-get install mono-devel nunit nuget
 
 script:
+  - nuget restore
   - msbuild /p:Configuration=Release /t:Restore
   - msbuild /p:Configuration=Release
   - nunit-console ./tests/bin/Release/MazeCreatorTest.dll
