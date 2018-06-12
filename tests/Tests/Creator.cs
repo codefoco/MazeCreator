@@ -178,8 +178,8 @@ namespace MazeCreatorTest.Tests
 			byte min = byte.MaxValue;
 			byte max = byte.MinValue;
 
-			for (int row = 0; row < maze.Rows; row++) {
-				for (int columns = 0; columns < maze.Columns; columns++) {
+			for (int row = 0; row <= maze.Rows; row++) {
+				for (int columns = 0; columns <= maze.Columns; columns++) {
 					
 					byte code = maze [row, columns].Code;
 					if (code > max)
