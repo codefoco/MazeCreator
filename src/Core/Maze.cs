@@ -79,7 +79,7 @@ namespace MazeCreator.Core
 			}
 
 			for (int i = 0; i <= Columns; i++) {
-				int index = IndexFromPosition (new Position (i, Rows));
+				int index = IndexFromPosition (new Position (Rows, i));
 				cells[index] = Cell.EmptyCell;
 			}
 		}
