@@ -10,18 +10,11 @@ namespace MazeCreator.Extensions
 		public static string ToBoxString (this Maze maze)
 		{
 			var builder = new StringBuilder ();
-			var position = new Position();
+
 			for (int row = 0; row <= maze.Rows; row++) {
 				for (int column = 0; column <= maze.Columns; column++) {
-					position.Row = row;
-					position.Column = column;
-					Cell cell = Cell.EmptyCell;
-
-					if (column < maze.Columns && row < maze.Rows)
-						cell = maze[position];
-					else
-						cell = maze.ProcessCell(position, cell);
-
+					
+					Cell cell = maze[row, column];
 					builder.Append (CellToString.GetCellString (cell));
 				}
 				builder.AppendLine ();
@@ -65,8 +58,8 @@ namespace MazeCreator.Extensions
 			int rows = maze.Rows;
 			int columns = maze.Columns;
 
-			for (int row = 0; row < rows; row++) {
-				for (int column = 0; column < columns; column++) {
+			for (int row = 0; row <= rows; row++) {
+				for (int column = 0; column <= columns; column++) {
 
 					Position position = new Position(row, column);
 					maze[position] = maze.ProcessCell(position, maze[position]);
