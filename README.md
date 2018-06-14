@@ -10,8 +10,8 @@ Maze Creator
 | :------ | :------: | 
 | **Linux**   | [![Linux](https://travis-ci.org/codefoco/MazeCreator.svg?branch=master)](https://travis-ci.org/codefoco/MazeCreator) |
 | **AppVeyor** | [![Build status](https://ci.appveyor.com/api/projects/status/jkqcy9m9k35jwolx?svg=true)](https://ci.appveyor.com/project/viniciusjarina/mazecreator)|
-|**Mac (Jenkins)** | [![Build Status](http://jenkins.codefoco.com:8085/buildStatus/icon?job=MazeCreator.Mac)](http://jenkins.codefoco.com:8085/job/MazeCreator.Mac/) |
-|**Windows (Jenkins)** | [![Build Status](http://jenkins.codefoco.com:8085/buildStatus/icon?job=MazeCreator.Windows)](http://jenkins.codefoco.com:8085/job/MazeCreator.Windows/) |
+|**Mac (VSTS)** | [![Build Status](https://codefoco.visualstudio.com/_apis/public/build/definitions/4f3cd26e-b8f7-4e52-9e78-c2ecf3de2929/1/badge)](https://codefoco.visualstudio.com/BlueMaze/_build/index?context=mine&path=%5C&definitionId=1&_a=completed) |
+|**Windows (VSTS)** | [![Build Status](https://codefoco.visualstudio.com/_apis/public/build/definitions/4f3cd26e-b8f7-4e52-9e78-c2ecf3de2929/2/badge)](https://codefoco.visualstudio.com/BlueMaze/_build/index?context=mine&path=%5C&definitionId=2&_a=completed) |
 
 
 This library will help you to create simple Mazes.
