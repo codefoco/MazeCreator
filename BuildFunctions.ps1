@@ -74,16 +74,20 @@ function Get-Published-Package-Version ($PackageId)
 
 function Get-Git-Package-Version ()
 {
+	Update-Ensure-Git-Not-Detached 
 	return [string](gitversion /showvariable MajorMinorPatch)
 }
 
 function Get-Git-Build-MetaData ()
 {
+	Update-Ensure-Git-Not-Detached 
 	return [string](gitversion /showvariable BuildMetaData)
 }
 
 function Get-Git-Full-Sem-Ver () 
 {
+	Update-Ensure-Git-Not-Detached
+
 	return [string](gitversion /showvariable FullSemVer)
 }
 
@@ -104,7 +108,6 @@ function Update-NuSpec-Release-Notes($File, $releaseNotes)
 
 function Update-NuSpec-Version($File, $Version)
 {
-
 	$File = Resolve-Path $File
 
 	[xml] $fileContents = Get-Content -Encoding UTF8 -Path $File
@@ -284,4 +287,29 @@ function Test-Package-Already-Published ($PackageId, $nextVersion)
 		return $false
 	}
 	return $true
+}
+
+function Test-Git-Detached ()
+{
+	$output = [string](git branch | head -1)
+	$detached = $output.Contains("detached")
+	return $detached
+}
+
+function Get-Git-Current-Tag
+{
+	return [string](git describe --tags | head -1)
+}
+
+# GitVersion only works in attached branches, if we try to build a tag from the commit hash gitversion will fail
+# so we ensure we are always attached to a branch
+function Update-Ensure-Git-Not-Detached ()
+{
+	$detached = Test-Git-Detached
+	if (!$detached) {
+		return
+	}
+	$currentTag = Get-Git-Current-Tag
+	& git checkout -B $currentTag
+	# We are using -B because maybe the branch alrady exist
 }

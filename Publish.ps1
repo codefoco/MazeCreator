@@ -1,8 +1,8 @@
-param ([string] $PackageId, [string] $NuSpecFile)
+param ([string] $PackageId, [string] $NuSpecFile, [bool] $ForcePublish = $false)
 
 . .\BuildFunctions.ps1
 
-if (-Not (Test-Should-Deploy)) {
+if (-Not (Test-Should-Deploy) -and -Not $ForcePublish) {
 	return
 }
 
@@ -21,16 +21,7 @@ if (-Not (Test-Version-Stable-Release $nextVersion)) {
 	}
 }
 
-$hash = Get-Current-Commit-Hash
-$releaseNotes = "Release: $($hash)"
-
-Update-NuSpec-Release-Notes $NuSpecFile $releaseNotes
-
-$nuget = " ${env:ProgramFiles(x86)}" + "\NuGet\nuget.exe"
-
-& $nuget pack $NuSpecFile
 & $nuget push *.nupkg -Source https://www.nuget.org/api/v2/package
-
 # Unlist previous Pre-Release packages.
 if ($versionToUnlist -ne "") {
 	& $nuget delete $versionToUnlist -Source https://www.nuget.org/api/v2/package
