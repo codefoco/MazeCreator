@@ -1,4 +1,4 @@
-param ([string] $PackageId, [string] $NuSpecFile, [bool] $ForcePublish = $false)
+param ([string] $PackageId)
 
 . .\BuildFunctions.ps1
 

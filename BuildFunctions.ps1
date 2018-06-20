@@ -225,6 +225,8 @@ function Get-Next-Version-String ($PackageId)
 	$fullSemVer = Get-Git-Full-Sem-Ver
 
 	$prefix = Get-Prefix-Name
+	$prefix = $prefix.Replace("-", "")
+	$prefix = $prefix.Replace(".", "")
 	$nextVersion = ""
 	
 	$stable = Test-Stable-Release $stableVersion $preReleaseVersion $nugetGitVersion $buildMetaData $fullSemVer
