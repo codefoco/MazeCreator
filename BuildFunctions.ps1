@@ -253,7 +253,7 @@ function Test-Version-Stable-Release ($version)
 function Test-Package-Already-Published ($PackageId, $nextVersion)
 {
 	if (Test-Version-Stable-Release $nextVersion) {
-		$publishedVersion = Get-Published-Package
+		$publishedVersion = Get-Published-Package $PackageId
 		if ($publishedVersion -eq $nextVersion) {
 			return $true
 		}
@@ -262,7 +262,6 @@ function Test-Package-Already-Published ($PackageId, $nextVersion)
 
 	$buildMetaData = Get-Git-Build-MetaData
 	$currentVersion = $nextVersion.Split('-')[0]
-	
 	
 	[int]$currentBuild = [Convert]::ToInt32($buildMetaData, 10)
 	$currentPrefix = Get-Prefix-Name

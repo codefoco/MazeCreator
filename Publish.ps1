@@ -2,7 +2,7 @@ param ([string] $PackageId)
 
 . .\BuildFunctions.ps1
 
-if (-Not (Test-Should-Deploy) -and -Not $ForcePublish) {
+if (-Not (Test-Should-Deploy)) {
 	return
 }
 
