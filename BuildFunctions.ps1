@@ -93,7 +93,6 @@ function Get-Git-Full-Sem-Ver ()
 
 function Update-NuSpec-Release-Notes($File, $releaseNotes) 
 {
-	
 		$File = Resolve-Path $File
 	
 		[xml] $fileContents = Get-Content -Encoding UTF8 -Path $File
