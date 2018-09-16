@@ -37,7 +37,7 @@ namespace MazeCreator.Creator
 		public IRandomGenerator Random { get; set; }
 		
 		public Action<Maze, Position> PositionVisited { get; set; }
-		public Action<Maze, Position, Position, Direction> WallRemoved { get; set; }
+		public Action<Maze, Position, Direction> WallRemoved { get; set; }
 
 		static Direction [] GetAvailableDirections (Maze maze, Position position)
 		{
@@ -109,17 +109,16 @@ namespace MazeCreator.Creator
 				if (directions.Any ()) {
 
 					Direction direction = GetRandomDirection (directions, Random);
-					Position nextPosition = Position.GetNextPosition (position, direction);
 
-					maze.RemoveWalls (position, nextPosition, direction);
+					maze.RemoveWalls (position, direction);
 
 					if (WallRemoved != null)
-						WallRemoved (maze, position, nextPosition, direction);
+						WallRemoved (maze, position, direction);
 
 					backtrack [backtrackPosition] = direction;
 					backtrackPosition++;
 
-					position = nextPosition;
+					position = Position.GetNextPosition (position, direction);
 
 					visited++;
 				} else {

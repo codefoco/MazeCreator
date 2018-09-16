@@ -37,7 +37,7 @@ namespace MazeCreator.Creator
 		public IRandomGenerator Random { get; set; }
 		
 		public Action<Maze, Position> PositionVisited { get; set; }
-		public Action<Maze, Position, Position, Direction> WallRemoved { get; set; }
+		public Action<Maze, Position, Direction> WallRemoved { get; set; }
 
 		void MoveCell (List<Position> from, List<Position> to, int index)
 		{
@@ -139,8 +139,7 @@ namespace MazeCreator.Creator
 				
 				Direction direction = directions [Random.Next (candidates)];
 
-				var nextPosition = Position.GetNextPosition (position, direction);
-				maze.RemoveWalls (position, nextPosition, direction);
+				maze.RemoveWalls (position, direction);
 			}
 			maze.PostProcessCellWalls ();
 			return maze;

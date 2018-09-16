@@ -106,8 +106,9 @@ namespace MazeCreator.Core
 			}
 		}
 
-		public void RemoveWalls (Position position, Position nextPosition, Direction direction)
+		public void RemoveWalls (Position position, Direction direction)
 		{
+			Position nextPosition = Position.GetNextPosition(position, direction);
 			Cell start  = this [position];
 			Cell end    = this [nextPosition];
 

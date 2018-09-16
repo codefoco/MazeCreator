@@ -32,6 +32,6 @@ namespace MazeCreator.Core
 
 		IRandomGenerator Random { get; set; }
 		Action<Maze, Position> PositionVisited { get; set; }
-		Action<Maze, Position, Position, Direction> WallRemoved { get; set; }
+		Action<Maze, Position, Direction> WallRemoved { get; set; }
 	}
 }

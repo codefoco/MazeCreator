@@ -127,7 +127,7 @@ namespace MazeCreatorTest.Tests
 				position++;
 			};
 
-			creator.WallRemoved = (m, p, nextPosition, direction) => {
+			creator.WallRemoved = (m, p, direction) => {
 				walls++;
 			};
 

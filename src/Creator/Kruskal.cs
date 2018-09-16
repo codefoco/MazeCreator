@@ -33,7 +33,7 @@ namespace MazeCreator.Creator
 		public IRandomGenerator Random { get; set; }
 		
 		public Action<Maze, Position> PositionVisited { get; set; }
-		public Action<Maze, Position, Position, Direction> WallRemoved { get; set; }
+		public Action<Maze, Position, Direction> WallRemoved { get; set; }
 
 		int [] unionFind;
 
@@ -114,9 +114,9 @@ namespace MazeCreator.Creator
 					visited++;
 
 					if (direction == Direction.Up)
-						maze.RemoveWalls (start, end, Direction.Up);
+						maze.RemoveWalls (start, Direction.Up);
 					else
-						maze.RemoveWalls (start, end, Direction.Left);
+						maze.RemoveWalls (start, Direction.Left);
 				}
 			}
 			maze.PostProcessCellWalls ();
