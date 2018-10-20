@@ -18,4 +18,8 @@ build/portable-net45+win8+wpa81/obj/
 lib/Debug/
 lib/Release/
 .vs/
-build/
+build/Android/obj/
+build/TVOS/obj/
+build/WatchOS/obj/
+build/XamariniOS/obj/
+build/XamarinMac/obj/
