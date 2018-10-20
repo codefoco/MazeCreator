@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreatorTest", "tests\Ma
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MazeCreator", "MazeCreator", "{4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator", "build\net461\MazeCreator.csproj", "{C45805A8-6436-4738-BD9F-4632EEA63BBC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator", "build\net45\MazeCreator.csproj", "{C45805A8-6436-4738-BD9F-4632EEA63BBC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeCreator.Profile78", "build\portable-net45+win8+wp8\MazeCreator.Profile78.csproj", "{DADBF7AF-B6F7-40A1-B7D1-D4A60DF10DB5}"
 EndProject
