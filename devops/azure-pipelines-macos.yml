@@ -64,5 +64,4 @@ steps:
     buildDefinition: 'MazeCreator-Win'
     ignoreSslCertificateErrors: true
     useSameSourceVersion: true
-    authenticationMethod: 'OAuth Token'
     password: '$(myToken)'
