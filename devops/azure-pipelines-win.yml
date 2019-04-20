@@ -58,12 +58,12 @@ steps:
 - task: DownloadBuildArtifacts@0
   displayName: 'Download Build Xamarin.iOS'
   inputs:
-    buildType: specific
-    project: '4f3cd26e-b8f7-4e52-9e78-c2ecf3de2929'
-    pipeline: 1
+    buildType: 'specific'
+    project: 'NuGets'
+    definition: 'MazeCreator-Mac'
     specificBuildWithTriggering: true
-    artifactName: Xamarin.iOS.MazeCreator.dll
-    downloadPath: artifacts
+    artifactName: 'Xamarin.iOS.MazeCreator.dll'
+    downloadPath: 'artifacts'
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: lib/Release/xamarinios/'
@@ -74,9 +74,9 @@ steps:
 - task: DownloadBuildArtifacts@0
   displayName: 'Download Build Mac'
   inputs:
-    buildType: specific
-    project: '4f3cd26e-b8f7-4e52-9e78-c2ecf3de2929'
-    pipeline: 1
+    buildType: 'specific'
+    project: 'NuGets'
+    definition: 'MazeCreator-Mac'
     specificBuildWithTriggering: true
     artifactName: Xamarin.Mac.MazeCreator.dll
     downloadPath: artifacts
@@ -88,14 +88,14 @@ steps:
     TargetFolder: lib/Release/xamarinmac/
 
 - task: DownloadBuildArtifacts@0
-  displayName: 'Download Build tvOS'
+  displayName: 'Download Build Xamarin.tvOS'
   inputs:
-    buildType: specific
-    project: '4f3cd26e-b8f7-4e52-9e78-c2ecf3de2929'
-    pipeline: 1
+    buildType: 'specific'
+    project: 'NuGets'
+    definition: 'MazeCreator-Mac'
     specificBuildWithTriggering: true
-    artifactName: Xamarin.tvOS.MazeCreator.dll
-    downloadPath: artifacts
+    artifactName: 'Xamarin.tvOS.MazeCreator.dll'
+    downloadPath: 'artifacts'
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: lib/Release/xamarintvos/'
@@ -104,14 +104,14 @@ steps:
     TargetFolder: lib/Release/xamarintvos/
 
 - task: DownloadBuildArtifacts@0
-  displayName: 'Download Build watchOS'
+  displayName: 'Download Build Xamarin.watchOS'
   inputs:
-    buildType: specific
-    project: '4f3cd26e-b8f7-4e52-9e78-c2ecf3de2929'
-    pipeline: 1
+    buildType: 'specific'
+    project: 'NuGets'
+    definition: 'MazeCreator-Mac'
     specificBuildWithTriggering: true
-    artifactName: Xamarin.watchOS.MazeCreator.dll
-    downloadPath: artifacts
+    artifactName: 'Xamarin.watchOS.MazeCreator.dll'
+    downloadPath: 'artifacts'
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: lib/Release/xamarinwatchos/'

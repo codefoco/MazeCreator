@@ -13,9 +13,10 @@ pool:
 steps:
 
 - task: NuGetToolInstaller@1
-  displayName: 'Use NuGet 4.5'
+  displayName: 'Use NuGet 4.7.3'
   inputs:
-    versionSpec: 4.5
+    versionSpec: 4.7.3
+    checkLatest: true
 
 - script: 'brew update'
   displayName: 'Run Update'
@@ -60,14 +61,6 @@ steps:
     PathtoPublish: lib/Release/xamarinwatchos/MazeCreator.dll
     ArtifactName: Xamarin.watchOS.MazeCreator.dll
 
-- task: benjhuser.tfs-extensions-build-tasks.trigger-build-task.TriggerBuild@3
-  displayName: 'Trigger a new build of BlueMaze-MazeCreator.Desktop'
-  inputs:
-
-    buildDefinition: 'BlueMaze-MazeCreator.Desktop'
-    password: '$(myToken)'
-
-
-
-
-
+  - task: TriggerBuild@3
+    inputs:
+      buildDefinition: 'MazeCreator-Win'
