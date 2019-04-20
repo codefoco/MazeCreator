@@ -8,8 +8,6 @@ pool:
   demands: msbuild
 
 
-#Your build pipeline references a secret variable named ‘myToken’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it secret. See https://go.microsoft.com/fwlink/?linkid=865972
-
 steps:
 
 - task: NuGetToolInstaller@1
@@ -61,6 +59,6 @@ steps:
     PathtoPublish: lib/Release/xamarinwatchos/MazeCreator.dll
     ArtifactName: Xamarin.watchOS.MazeCreator.dll
 
-  - task: TriggerBuild@3
-    inputs:
-      buildDefinition: 'MazeCreator-Win'
+- task: TriggerBuild@3
+  inputs:
+    buildDefinition: 'MazeCreator-Win'
