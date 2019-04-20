@@ -127,7 +127,7 @@ steps:
   inputs:
     targetType: filePath
     filePath: ./devops/Package.ps1
-    arguments: ' MazeCreator MazeCreator.nuspec'
+    arguments: 'MazeCreator MazeCreator.nuspec'
 
 - script: 'rename *.nupkg MazeCreator.nupkg'
   displayName: 'Rename Nuget Package'
