@@ -60,7 +60,6 @@ steps:
     ArtifactName: Xamarin.watchOS.MazeCreator.dll
 
 - task: TriggerBuild@3
-  env:
-    system_accesstoken: $(System.AccessToken) 
   inputs:
     buildDefinition: 'MazeCreator-Win'
+    password: '$(myToken)'
