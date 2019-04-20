@@ -10,8 +10,8 @@ Maze Creator
 | :------ | :------: | 
 | **Linux**   | [![Linux](https://travis-ci.org/codefoco/MazeCreator.svg?branch=master)](https://travis-ci.org/codefoco/MazeCreator) |
 | **AppVeyor** | [![Build status](https://ci.appveyor.com/api/projects/status/jkqcy9m9k35jwolx?svg=true)](https://ci.appveyor.com/project/viniciusjarina/mazecreator)|
-|**Mac (VSTS)** | [![Build Status](https://codefoco.visualstudio.com/_apis/public/build/definitions/4f3cd26e-b8f7-4e52-9e78-c2ecf3de2929/1/badge)](https://codefoco.visualstudio.com/BlueMaze/_build/index?context=mine&path=%5C&definitionId=1&_a=completed) |
-|**Windows (VSTS)** | [![Build Status](https://codefoco.visualstudio.com/_apis/public/build/definitions/4f3cd26e-b8f7-4e52-9e78-c2ecf3de2929/2/badge)](https://codefoco.visualstudio.com/BlueMaze/_build/index?context=mine&path=%5C&definitionId=2&_a=completed) |
+|**Mac** | [![Build Status](https://dev.azure.com/codefoco/NuGets/_apis/build/status/MazeCreator/MazeCreator-Mac?branchName=master)](https://dev.azure.com/codefoco/NuGets/_build/latest?definitionId=4&branchName=master) |
+|**Windows ** | [![Build Status](https://dev.azure.com/codefoco/NuGets/_apis/build/status/MazeCreator/MazeCreator-Win?branchName=master)](https://dev.azure.com/codefoco/NuGets/_build/latest?definitionId=5&branchName=master) |
 
 
 This library will help you to create simple Mazes.
