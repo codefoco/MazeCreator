@@ -59,3 +59,10 @@ steps:
     PathtoPublish: lib/Release/xamarinwatchos/MazeCreator.dll
     ArtifactName: Xamarin.watchOS.MazeCreator.dll
 
+- task: TriggerBuild@3
+  inputs:
+    buildDefinition: 'MazeCreator-Win'
+    ignoreSslCertificateErrors: true
+    useSameSourceVersion: true
+    authenticationMethod: 'OAuth Token'
+    password: '$(myToken)'
