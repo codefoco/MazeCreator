@@ -18,7 +18,7 @@ steps:
   inputs:
     restoreSolution: MazeCreator.sln
 
-- powershell: 'Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString(''https://chocolatey.org/install.ps1'))'
+- powershell: 'Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString(''https://chocolatey.org/install.ps1''))'
   displayName: 'Install Choco'
 
 - script: 'choco install gitversion.portable --pre '
