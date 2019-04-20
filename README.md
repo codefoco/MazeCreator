@@ -2,9 +2,9 @@
 Maze Creator
 =============
 
-| NuGet | NuGet (Pre-Release) |
-| ------|------|
-|[![nuget](https://img.shields.io/nuget/v/MazeCreator.svg)](https://www.nuget.org/packages/MazeCreator)|[![nuget](https://img.shields.io/nuget/vpre/MazeCreator.svg)](https://www.nuget.org/packages/MazeCreator)|
+| NuGet |
+| ------|
+|[![nuget](https://badgen.net/nuget/v/MazeCreator?icon=nuget)](https://www.nuget.org/packages/MazeCreator)|
 
 |  | Status | 
 | :------ | :------: | 

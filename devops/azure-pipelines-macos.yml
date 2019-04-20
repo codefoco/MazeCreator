@@ -1,0 +1,73 @@
+resources:
+
+- repo: self
+  clean: true
+
+pool:
+  name: Hosted macOS
+  demands: msbuild
+
+
+#Your build pipeline references a secret variable named ‘myToken’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it secret. See https://go.microsoft.com/fwlink/?linkid=865972
+
+steps:
+
+- task: NuGetToolInstaller@1
+  displayName: 'Use NuGet 4.5'
+  inputs:
+    versionSpec: 4.5
+
+- script: 'brew update'
+  displayName: 'Run Update'
+
+- script: 'brew install gitversion --ignore-dependencies'
+  displayName: 'Install GitVersion'
+
+- task: PowerShell@2
+  displayName: 'PowerShell Script'
+  inputs:
+    targetType: filePath
+    filePath: ./devops/PreBuild.ps1
+    arguments: ' MazeCreator MazeCreator.nuspec'
+
+- task: MSBuild@1
+  displayName: 'Build solution MazeCreator.sln'
+  inputs:
+    solution: MazeCreator.sln
+    configuration: ReleaseMac
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Xamarin.iOS.MazeCreator.dll'
+  inputs:
+    PathtoPublish: lib/Release/xamarinios/MazeCreator.dll
+    ArtifactName: Xamarin.iOS.MazeCreator.dll
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Xamarin.Mac.MazeCreator.dll'
+  inputs:
+    PathtoPublish: lib/Release/xamarinmac/MazeCreator.dll
+    ArtifactName: Xamarin.Mac.MazeCreator.dll
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Xamarin.tvOS.MazeCreator.dll'
+  inputs:
+    PathtoPublish: lib/Release/xamarintvos/MazeCreator.dll
+    ArtifactName: Xamarin.tvOS.MazeCreator.dll
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Xamarin.watchOS.MazeCreator.dll'
+  inputs:
+    PathtoPublish: lib/Release/xamarinwatchos/MazeCreator.dll
+    ArtifactName: Xamarin.watchOS.MazeCreator.dll
+
+- task: benjhuser.tfs-extensions-build-tasks.trigger-build-task.TriggerBuild@3
+  displayName: 'Trigger a new build of BlueMaze-MazeCreator.Desktop'
+  inputs:
+
+    buildDefinition: 'BlueMaze-MazeCreator.Desktop'
+    password: '$(myToken)'
+
+
+
+
+

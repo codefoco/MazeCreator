@@ -1,0 +1,146 @@
+pool:
+  name: Hosted VS2017
+  demands:
+  - msbuild
+  - visualstudio
+  - vstest
+
+
+steps:
+- task: NuGetToolInstaller@1
+  displayName: 'Use NuGet 4.7.3'
+  inputs:
+    versionSpec: 4.7.3
+    checkLatest: true
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    restoreSolution: MazeCreator.sln
+
+- powershell: 'Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString(''https://chocolatey.org/install.ps1'))'
+  displayName: 'Install Choco'
+
+- script: 'choco install gitversion.portable --pre '
+  displayName: 'Install GitVersion'
+
+- task: PowerShell@2
+  displayName: 'PreBuild Script'
+  inputs:
+    targetType: filePath
+    filePath: ./devops/PreBuild.ps1
+    arguments: ' MazeCreator MazeCreator.nuspec'
+
+- task: VSBuild@1
+  displayName: 'Build solution MazeCreator.sln'
+  inputs:
+    solution: MazeCreator.sln
+    platform: 'any cpu'
+    configuration: Release
+
+- task: VSBuild@1
+  displayName: 'Build solution MazeCreator.sln (Android)'
+  inputs:
+    solution: MazeCreator.sln
+    platform: 'any cpu'
+    configuration: ReleaseAndroid
+
+- task: VSTest@2
+  displayName: 'VsTest - testAssemblies'
+  inputs:
+    testAssemblyVer2: |
+     **\tests\bin\$(BuildConfiguration)\*Test*.dll
+     !**\obj\**
+
+    platform: '$(BuildPlatform)'
+    configuration: '$(BuildConfiguration)'
+
+- task: DownloadBuildArtifacts@0
+  displayName: 'Download Build Xamarin.iOS'
+  inputs:
+    buildType: specific
+    project: '4f3cd26e-b8f7-4e52-9e78-c2ecf3de2929'
+    pipeline: 1
+    specificBuildWithTriggering: true
+    artifactName: Xamarin.iOS.MazeCreator.dll
+    downloadPath: artifacts
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: lib/Release/xamarinios/'
+  inputs:
+    SourceFolder: 'artifacts\Xamarin.iOS.MazeCreator.dll\'
+    TargetFolder: lib/Release/xamarinios/
+
+- task: DownloadBuildArtifacts@0
+  displayName: 'Download Build Mac'
+  inputs:
+    buildType: specific
+    project: '4f3cd26e-b8f7-4e52-9e78-c2ecf3de2929'
+    pipeline: 1
+    specificBuildWithTriggering: true
+    artifactName: Xamarin.Mac.MazeCreator.dll
+    downloadPath: artifacts
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: lib/Release/xamarinmac/'
+  inputs:
+    SourceFolder: 'artifacts\Xamarin.Mac.MazeCreator.dll\'
+    TargetFolder: lib/Release/xamarinmac/
+
+- task: DownloadBuildArtifacts@0
+  displayName: 'Download Build tvOS'
+  inputs:
+    buildType: specific
+    project: '4f3cd26e-b8f7-4e52-9e78-c2ecf3de2929'
+    pipeline: 1
+    specificBuildWithTriggering: true
+    artifactName: Xamarin.tvOS.MazeCreator.dll
+    downloadPath: artifacts
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: lib/Release/xamarintvos/'
+  inputs:
+    SourceFolder: 'artifacts\Xamarin.tvOS.MazeCreator.dll\'
+    TargetFolder: lib/Release/xamarintvos/
+
+- task: DownloadBuildArtifacts@0
+  displayName: 'Download Build watchOS'
+  inputs:
+    buildType: specific
+    project: '4f3cd26e-b8f7-4e52-9e78-c2ecf3de2929'
+    pipeline: 1
+    specificBuildWithTriggering: true
+    artifactName: Xamarin.watchOS.MazeCreator.dll
+    downloadPath: artifacts
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: lib/Release/xamarinwatchos/'
+  inputs:
+    SourceFolder: 'artifacts\Xamarin.watchOS.MazeCreator.dll\'
+    TargetFolder: lib/Release/xamarinwatchos/
+
+- script: 'nuget setapikey $(apikey)'
+  displayName: 'Set NuGet API Key'
+
+- task: PowerShell@2
+  displayName: 'Package NuGet'
+  inputs:
+    targetType: filePath
+    filePath: ./devops/Package.ps1
+    arguments: ' MazeCreator MazeCreator.nuspec'
+
+- script: 'rename *.nupkg MazeCreator.nupkg'
+  displayName: 'Rename Nuget Package'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Save MazeCreator.nupkg Artifact'
+  inputs:
+    PathtoPublish: MazeCreator.nupkg
+    ArtifactName: MazeCreator.nupkg
+
+- task: PowerShell@2
+  displayName: 'Publish NuGet'
+  inputs:
+    targetType: filePath
+    filePath: ./devops/Publish.ps1
+    arguments: 'MazeCreator'
