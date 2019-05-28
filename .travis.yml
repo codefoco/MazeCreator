@@ -12,8 +12,8 @@ install:
 
 script:
   - nuget restore
-  - msbuild /p:Configuration=Release /t:Restore
-  - msbuild /p:Configuration=Release
+  - msbuild MazeCreator.sln /p:Configuration=Release /t:Restore
+  - msbuild MazeCreator.sln /p:Configuration=Release
   - nunit-console ./tests/bin/Release/MazeCreatorTest.dll
 
 # Execute additional tests or commands

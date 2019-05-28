@@ -2,7 +2,7 @@
 /*
  * This file is part of MazeCreator.
  * 
- * Copyright (c)  2018 Vinicius Jarina (viniciusjarina@gmail.com)
+ * Copyright (c)  2019 Vinicius Jarina (viniciusjarina@gmail.com)
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal

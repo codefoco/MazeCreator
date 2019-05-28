@@ -72,7 +72,7 @@ and enabling Timeout on tests.
  * 3222 Our build script tests hang when run with Mono on Windows
  * 3233 AndConstraint should write additional information from failed constraint
 
-### NUnit 3.11 - October 6, 2018
+### NUnit 3.11 - October 6, 2019
 
  * More informative assertion messages
  * PlatformAttribute is available on .NET Standard and now detects .NET Core
@@ -136,12 +136,12 @@ and enabling Timeout on tests.
  * 3024 Unable to add `.IgnoreCase` modifier to an `AnyOf` constraint in collection constraints
  * 3032 APIs to restore before 3.11
 
-### NUnit 3.10.1 - March 12, 2018
+### NUnit 3.10.1 - March 12, 2019
 
 Added a namespace to the props file included in the NuGet package to make it
 compatible with versions of Visual Studio prior to VS 2017.
 
-### NUnit 3.10 - March 12, 2018
+### NUnit 3.10 - March 12, 2019
 
 This release adds a .NET Standard 2.0 version of the framework which re-enables
 most of the features that have been missing in our earlier .NET Standard builds
