@@ -11,7 +11,7 @@ Maze Creator
 | **Linux**   | [![Linux](https://travis-ci.org/codefoco/MazeCreator.svg?branch=master)](https://travis-ci.org/codefoco/MazeCreator) |
 | **AppVeyor** | [![Build status](https://ci.appveyor.com/api/projects/status/jkqcy9m9k35jwolx?svg=true)](https://ci.appveyor.com/project/viniciusjarina/mazecreator)|
 |**Mac** | [![Build Status](https://dev.azure.com/codefoco/NuGets/_apis/build/status/MazeCreator/MazeCreator-Mac?branchName=master)](https://dev.azure.com/codefoco/NuGets/_build/latest?definitionId=4&branchName=master) |
-|**Windows ** | [![Build Status](https://dev.azure.com/codefoco/NuGets/_apis/build/status/MazeCreator/MazeCreator-Win?branchName=master)](https://dev.azure.com/codefoco/NuGets/_build/latest?definitionId=5&branchName=master) |
+|**Windows** | [![Build Status](https://dev.azure.com/codefoco/NuGets/_apis/build/status/MazeCreator/MazeCreator-Win?branchName=master)](https://dev.azure.com/codefoco/NuGets/_build/latest?definitionId=5&branchName=master) |
 
 
 This library will help you to create simple Mazes.
