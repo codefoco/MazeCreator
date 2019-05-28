@@ -471,7 +471,7 @@
             </summary>
             <param name="assemblyNameOrPath">File name or path of the assembly to load</param>
             <param name="settings">Dictionary of option settings for loading the assembly</param>
-            <returns>True if the load was successful</returns>
+            <returns>A Test Assembly containing all loaded tests</returns>
         </member>
         <member name="M:NUnit.Framework.Api.NUnitTestAssemblyRunner.Load(System.Reflection.Assembly,System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>
@@ -479,7 +479,7 @@
             </summary>
             <param name="assembly">The assembly to load</param>
             <param name="settings">Dictionary of option settings for loading the assembly</param>
-            <returns>True if the load was successful</returns>
+            <returns>A Test Assembly containing all loaded tests</returns>
         </member>
         <member name="M:NUnit.Framework.Api.NUnitTestAssemblyRunner.CountTestCases(NUnit.Framework.Interfaces.ITestFilter)">
             <summary>
@@ -502,7 +502,7 @@
             </summary>
             <param name="listener">Interface to receive EventListener notifications.</param>
             <param name="filter">A test filter used to select tests to be run</param>
-            <returns></returns>
+            <returns>The test results from the run</returns>
         </member>
         <member name="M:NUnit.Framework.Api.NUnitTestAssemblyRunner.RunAsync(NUnit.Framework.Interfaces.ITestListener,NUnit.Framework.Interfaces.ITestFilter)">
             <summary>
@@ -542,6 +542,11 @@
         <member name="M:NUnit.Framework.Api.NUnitTestAssemblyRunner.OnRunCompleted(System.Object,System.EventArgs)">
             <summary>
             Handle the Completed event for the top level work item
+            </summary>
+        </member>
+        <member name="M:NUnit.Framework.Api.NUnitTestAssemblyRunner.WrapInNUnitCallContext(System.Action)">
+            <summary>
+            This method is a no-op in .NET Standard builds.
             </summary>
         </member>
         <member name="T:NUnit.Framework.Assert">
@@ -2020,6 +2025,14 @@
             </summary>
             <param name="testDelegate">A TestDelegate to be executed in Multiple Assertion mode.</param>
         </member>
+        <member name="M:NUnit.Framework.Assert.Multiple(NUnit.Framework.AsyncTestDelegate)">
+            <summary>
+            Wraps code containing a series of assertions, which should all
+            be executed, even if they fail. Failed results are saved and
+            reported at the end of the code block.
+            </summary>
+            <param name="testDelegate">A TestDelegate to be executed in Multiple Assertion mode.</param>
+        </member>
         <member name="M:NUnit.Framework.Assert.AreEqual(System.Double,System.Double,System.Double,System.String,System.Object[])">
             <summary>
             Verifies that two doubles are equal considering a delta. If the
@@ -2163,6 +2176,118 @@
             the expected and the actual</param>
             <param name="message">The message to display in case of failure</param>
             <param name="args">Array of objects to be used in formatting the message</param>
+        </member>
+        <member name="M:NUnit.Framework.Assert.ThrowsAsync(NUnit.Framework.Constraints.IResolveConstraint,NUnit.Framework.AsyncTestDelegate,System.String,System.Object[])">
+            <summary>
+            Verifies that an async delegate throws a particular exception when called.
+            </summary>
+            <param name="expression">A constraint to be satisfied by the exception</param>
+            <param name="code">A TestSnippet delegate</param>
+            <param name="message">The message that will be displayed on failure</param>
+            <param name="args">Arguments to be used in formatting the message</param>
+        </member>
+        <member name="M:NUnit.Framework.Assert.ThrowsAsync(NUnit.Framework.Constraints.IResolveConstraint,NUnit.Framework.AsyncTestDelegate)">
+            <summary>
+            Verifies that an async delegate throws a particular exception when called.
+            </summary>
+            <param name="expression">A constraint to be satisfied by the exception</param>
+            <param name="code">A TestSnippet delegate</param>
+        </member>
+        <member name="M:NUnit.Framework.Assert.ThrowsAsync(System.Type,NUnit.Framework.AsyncTestDelegate,System.String,System.Object[])">
+            <summary>
+            Verifies that an async delegate throws a particular exception when called.
+            </summary>
+            <param name="expectedExceptionType">The exception Type expected</param>
+            <param name="code">A TestDelegate</param>
+            <param name="message">The message that will be displayed on failure</param>
+            <param name="args">Arguments to be used in formatting the message</param>
+        </member>
+        <member name="M:NUnit.Framework.Assert.ThrowsAsync(System.Type,NUnit.Framework.AsyncTestDelegate)">
+            <summary>
+            Verifies that an async delegate throws a particular exception when called.
+            </summary>
+            <param name="expectedExceptionType">The exception Type expected</param>
+            <param name="code">A TestDelegate</param>
+        </member>
+        <member name="M:NUnit.Framework.Assert.ThrowsAsync``1(NUnit.Framework.AsyncTestDelegate,System.String,System.Object[])">
+            <summary>
+            Verifies that an async delegate throws a particular exception when called.
+            </summary>
+            <typeparam name="TActual">Type of the expected exception</typeparam>
+            <param name="code">A TestDelegate</param>
+            <param name="message">The message that will be displayed on failure</param>
+            <param name="args">Arguments to be used in formatting the message</param>
+        </member>
+        <member name="M:NUnit.Framework.Assert.ThrowsAsync``1(NUnit.Framework.AsyncTestDelegate)">
+            <summary>
+            Verifies that an async delegate throws a particular exception when called.
+            </summary>
+            <typeparam name="TActual">Type of the expected exception</typeparam>
+            <param name="code">A TestDelegate</param>
+        </member>
+        <member name="M:NUnit.Framework.Assert.CatchAsync(NUnit.Framework.AsyncTestDelegate,System.String,System.Object[])">
+            <summary>
+            Verifies that an async delegate throws an exception when called
+            and returns it.
+            </summary>
+            <param name="code">A TestDelegate</param>
+            <param name="message">The message that will be displayed on failure</param>
+            <param name="args">Arguments to be used in formatting the message</param>
+        </member>
+        <member name="M:NUnit.Framework.Assert.CatchAsync(NUnit.Framework.AsyncTestDelegate)">
+            <summary>
+            Verifies that an async delegate throws an exception when called
+            and returns it.
+            </summary>
+            <param name="code">A TestDelegate</param>
+        </member>
+        <member name="M:NUnit.Framework.Assert.CatchAsync(System.Type,NUnit.Framework.AsyncTestDelegate,System.String,System.Object[])">
+            <summary>
+            Verifies that an async delegate throws an exception of a certain Type
+            or one derived from it when called and returns it.
+            </summary>
+            <param name="expectedExceptionType">The expected Exception Type</param>
+            <param name="code">A TestDelegate</param>
+            <param name="message">The message that will be displayed on failure</param>
+            <param name="args">Arguments to be used in formatting the message</param>
+        </member>
+        <member name="M:NUnit.Framework.Assert.CatchAsync(System.Type,NUnit.Framework.AsyncTestDelegate)">
+            <summary>
+            Verifies that an async delegate throws an exception of a certain Type
+            or one derived from it when called and returns it.
+            </summary>
+            <param name="expectedExceptionType">The expected Exception Type</param>
+            <param name="code">A TestDelegate</param>
+        </member>
+        <member name="M:NUnit.Framework.Assert.CatchAsync``1(NUnit.Framework.AsyncTestDelegate,System.String,System.Object[])">
+            <summary>
+            Verifies that an async delegate throws an exception of a certain Type
+            or one derived from it when called and returns it.
+            </summary>
+            <param name="code">A TestDelegate</param>
+            <param name="message">The message that will be displayed on failure</param>
+            <param name="args">Arguments to be used in formatting the message</param>
+        </member>
+        <member name="M:NUnit.Framework.Assert.CatchAsync``1(NUnit.Framework.AsyncTestDelegate)">
+            <summary>
+            Verifies that an async delegate throws an exception of a certain Type
+            or one derived from it when called and returns it.
+            </summary>
+            <param name="code">A TestDelegate</param>
+        </member>
+        <member name="M:NUnit.Framework.Assert.DoesNotThrowAsync(NUnit.Framework.AsyncTestDelegate,System.String,System.Object[])">
+            <summary>
+            Verifies that an async delegate does not throw an exception
+            </summary>
+            <param name="code">A TestDelegate</param>
+            <param name="message">The message that will be displayed on failure</param>
+            <param name="args">Arguments to be used in formatting the message</param>
+        </member>
+        <member name="M:NUnit.Framework.Assert.DoesNotThrowAsync(NUnit.Framework.AsyncTestDelegate)">
+            <summary>
+            Verifies that an async delegate does not throw an exception.
+            </summary>
+            <param name="code">A TestDelegate</param>
         </member>
         <member name="M:NUnit.Framework.Assert.Throws(NUnit.Framework.Constraints.IResolveConstraint,NUnit.Framework.TestDelegate,System.String,System.Object[])">
             <summary>
@@ -2571,6 +2696,12 @@
             capture any thrown exception.
             </summary>
         </member>
+        <member name="T:NUnit.Framework.AsyncTestDelegate">
+            <summary>
+            Delegate used by tests that execute async code and
+            capture any thrown exception.
+            </summary>
+        </member>
         <member name="T:NUnit.Framework.AssertionHelper">
             <summary>
             AssertionHelper is an optional base class for user tests,
@@ -2910,18 +3041,27 @@
         </member>
         <member name="M:NUnit.Framework.AssertionHelper.Contains(System.Object)">
             <summary>
+            <para>
             Returns a new <see cref="T:NUnit.Framework.Constraints.SomeItemsConstraint"/> checking for the
             presence of a particular object in the collection.
+            </para>
+            <para>
+            To search for a substring instead of a collection element, use the
+            <see cref="M:NUnit.Framework.AssertionHelper.Contains(System.String)"/> overload.
+            </para>
             </summary>
         </member>
         <member name="M:NUnit.Framework.AssertionHelper.Contains(System.String)">
             <summary>
+            <para>
             Returns a new ContainsConstraint. This constraint
             will, in turn, make use of the appropriate second-level
             constraint, depending on the type of the actual argument.
-            This overload is only used if the item sought is a string,
-            since any other type implies that we are looking for a
-            collection member.
+            </para>
+            <para>
+            To search for a collection element instead of a substring, use the
+            <see cref="M:NUnit.Framework.AssertionHelper.Contains(System.Object)"/> overload.
+            </para>
             </summary>
         </member>
         <member name="M:NUnit.Framework.AssertionHelper.StringContaining(System.String)">
@@ -3049,7 +3189,7 @@
         <member name="M:NUnit.Framework.Assume.Equals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The Equals method throws an InvalidOperationException. This is done 
+            The Equals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a">The left object.</param>
@@ -3059,7 +3199,7 @@
         <member name="M:NUnit.Framework.Assume.ReferenceEquals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The ReferenceEquals method throws an InvalidOperationException. This is done 
+            The ReferenceEquals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a">The left object.</param>
@@ -3099,14 +3239,14 @@
             <summary>
             Asserts that a condition is true. If the condition is false the method throws
             an <see cref="T:NUnit.Framework.InconclusiveException"/>.
-            </summary> 
+            </summary>
             <param name="condition">The evaluated condition</param>
             <param name="message">The message to display if the condition is false</param>
             <param name="args">Arguments to be used in formatting the message</param>
         </member>
         <member name="M:NUnit.Framework.Assume.That(System.Boolean)">
             <summary>
-            Asserts that a condition is true. If the condition is false the 
+            Asserts that a condition is true. If the condition is false the
             method throws an <see cref="T:NUnit.Framework.InconclusiveException"/>.
             </summary>
             <param name="condition">The evaluated condition</param>
@@ -3115,7 +3255,7 @@
             <summary>
             Asserts that a condition is true. If the condition is false the method throws
             an <see cref="T:NUnit.Framework.InconclusiveException"/>.
-            </summary> 
+            </summary>
             <param name="condition">The evaluated condition</param>
             <param name="getExceptionMessage">A function to build the message included with the Exception</param>
         </member>
@@ -3123,7 +3263,7 @@
             <summary>
             Asserts that a condition is true. If the condition is false the method throws
             an <see cref="T:NUnit.Framework.InconclusiveException"/>.
-            </summary> 
+            </summary>
             <param name="condition">A lambda that returns a Boolean</param>
             <param name="message">The message to display if the condition is false</param>
             <param name="args">Arguments to be used in formatting the message</param>
@@ -3139,7 +3279,7 @@
             <summary>
             Asserts that a condition is true. If the condition is false the method throws
             an <see cref="T:NUnit.Framework.InconclusiveException"/>.
-            </summary> 
+            </summary>
             <param name="condition">A lambda that returns a Boolean</param>
             <param name="getExceptionMessage">A function to build the message included with the Exception</param>
         </member>
@@ -3347,7 +3487,7 @@
         </member>
         <member name="T:NUnit.Framework.DataAttribute">
             <summary>
-            Abstract base class for all data-providing attributes defined by NUnit. 
+            Abstract base class for all data-providing attributes defined by NUnit.
             Used to select all data sources for a method, class or parameter.
             </summary>
         </member>
@@ -3640,7 +3780,7 @@
         <member name="F:NUnit.Framework.ParallelScope.Self">
             <summary>
             The test may be run in parallel with others at the same level.
-            Valid on classes and methods but not assemblies.
+            Valid on classes and methods but has no effect on assemblies.
             </summary>
         </member>
         <member name="F:NUnit.Framework.ParallelScope.None">
@@ -3658,7 +3798,7 @@
         <member name="F:NUnit.Framework.ParallelScope.Children">
             <summary>
             Descendants of the test may be run in parallel with one another.
-            Valid on assemblies and classes but not on methods.
+            Valid on assemblies and classes but not on non-parameterized methods.
             </summary>
         </member>
         <member name="F:NUnit.Framework.ParallelScope.Fixtures">
@@ -3677,7 +3817,9 @@
         <member name="F:NUnit.Framework.ParallelScope.All">
             <summary>
             The test and its descendants may be run in parallel with others at
-            the same level. Valid on classes and methods but not assemblies.
+            the same level. Valid on classes and parameterized methods.
+            For assemblies it is recommended to use <see cref="F:NUnit.Framework.ParallelScope.Children"/>
+            instead, as <see cref="F:NUnit.Framework.ParallelScope.Self"/> has no effect on assemblies.
             </summary>
         </member>
         <member name="T:NUnit.Framework.PlatformAttribute">
@@ -4279,20 +4421,6 @@
             <param name="arglist">The arguments to be converted</param>
             <param name="parameters">The ParameterInfo array for the method</param>
         </member>
-        <member name="M:NUnit.Framework.TestCaseAttribute.PerformSpecialConversion(System.Object,System.Type,System.Object@)">
-            <summary>
-            Performs several special conversions allowed by NUnit in order to
-            permit arguments with types that cannot be used in the constructor
-            of an Attribute such as TestCaseAttribute or to simplify their use.
-            </summary>
-            <param name="arg">The argument to be converted</param>
-            <param name="targetType">The target <see cref="T:System.Type"/> in which the <paramref name="arg"/> should be converted</param>
-            <param name="argAsTargetType">If conversion was successfully applied, the <paramref name="arg"/> converted into <paramref name="targetType"/></param>
-            <returns>
-            <c>true</c> if <paramref name="arg"/> was converted and <paramref name="argAsTargetType"/> should be used;
-            <c>false</c> is no conversion was applied and <paramref name="argAsTargetType"/> should be ignored
-            </returns>
-        </member>
         <member name="M:NUnit.Framework.TestCaseAttribute.BuildFrom(NUnit.Framework.Interfaces.IMethodInfo,NUnit.Framework.Internal.Test)">
             <summary>
             Builds a single test from the specified method and context.
@@ -4383,8 +4511,7 @@
         <member name="M:NUnit.Framework.TestFixtureAttribute.#ctor(System.Object[])">
             <summary>
             Construct with a object[] representing a set of arguments.
-            In .NET 2.0, the arguments may later be separated into
-            type arguments and constructor arguments.
+            The arguments may later be separated into type arguments and constructor arguments.
             </summary>
             <param name="arguments"></param>
         </member>
@@ -4707,7 +4834,7 @@
         <member name="M:NUnit.Framework.CollectionAssert.Equals(System.Object,System.Object)">
             <summary>
             DO NOT USE! Use CollectionAssert.AreEqual(...) instead.
-            The Equals method throws an InvalidOperationException. This is done 
+            The Equals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -4716,7 +4843,7 @@
         <member name="M:NUnit.Framework.CollectionAssert.ReferenceEquals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The ReferenceEquals method throws an InvalidOperationException. This is done 
+            The ReferenceEquals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -4770,7 +4897,7 @@
         </member>
         <member name="M:NUnit.Framework.CollectionAssert.AreEqual(System.Collections.IEnumerable,System.Collections.IEnumerable)">
             <summary>
-            Asserts that expected and actual are exactly equal.  The collections must have the same count, 
+            Asserts that expected and actual are exactly equal.  The collections must have the same count,
             and contain the exact same objects in the same order.
             </summary>
             <param name="expected">The first IEnumerable of objects to be considered</param>
@@ -4778,7 +4905,7 @@
         </member>
         <member name="M:NUnit.Framework.CollectionAssert.AreEqual(System.Collections.IEnumerable,System.Collections.IEnumerable,System.Collections.IComparer)">
             <summary>
-            Asserts that expected and actual are exactly equal.  The collections must have the same count, 
+            Asserts that expected and actual are exactly equal.  The collections must have the same count,
             and contain the exact same objects in the same order.
             If comparer is not null then it will be used to compare the objects.
             </summary>
@@ -4788,7 +4915,7 @@
         </member>
         <member name="M:NUnit.Framework.CollectionAssert.AreEqual(System.Collections.IEnumerable,System.Collections.IEnumerable,System.String,System.Object[])">
             <summary>
-            Asserts that expected and actual are exactly equal.  The collections must have the same count, 
+            Asserts that expected and actual are exactly equal.  The collections must have the same count,
             and contain the exact same objects in the same order.
             </summary>
             <param name="expected">The first IEnumerable of objects to be considered</param>
@@ -4798,7 +4925,7 @@
         </member>
         <member name="M:NUnit.Framework.CollectionAssert.AreEqual(System.Collections.IEnumerable,System.Collections.IEnumerable,System.Collections.IComparer,System.String,System.Object[])">
             <summary>
-            Asserts that expected and actual are exactly equal.  The collections must have the same count, 
+            Asserts that expected and actual are exactly equal.  The collections must have the same count,
             and contain the exact same objects in the same order.
             If comparer is not null then it will be used to compare the objects.
             </summary>
@@ -5347,7 +5474,7 @@
             <param name="expected"></param>
         </member>
         <member name="P:NUnit.Framework.Constraints.CollectionContainsConstraint.DisplayName">
-            <summary> 
+            <summary>
             The display name of this Constraint for use by ToString().
             The default value is the name of the constraint with
             trailing "Constraint" removed. Derived classes may set
@@ -6006,6 +6133,15 @@
             </summary>
             <returns>Self</returns>
         </member>
+        <member name="M:NUnit.Framework.Constraints.ComparisonConstraint.DefaultDescription(System.String)">
+            <summary>
+            Provides standard description of what the constraint tests
+            based on comparison text.
+            </summary>
+            <param name="comparisonText">Describes the comparison being tested, throws <see cref="T:System.ArgumentNullException"/>
+            if null</param>
+            <exception cref="T:System.ArgumentNullException">Is thrown when null passed to a method</exception>
+        </member>
         <member name="T:NUnit.Framework.Constraints.ActualValueDelegate`1">
             <summary>
             Delegate used to delay evaluation of the actual value
@@ -6631,18 +6767,27 @@
         </member>
         <member name="M:NUnit.Framework.Constraints.ConstraintExpression.Contains(System.Object)">
             <summary>
+            <para>
             Returns a new <see cref="T:NUnit.Framework.Constraints.SomeItemsConstraint"/> checking for the
             presence of a particular object in the collection.
+            </para>
+            <para>
+            To search for a substring instead of a collection element, use the
+            <see cref="M:NUnit.Framework.Constraints.ConstraintExpression.Contains(System.String)"/> overload.
+            </para>
             </summary>
         </member>
         <member name="M:NUnit.Framework.Constraints.ConstraintExpression.Contains(System.String)">
             <summary>
+            <para>
             Returns a new ContainsConstraint. This constraint
             will, in turn, make use of the appropriate second-level
             constraint, depending on the type of the actual argument.
-            This overload is only used if the item sought is a string,
-            since any other type implies that we are looking for a
-            collection member.
+            </para>
+            <para>
+            To search for a collection element instead of a substring, use the
+            <see cref="M:NUnit.Framework.Constraints.ConstraintExpression.Contains(System.Object)"/> overload.
+            </para>
             </summary>
         </member>
         <member name="M:NUnit.Framework.Constraints.ConstraintExpression.Contain(System.Object)">
@@ -7090,7 +7235,7 @@
             <param name="expected"></param>
         </member>
         <member name="P:NUnit.Framework.Constraints.DictionaryContainsKeyConstraint.DisplayName">
-            <summary> 
+            <summary>
             The display name of this Constraint for use by ToString().
             The default value is the name of the constraint with
             trailing "Constraint" removed. Derived classes may set
@@ -7880,7 +8025,7 @@
             <remarks>
               <para>
                 The floating point comparison code is based on this excellent article:
-                http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm
+                https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/
               </para>
               <para>
                 "ULP" means Unit in the Last Place and in the context of this library refers to
@@ -7984,6 +8129,12 @@
             </summary>
             <param name="expected">The expected value.</param>
         </member>
+        <member name="P:NUnit.Framework.Constraints.GreaterThanConstraint.Description">
+            <summary>
+            The Description of what this constraint tests, for
+            use in messages and in the ConstraintResult.
+            </summary>
+        </member>
         <member name="M:NUnit.Framework.Constraints.GreaterThanConstraint.PerformComparison(NUnit.Framework.Constraints.ComparisonAdapter,System.Object,System.Object,NUnit.Framework.Constraints.Tolerance)">
             <summary>
             Perform the comparison
@@ -7999,6 +8150,12 @@
             Initializes a new instance of the <see cref="T:NUnit.Framework.Constraints.GreaterThanOrEqualConstraint"/> class.
             </summary>
             <param name="expected">The expected value.</param>
+        </member>
+        <member name="P:NUnit.Framework.Constraints.GreaterThanOrEqualConstraint.Description">
+            <summary>
+            The Description of what this constraint tests, for
+            use in messages and in the ConstraintResult.
+            </summary>
         </member>
         <member name="M:NUnit.Framework.Constraints.GreaterThanOrEqualConstraint.PerformComparison(NUnit.Framework.Constraints.ComparisonAdapter,System.Object,System.Object,NUnit.Framework.Constraints.Tolerance)">
             <summary>
@@ -8194,6 +8351,12 @@
             </summary>
             <param name="expected">The expected value.</param>
         </member>
+        <member name="P:NUnit.Framework.Constraints.LessThanConstraint.Description">
+            <summary>
+            The Description of what this constraint tests, for
+            use in messages and in the ConstraintResult.
+            </summary>
+        </member>
         <member name="M:NUnit.Framework.Constraints.LessThanConstraint.PerformComparison(NUnit.Framework.Constraints.ComparisonAdapter,System.Object,System.Object,NUnit.Framework.Constraints.Tolerance)">
             <summary>
             Perform the comparison
@@ -8209,6 +8372,12 @@
             Initializes a new instance of the <see cref="T:NUnit.Framework.Constraints.LessThanOrEqualConstraint"/> class.
             </summary>
             <param name="expected">The expected value.</param>
+        </member>
+        <member name="P:NUnit.Framework.Constraints.LessThanOrEqualConstraint.Description">
+            <summary>
+            The Description of what this constraint tests, for
+            use in messages and in the ConstraintResult.
+            </summary>
         </member>
         <member name="M:NUnit.Framework.Constraints.LessThanOrEqualConstraint.PerformComparison(NUnit.Framework.Constraints.ComparisonAdapter,System.Object,System.Object,NUnit.Framework.Constraints.Tolerance)">
             <summary>
@@ -10007,7 +10176,7 @@
         <member name="M:NUnit.Framework.DirectoryAssert.Equals(System.Object,System.Object)">
             <summary>
             DO NOT USE! Use DirectoryAssert.AreEqual(...) instead.
-            The Equals method throws an InvalidOperationException. This is done 
+            The Equals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -10016,7 +10185,7 @@
         <member name="M:NUnit.Framework.DirectoryAssert.ReferenceEquals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The ReferenceEquals method throws an InvalidOperationException. This is done 
+            The ReferenceEquals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -10368,7 +10537,7 @@
         <member name="M:NUnit.Framework.FileAssert.Equals(System.Object,System.Object)">
             <summary>
             DO NOT USE! Use FileAssert.AreEqual(...) instead.
-            The Equals method throws an InvalidOperationException. This is done 
+            The Equals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -10377,7 +10546,7 @@
         <member name="M:NUnit.Framework.FileAssert.ReferenceEquals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The ReferenceEquals method throws an InvalidOperationException. This is done 
+            The ReferenceEquals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -12258,8 +12427,7 @@
         </member>
         <member name="M:NUnit.Framework.Internal.AssemblyHelper.Load(System.String)">
             <summary>
-            Loads an assembly given a string, which may be the
-            path to the assembly or the AssemblyName
+            Loads an assembly given a string, which is the AssemblyName
             </summary>
         </member>
         <member name="M:NUnit.Framework.Internal.AssemblyHelper.GetAssemblyPathFromCodeBase(System.String)">
@@ -12575,14 +12743,14 @@
             </para>
             <para>
             The PairwiseStrategy code is based on "jenny" tool by Bob Jenkins:
-            http://burtleburtle.net/bob/math/jenny.html
+            https://burtleburtle.net/bob/math/jenny.html
             </para>
             </remarks>
         </member>
         <member name="T:NUnit.Framework.Internal.Builders.PairwiseStrategy.FleaRand">
             <summary>
             FleaRand is a pseudo-random number generator developed by Bob Jenkins:
-            http://burtleburtle.net/bob/rand/talksmall.html#flea
+            https://burtleburtle.net/bob/rand/talksmall.html#flea
             </summary>
         </member>
         <member name="M:NUnit.Framework.Internal.Builders.PairwiseStrategy.FleaRand.#ctor(System.UInt32)">
@@ -12906,9 +13074,9 @@
         </member>
         <member name="M:NUnit.Framework.Internal.Commands.DelegatingTestCommand.#ctor(NUnit.Framework.Internal.Commands.TestCommand)">
             <summary>
-            TODO: Documentation needed for constructor
+            Initializes a new instance of the <see cref="T:NUnit.Framework.Internal.Commands.DelegatingTestCommand"/> class.
             </summary>
-            <param name="innerCommand"></param>
+            <param name="innerCommand">The inner command.</param>
         </member>
         <member name="T:NUnit.Framework.Internal.Commands.DisposeFixtureCommand">
             <summary>
@@ -12943,7 +13111,9 @@
         </member>
         <member name="T:NUnit.Framework.Internal.Commands.MaxTimeCommand">
             <summary>
-            TODO: Documentation needed for class
+            <see cref="T:NUnit.Framework.Internal.Commands.MaxTimeCommand" /> adjusts the result of a successful test
+            to a failure if the elapsed time has exceeded the specified maximum
+            time allowed.
             </summary>
         </member>
         <member name="M:NUnit.Framework.Internal.Commands.MaxTimeCommand.#ctor(NUnit.Framework.Internal.Commands.TestCommand,System.Int32)">
@@ -13164,7 +13334,7 @@
         </member>
         <member name="T:NUnit.Framework.Internal.Commands.TimeoutCommand">
             <summary>
-            TimeoutCommand creates a timer in order to cancel
+            <see cref="T:NUnit.Framework.Internal.Commands.TimeoutCommand"/> creates a timer in order to cancel
             a test if it exceeds a specified time and adjusts
             the test result if it did time out.
             </summary>
@@ -13175,6 +13345,13 @@
             </summary>
             <param name="innerCommand">The inner command</param>
             <param name="timeout">Timeout value</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Commands.TimeoutCommand.Execute(NUnit.Framework.Internal.TestExecutionContext)">
+            <summary>
+            Runs the test, saving a TestResult in the supplied TestExecutionContext.
+            </summary>
+            <param name="context">The context in which the test should run.</param>
+            <returns>A TestResult</returns>
         </member>
         <member name="T:NUnit.Framework.Internal.ConstraintUtils">
             <summary>
@@ -13240,6 +13417,13 @@
             is called.
             </summary>
         </member>
+        <member name="T:NUnit.Framework.Internal.DefaultBlockingAwaitAdapter">
+            <summary>
+            Useful when wrapping awaitables whose <c>GetResult</c> method does not block until complete.
+            Contains a default mechanism to implement <see cref="M:NUnit.Framework.Internal.AwaitAdapter.BlockUntilCompleted"/>
+            via <see cref="P:NUnit.Framework.Internal.AwaitAdapter.IsCompleted"/> and <see cref="M:NUnit.Framework.Internal.AwaitAdapter.OnCompleted(System.Action)"/>.
+            </summary>
+        </member>
         <member name="T:NUnit.Framework.Internal.ExceptionHelper">
             <summary>
             ExceptionHelper provides static methods for working with exceptions
@@ -13276,6 +13460,11 @@
             </summary>
             <param name="exception">The exception.</param>
             <returns>A string representation of the stack trace.</returns>
+        </member>
+        <member name="M:NUnit.Framework.Internal.ExceptionHelper.RecordException(System.Delegate,System.String)">
+            <summary>
+            Executes a parameterless synchronous or async delegate and returns the exception it throws, if any.
+            </summary>
         </member>
         <member name="T:NUnit.Framework.Internal.Execution.CompositeWorkItem">
             <summary>
@@ -13350,44 +13539,6 @@
         <member name="M:NUnit.Framework.Internal.Execution.CompositeWorkItem.OneTimeTearDownWorkItem.PerformWork">
             <summary>
             PerformWork is not used in CompositeWorkItem
-            </summary>
-        </member>
-        <member name="T:NUnit.Framework.Internal.Execution.CountdownEvent">
-            <summary>
-            A simplified implementation of .NET 4 CountdownEvent
-            for use in earlier versions of .NET. Only the methods
-            used by NUnit are implemented.
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Internal.Execution.CountdownEvent.#ctor(System.Int32)">
-            <summary>
-            Construct a CountdownEvent
-            </summary>
-            <param name="initialCount">The initial count</param>
-        </member>
-        <member name="P:NUnit.Framework.Internal.Execution.CountdownEvent.InitialCount">
-            <summary>
-            Gets the initial count established for the CountdownEvent
-            </summary>
-        </member>
-        <member name="P:NUnit.Framework.Internal.Execution.CountdownEvent.CurrentCount">
-            <summary>
-            Gets the current count remaining for the CountdownEvent
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Internal.Execution.CountdownEvent.Signal">
-            <summary>
-            Decrement the count by one
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Internal.Execution.CountdownEvent.Signal(System.Int32)">
-            <summary>
-            Decrement the count by the specified amount
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Internal.Execution.CountdownEvent.Wait">
-            <summary>
-            Block the thread until the count reaches zero
             </summary>
         </member>
         <member name="T:NUnit.Framework.Internal.Execution.EventListenerTextWriter">
@@ -13957,9 +14108,9 @@
             Save the state of the queues and create a new isolated set
             </summary>
         </member>
-        <member name="M:NUnit.Framework.Internal.Execution.ParallelWorkItemDispatcher.RestoreQueues">
+        <member name="M:NUnit.Framework.Internal.Execution.ParallelWorkItemDispatcher.TryRestoreQueues">
             <summary>
-            Remove isolated queues and restore old ones
+            Try to remove isolated queues and restore old ones
             </summary>
         </member>
         <member name="T:NUnit.Framework.Internal.Execution.QueuingEventListener">
@@ -14972,11 +15123,12 @@
         </member>
         <member name="M:NUnit.Framework.Internal.Filters.NotFilter.Pass(NUnit.Framework.Interfaces.ITest)">
             <summary>
-            Determine if a particular test passes the filter criteria. The default 
-            implementation checks the test itself, its parents and any descendants.
+            Determine if a particular test passes the filter criteria.
             
-            Derived classes may override this method or any of the Match methods
-            to change the behavior of the filter.
+            Overriden in NotFilter so that
+            1. Two nested NotFilters are simply ignored
+            2. Otherwise, we only look at the test itself and parents, ignoring
+            any child test matches.
             </summary>
             <param name="test">The test to which the filter is applied</param>
             <returns>True if the test passes the filter, otherwise false</returns>
@@ -15677,7 +15829,7 @@
         </member>
         <member name="F:NUnit.Framework.Internal.OSPlatform.UnixPlatformID_Microsoft">
             <summary>
-            Platform ID for Unix as defined by Microsoft .NET 2.0 and greater
+            Platform ID for Unix as defined by .NET
             </summary>
         </member>
         <member name="F:NUnit.Framework.Internal.OSPlatform.UnixPlatformID_Mono">
@@ -15973,8 +16125,17 @@
         </member>
         <member name="M:NUnit.Framework.Internal.ParamAttributeTypeConversions.TryConvert(System.Object,System.Type,System.Object@)">
             <summary>
-            Converts a single value to the <paramref name="targetType"/>, if it is supported.
+            Performs several special conversions allowed by NUnit in order to
+            permit arguments with types that cannot be used in the constructor
+            of an Attribute such as TestCaseAttribute or to simplify their use.
             </summary>
+            <param name="value">The value to be converted</param>
+            <param name="targetType">The target <see cref="T:System.Type"/> in which the <paramref name="value"/> should be converted</param>
+            <param name="convertedValue">If conversion was successfully applied, the <paramref name="value"/> converted into <paramref name="targetType"/></param>
+            <returns>
+            <c>true</c> if <paramref name="value"/> was converted and <paramref name="convertedValue"/> should be used;
+            <c>false</c> is no conversion was applied and <paramref name="convertedValue"/> should be ignored
+            </returns>
         </member>
         <member name="T:NUnit.Framework.Internal.ParameterWrapper">
             <summary>
@@ -16213,7 +16374,7 @@
             The selected strategy for joining parameter data into test cases
             </summary>
         </member>
-        <member name="F:NUnit.Framework.Internal.PropertyNames.ProcessID">
+        <member name="F:NUnit.Framework.Internal.PropertyNames.ProcessId">
             <summary>
             The process ID of the executing assembly
             </summary>
@@ -16675,6 +16836,14 @@
             <param name="type">See <see cref="M:System.Type.GetProperty(System.String,System.Reflection.BindingFlags)"/>.</param>
             <param name="name">See <see cref="M:System.Type.GetProperty(System.String,System.Reflection.BindingFlags)"/>.</param>
             <param name="bindingFlags">See <see cref="M:System.Type.GetProperty(System.String,System.Reflection.BindingFlags)"/>.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Reflect.GetNonGenericPublicInstanceMethod(System.Type,System.String,System.Type[])">
+            <summary>
+            Same as <c>GetMethod(<paramref name="name"/>, <see cref="F:System.Reflection.BindingFlags.Public"/> |
+            <see cref="F:System.Reflection.BindingFlags.Instance"/>, <see langword="null"/>, <paramref name="parameterTypes"/>,
+            <see langword="null"/>)</c> except that it also chooses only non-generic methods.
+            Useful for avoiding the <see cref="T:System.Reflection.AmbiguousMatchException"/> you can have with <c>GetMethod</c>.
+            </summary>
         </member>
         <member name="T:NUnit.Framework.Internal.TestCaseResult">
             <summary>
@@ -17983,10 +18152,23 @@
             </summary>
             <param name="typeInfo">The ITypeInfo for the type that represents the suite.</param>
         </member>
+        <member name="M:NUnit.Framework.Internal.ParameterizedFixtureSuite.#ctor(NUnit.Framework.Internal.ParameterizedFixtureSuite,NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a copy of the given suite with only the descendants that pass the specified filter.
+            </summary>
+            <param name="suite">The <see cref="T:NUnit.Framework.Internal.ParameterizedFixtureSuite"/> to copy.</param>
+            <param name="filter">Determines which descendants are copied.</param>
+        </member>
         <member name="P:NUnit.Framework.Internal.ParameterizedFixtureSuite.TestType">
             <summary>
             Gets a string representing the type of test
             </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.ParameterizedFixtureSuite.Copy(NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a filtered copy of the test suite.
+            </summary>
+            <param name="filter">Determines which descendants are copied.</param>
         </member>
         <member name="T:NUnit.Framework.Internal.ParameterizedMethodSuite">
             <summary>
@@ -17999,10 +18181,23 @@
             Initializes a new instance of the <see cref="T:NUnit.Framework.Internal.ParameterizedMethodSuite"/> class.
             </summary>
         </member>
+        <member name="M:NUnit.Framework.Internal.ParameterizedMethodSuite.#ctor(NUnit.Framework.Internal.ParameterizedMethodSuite,NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a copy of the given suite with only the descendants that pass the specified filter.
+            </summary>
+            <param name="suite">The <see cref="T:NUnit.Framework.Internal.ParameterizedMethodSuite"/> to copy.</param>
+            <param name="filter">Determines which descendants are copied.</param>
+        </member>
         <member name="P:NUnit.Framework.Internal.ParameterizedMethodSuite.TestType">
             <summary>
             Gets a string representing the type of test
             </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.ParameterizedMethodSuite.Copy(NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a filtered copy of the test suite.
+            </summary>
+            <param name="filter">Determines which descendants are copied.</param>
         </member>
         <member name="T:NUnit.Framework.Internal.SetUpFixture">
             <summary>
@@ -18014,6 +18209,19 @@
             <summary>
             Initializes a new instance of the <see cref="T:NUnit.Framework.Internal.SetUpFixture"/> class.
             </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.SetUpFixture.#ctor(NUnit.Framework.Internal.SetUpFixture,NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a copy of the given suite with only the descendants that pass the specified filter.
+            </summary>
+            <param name="setUpFixture">The <see cref="T:NUnit.Framework.Internal.SetUpFixture"/> to copy.</param>
+            <param name="filter">Determines which descendants are copied.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.SetUpFixture.Copy(NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a filtered copy of the test suite.
+            </summary>
+            <param name="filter">Determines which descendants are copied.</param>
         </member>
         <member name="T:NUnit.Framework.Internal.Test">
             <summary>
@@ -18253,22 +18461,25 @@
             specifying the Assembly and the suite name.
             </summary>
             <param name="assembly">The assembly this test represents.</param>
-            <param name="name">The desired name for the test suite.</param>
+            <param name="assemblyNameOrPath">
+            This becomes the full name of the suite and the filename part is used as the suite name.
+            </param>
         </member>
         <member name="M:NUnit.Framework.Internal.TestAssembly.#ctor(System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:NUnit.Framework.Internal.TestAssembly"/> class
             specifying the suite name for an assembly that could not be loaded.
             </summary>
-            <param name="name">The desired name for the test suite.</param>
+            <param name="assemblyNameOrPath">
+            This becomes the full name of the suite and the filename part is used as the suite name.
+            </param>
         </member>
         <member name="M:NUnit.Framework.Internal.TestAssembly.#ctor(NUnit.Framework.Internal.TestAssembly,NUnit.Framework.Interfaces.ITestFilter)">
             <summary>
-            Copy-constructor style to create a filtered copy of the test assemblies
-            test cases
+            Creates a copy of the given assembly with only the descendants that pass the specified filter.
             </summary>
-            <param name="assembly"></param>
-            <param name="filter"></param>
+            <param name="assembly">The <see cref="T:NUnit.Framework.Internal.TestAssembly"/> to copy.</param>
+            <param name="filter">Determines which descendants are copied.</param>
         </member>
         <member name="P:NUnit.Framework.Internal.TestAssembly.Assembly">
             <summary>
@@ -18286,6 +18497,12 @@
             Get custom attributes specified on the assembly
             </summary>
         </member>
+        <member name="M:NUnit.Framework.Internal.TestAssembly.Copy(NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a filtered copy of the test suite.
+            </summary>
+            <param name="filter">Determines which descendants are copied.</param>
+        </member>
         <member name="T:NUnit.Framework.Internal.TestFixture">
             <summary>
             TestFixture is a surrogate for a user test fixture class,
@@ -18298,6 +18515,19 @@
             </summary>
             <param name="fixtureType">Type of the fixture.</param>
             <param name="arguments">Arguments used to instantiate the test fixture, or null if none used</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.TestFixture.#ctor(NUnit.Framework.Internal.TestFixture,NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a copy of the given suite with only the descendants that pass the specified filter.
+            </summary>
+            <param name="fixture">The <see cref="T:NUnit.Framework.Internal.TestFixture"/> to copy.</param>
+            <param name="filter">Determines which descendants are copied.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.TestFixture.Copy(NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a filtered copy of the test suite.
+            </summary>
+            <param name="filter">Determines which descendants are copied.</param>
         </member>
         <member name="T:NUnit.Framework.Internal.TestMethod">
             <summary>
@@ -18403,10 +18633,10 @@
         </member>
         <member name="M:NUnit.Framework.Internal.TestSuite.#ctor(NUnit.Framework.Internal.TestSuite,NUnit.Framework.Interfaces.ITestFilter)">
             <summary>
-            Copy constructor style to create a filtered copy of the given test suite
+            Creates a copy of the given suite with only the descendants that pass the specified filter.
             </summary>
-            <param name="suite">Test Suite to copy</param>
-            <param name="filter">Filter to be applied</param>
+            <param name="suite">The <see cref="T:NUnit.Framework.Internal.TestSuite"/> to copy.</param>
+            <param name="filter">Determines which descendants are copied.</param>
         </member>
         <member name="M:NUnit.Framework.Internal.TestSuite.Sort">
             <summary>
@@ -18418,6 +18648,12 @@
             Adds a test to the suite.
             </summary>
             <param name="test">The test.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.TestSuite.Copy(NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a filtered copy of the test suite.
+            </summary>
+            <param name="filter">Determines which descendants are copied.</param>
         </member>
         <member name="P:NUnit.Framework.Internal.TestSuite.Tests">
             <summary>
@@ -18490,55 +18726,6 @@
             <summary>
             ThreadUtility provides a set of static methods convenient
             for working with threads.
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Internal.ThreadUtility.Delay(System.Int32,System.Threading.WaitCallback,System.Object)">
-            <summary>
-            Pre-Task compatibility
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Internal.ThreadUtility.Abort(System.Threading.Thread,System.Int32)">
-            <summary>
-            Abort a thread, helping to dislodging it if it is blocked in native code
-            </summary>
-            <param name="thread">The thread to abort</param>
-            <param name="nativeId">The native thread id (if known), otherwise 0.
-            If provided, allows the thread to be killed if it's in a message pump native blocking wait.
-            This must have previously been captured by calling <see cref="M:NUnit.Framework.Internal.ThreadUtility.GetCurrentThreadNativeId"/> from the running thread itself.</param>
-        </member>
-        <member name="M:NUnit.Framework.Internal.ThreadUtility.Kill(System.Threading.Thread,System.Int32)">
-            <summary>
-            Do our best to kill a thread
-            </summary>
-            <param name="thread">The thread to kill</param>
-            <param name="nativeId">The native thread id (if known), otherwise 0.
-            If provided, allows the thread to be killed if it's in a message pump native blocking wait.
-            This must have previously been captured by calling <see cref="M:NUnit.Framework.Internal.ThreadUtility.GetCurrentThreadNativeId"/> from the running thread itself.</param>
-        </member>
-        <member name="M:NUnit.Framework.Internal.ThreadUtility.Kill(System.Threading.Thread,System.Object,System.Int32)">
-            <summary>
-            Do our best to kill a thread, passing state info
-            </summary>
-            <param name="thread">The thread to kill</param>
-            <param name="stateInfo">Info for the ThreadAbortException handler</param>
-            <param name="nativeId">The native thread id (if known), otherwise 0.
-            If provided, allows the thread to be killed if it's in a message pump native blocking wait.
-            This must have previously been captured by calling <see cref="M:NUnit.Framework.Internal.ThreadUtility.GetCurrentThreadNativeId"/> from the running thread itself.</param>
-        </member>
-        <member name="M:NUnit.Framework.Internal.ThreadUtility.DislodgeThreadInNativeMessageWait(System.Threading.Thread,System.Int32)">
-            <summary>
-            Schedule a threadpool thread to check on the aborting thread in case it's in a message pump native blocking wait
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Internal.ThreadUtility.GetCurrentThreadNativeId">
-            <summary>
-            Captures the current thread's native id. If provided to <see cref="M:NUnit.Framework.Internal.ThreadUtility.Kill(System.Threading.Thread,System.Int32)"/> later, allows the thread to be killed if it's in a message pump native blocking wait.
-            </summary>
-        </member>
-        <member name="M:NUnit.Framework.Internal.ThreadUtility.PostThreadCloseMessage(System.Int32)">
-            <summary>
-            Sends a message to the thread to dislodge it from native code and allow a return to managed code, where a ThreadAbortException can be generated.
-            The message is meaningless (WM_CLOSE without a window handle) but it will end any blocking message wait.
             </summary>
         </member>
         <member name="T:NUnit.Framework.Internal.TypeHelper">
@@ -18695,8 +18882,8 @@
             Reconstruct a generic type name using the provided generic type name, and a
             <see cref="T:NUnit.Framework.List"/> of the template parameters.
             </summary>
-            <param name="GenericTypeName">The name of the generic type, including the number of template parameters expected.</param>
-            <param name="TemplateParamNames">A <see cref="T:NUnit.Framework.List"/> of names of the template parameters of the provided generic type.</param>
+            <param name="genericTypeName">The name of the generic type, including the number of template parameters expected.</param>
+            <param name="templateParamNames">A <see cref="T:NUnit.Framework.List"/> of names of the template parameters of the provided generic type.</param>
         </member>
         <member name="M:NUnit.Framework.Internal.TypeNameDifferenceResolver.GetShortenedGenericTypes(System.Type,System.Type,System.String@,System.String@)">
             <summary>
@@ -19224,7 +19411,7 @@
         <member name="M:NUnit.Framework.StringAssert.Equals(System.Object,System.Object)">
             <summary>
             DO NOT USE! Use StringAssert.AreEqualIgnoringCase(...) or Assert.AreEqual(...) instead.
-            The Equals method throws an InvalidOperationException. This is done 
+            The Equals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -19233,7 +19420,7 @@
         <member name="M:NUnit.Framework.StringAssert.ReferenceEquals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The ReferenceEquals method throws an InvalidOperationException. This is done 
+            The ReferenceEquals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -19725,7 +19912,7 @@
             is the only criterion for selection of the formatter, since
             it can be used without getting involved with a compound function.
             </summary>
-            <typeparam name="TSUPPORTED">The type supported by this formatter</typeparam>
+            <typeparam name="TSupported">The type supported by this formatter</typeparam>
             <param name="formatter">The ValueFormatter delegate</param>
         </member>
         <member name="T:NUnit.Framework.TestContext.TestAdapter">
@@ -20068,7 +20255,7 @@
         </member>
         <member name="T:NUnit.Framework.Warn">
             <summary>
-            Provides static methods to express conditions 
+            Provides static methods to express conditions
             that must be met for the test to succeed. If
             any test fails, a warning is issued.
             </summary>
@@ -20076,7 +20263,7 @@
         <member name="M:NUnit.Framework.Warn.Equals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The Equals method throws an InvalidOperationException. This is done 
+            The Equals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a">The left object.</param>
@@ -20086,7 +20273,7 @@
         <member name="M:NUnit.Framework.Warn.ReferenceEquals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The ReferenceEquals method throws an InvalidOperationException. This is done 
+            The ReferenceEquals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a">The left object.</param>
@@ -20125,21 +20312,21 @@
         <member name="M:NUnit.Framework.Warn.Unless(System.Boolean,System.String,System.Object[])">
             <summary>
             Asserts that a condition is true. If the condition is false a warning is issued.
-            </summary> 
+            </summary>
             <param name="condition">The evaluated condition</param>
             <param name="message">The message to display if the condition is false</param>
             <param name="args">Arguments to be used in formatting the message</param>
         </member>
         <member name="M:NUnit.Framework.Warn.Unless(System.Boolean)">
             <summary>
-            Asserts that a condition is true. If the condition is false a warning is issued. 
+            Asserts that a condition is true. If the condition is false a warning is issued.
             </summary>
             <param name="condition">The evaluated condition</param>
         </member>
         <member name="M:NUnit.Framework.Warn.Unless(System.Boolean,System.Func{System.String})">
             <summary>
             Asserts that a condition is true. If the condition is false a warning is issued.
-            </summary> 
+            </summary>
             <param name="condition">The evaluated condition</param>
             <param name="getExceptionMessage">A function to build the message included with the Exception</param>
         </member>
@@ -20147,7 +20334,7 @@
             <summary>
             Asserts that a condition is true. If the condition is false the method throws
             an <see cref="T:NUnit.Framework.InconclusiveException"/>.
-            </summary> 
+            </summary>
             <param name="condition">A lambda that returns a Boolean</param>
             <param name="message">The message to display if the condition is false</param>
             <param name="args">Arguments to be used in formatting the message</param>
@@ -20163,7 +20350,7 @@
             <summary>
             Asserts that a condition is true. If the condition is false the method throws
             an <see cref="T:NUnit.Framework.InconclusiveException"/>.
-            </summary> 
+            </summary>
             <param name="condition">A lambda that returns a Boolean</param>
             <param name="getExceptionMessage">A function to build the message included with the Exception</param>
         </member>
@@ -20238,28 +20425,28 @@
         <member name="M:NUnit.Framework.Warn.If(System.Boolean,System.String,System.Object[])">
             <summary>
             Asserts that a condition is true. If the condition is false a warning is issued.
-            </summary> 
+            </summary>
             <param name="condition">The evaluated condition</param>
             <param name="message">The message to display if the condition is false</param>
             <param name="args">Arguments to be used in formatting the message</param>
         </member>
         <member name="M:NUnit.Framework.Warn.If(System.Boolean)">
             <summary>
-            Asserts that a condition is true. If the condition is false a warning is issued. 
+            Asserts that a condition is true. If the condition is false a warning is issued.
             </summary>
             <param name="condition">The evaluated condition</param>
         </member>
         <member name="M:NUnit.Framework.Warn.If(System.Boolean,System.Func{System.String})">
             <summary>
             Asserts that a condition is true. If the condition is false a warning is issued.
-            </summary> 
+            </summary>
             <param name="condition">The evaluated condition</param>
             <param name="getExceptionMessage">A function to build the message included with the Exception</param>
         </member>
         <member name="M:NUnit.Framework.Warn.If(System.Func{System.Boolean},System.String,System.Object[])">
             <summary>
             Asserts that a condition is false. If the condition is true a warning is issued.
-            </summary> 
+            </summary>
             <param name="condition">A lambda that returns a Boolean</param>
             <param name="message">The message to display if the condition is true</param>
             <param name="args">Arguments to be used in formatting the message</param>
@@ -20273,7 +20460,7 @@
         <member name="M:NUnit.Framework.Warn.If(System.Func{System.Boolean},System.Func{System.String})">
             <summary>
             Asserts that a condition is false. If the condition is true a warning is issued.
-            </summary> 
+            </summary>
             <param name="condition">A lambda that returns a Boolean</param>
             <param name="getExceptionMessage">A function to build the message included with the Exception</param>
         </member>
@@ -20426,684 +20613,23 @@
             Obtains a lifetime service object to control the lifetime policy for this instance.
             </summary>
         </member>
-        <member name="T:NUnit.Compatibility.TypeExtensions">
+        <member name="T:System.Web.UI.ICallbackEventHandler">
             <summary>
-            Provides NUnit specific extensions to aid in Reflection
-            across multiple frameworks
+            A shim of the .NET interface for platforms that do not support it.
+            Used to indicate that a control can be the target of a callback event on the server.
             </summary>
-            <remarks>
-            This version of the class supplies GetTypeInfo() on platforms
-            that don't support it.
-            </remarks>
         </member>
-        <member name="M:NUnit.Compatibility.TypeExtensions.GetTypeInfo(System.Type)">
+        <member name="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)">
             <summary>
-            GetTypeInfo gives access to most of the Type information we take for granted
-            on .NET Core and Windows Runtime. Rather than #ifdef different code for different
-            platforms, it is easiest to just code all platforms as if they worked this way,
-            thus the simple passthrough.
+            Processes a callback event that targets a control.
             </summary>
-            <param name="type"></param>
-            <returns></returns>
+            <param name="report"></param>
         </member>
-        <member name="M:NUnit.Compatibility.TypeExtensions.GetMethodInfo(System.Delegate)">
+        <member name="M:System.Web.UI.ICallbackEventHandler.GetCallbackResult">
             <summary>
-            See <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo)"/>.
-            </summary>
-        </member>
-        <member name="T:NUnit.Compatibility.AssemblyExtensions">
-            <summary>
-            Extensions for Assembly that are not available in pre-4.5 .NET releases
-            </summary>
-        </member>
-        <member name="M:NUnit.Compatibility.AssemblyExtensions.GetCustomAttribute``1(System.Reflection.Assembly)">
-            <summary>
-            An easy way to get a single custom attribute from an assembly
-            </summary>
-            <typeparam name="T">The attribute Type</typeparam>
-            <param name="assembly">The assembly</param>
-            <returns>An attribute of Type T</returns>
-        </member>
-        <member name="T:NUnit.Compatibility.MethodInfoExtensions">
-            <summary>
-            Extensions for MethodInfo that are not available in pre-4.5 .NET releases
-            </summary>
-        </member>
-        <member name="M:NUnit.Compatibility.MethodInfoExtensions.CreateDelegate(System.Reflection.MethodInfo,System.Type)">
-            <summary>
-            See <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Reflection.MethodInfo)"/>.
-            </summary>
-        </member>
-        <member name="T:System.Collections.Concurrent.ConcurrentQueue`1">
-            <summary>
-            Represents a thread-safe first-in, first-out collection of objects.
-            </summary>
-            <typeparam name="T">Specifies the type of elements in the queue.</typeparam>
-            <remarks>
-            All public  and protected members of <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/> are thread-safe and may be used
-            concurrently from multiple threads.
-            </remarks>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/> class.
-            </summary>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.InitializeFromCollection(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Initializes the contents of the queue from an existing collection.
-            </summary>
-            <param name="collection">A collection from which to copy elements.</param>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Initializes a new instance of the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>
-            class that contains elements copied from the specified collection
-            </summary>
-            <param name="collection">The collection whose elements are copied to the new <see
-            cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>.</param>
-            <exception cref="T:System.ArgumentNullException">The <paramref name="collection"/> argument is
-            null.</exception>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.OnSerializing(System.Runtime.Serialization.StreamingContext)">
-            <summary>
-            Get the data array to be serialized
-            </summary>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.OnDeserialized(System.Runtime.Serialization.StreamingContext)">
-            <summary>
-            Construct the queue from a previously seiralized one
-            </summary>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
-            <summary>
-            Copies the elements of the <see cref="T:System.Collections.ICollection"/> to an <see
-            cref="T:System.Array"/>, starting at a particular
-            <see cref="T:System.Array"/> index.
-            </summary>
-            <param name="array">The one-dimensional <see cref="T:System.Array">Array</see> that is the
-            destination of the elements copied from the
-            <see cref="T:System.Collections.Concurrent.ConcurrentBag"/>. The <see
-            cref="T:System.Array">Array</see> must have zero-based indexing.</param>
-            <param name="index">The zero-based index in <paramref name="array"/> at which copying
-            begins.</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="array"/> is a null reference (Nothing in
-            Visual Basic).</exception>
-            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than
-            zero.</exception>
-            <exception cref="T:System.ArgumentException">
-            <paramref name="array"/> is multidimensional. -or-
-            <paramref name="array"/> does not have zero-based indexing. -or-
-            <paramref name="index"/> is equal to or greater than the length of the <paramref name="array"/>
-            -or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is
-            greater than the available space from <paramref name="index"/> to the end of the destination
-            <paramref name="array"/>. -or- The type of the source <see
-            cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the
-            destination <paramref name="array"/>.
-            </exception>
-        </member>
-        <member name="P:System.Collections.Concurrent.ConcurrentQueue`1.System#Collections#ICollection#IsSynchronized">
-            <summary>
-            Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is
-            synchronized with the SyncRoot.
-            </summary>
-            <value>true if access to the <see cref="T:System.Collections.ICollection"/> is synchronized
-            with the SyncRoot; otherwise, false. For <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>, this property always
-            returns false.</value>
-        </member>
-        <member name="P:System.Collections.Concurrent.ConcurrentQueue`1.System#Collections#ICollection#SyncRoot">
-            <summary>
-            Gets an object that can be used to synchronize access to the <see
-            cref="T:System.Collections.ICollection"/>. This property is not supported.
-            </summary>
-            <exception cref="T:System.NotSupportedException">The SyncRoot property is not supported.</exception>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.System#Collections#IEnumerable#GetEnumerator">
-            <summary>
-            Returns an enumerator that iterates through a collection.
-            </summary>
-            <returns>An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through the collection.</returns>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.System#Collections#Concurrent#IProducerConsumerCollection{T}#TryAdd(`0)">
-            <summary>
-            Attempts to add an object to the <see
-            cref="T:System.Collections.Concurrent.IProducerConsumerCollection{T}"/>.
-            </summary>
-            <param name="item">The object to add to the <see
-            cref="T:System.Collections.Concurrent.IProducerConsumerCollection{T}"/>. The value can be a null
-            reference (Nothing in Visual Basic) for reference types.
-            </param>
-            <returns>true if the object was added successfully; otherwise, false.</returns>
-            <remarks>For <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>, this operation will always add the object to the
-            end of the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>
-            and return true.</remarks>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.System#Collections#Concurrent#IProducerConsumerCollection{T}#TryTake(`0@)">
-            <summary>
-            Attempts to remove and return an object from the <see
-            cref="T:System.Collections.Concurrent.IProducerConsumerCollection{T}"/>.
-            </summary>
-            <param name="item">
-            When this method returns, if the operation was successful, <paramref name="item"/> contains the
-            object removed. If no object was available to be removed, the value is unspecified.
-            </param>
-            <returns>true if an element was removed and returned succesfully; otherwise, false.</returns>
-            <remarks>For <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>, this operation will attempt to remove the object
-            from the beginning of the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>.
-            </remarks>
-        </member>
-        <member name="P:System.Collections.Concurrent.ConcurrentQueue`1.IsEmpty">
-            <summary>
-            Gets a value that indicates whether the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/> is empty.
-            </summary>
-            <value>true if the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/> is empty; otherwise, false.</value>
-            <remarks>
-            For determining whether the collection contains any items, use of this property is recommended
-            rather than retrieving the number of items from the <see cref="P:System.Collections.Concurrent.ConcurrentQueue`1.Count"/> property and comparing it
-            to 0.  However, as this collection is intended to be accessed concurrently, it may be the case
-            that another thread will modify the collection after <see cref="P:System.Collections.Concurrent.ConcurrentQueue`1.IsEmpty"/> returns, thus invalidating
-            the result.
-            </remarks>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.ToArray">
-            <summary>
-            Copies the elements stored in the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/> to a new array.
-            </summary>
-            <returns>A new array containing a snapshot of elements copied from the <see
-            cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>.</returns>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.ToList">
-            <summary>
-            Copies the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/> elements to a new <see
-            cref="T:System.Collections.Generic.List{T}"/>.
-            </summary>
-            <returns>A new <see cref="T:System.Collections.Generic.List{T}"/> containing a snapshot of
-            elements copied from the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>.</returns>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.GetHeadTailPositions(System.Collections.Concurrent.ConcurrentQueue{`0}.Segment@,System.Collections.Concurrent.ConcurrentQueue{`0}.Segment@,System.Int32@,System.Int32@)">
-            <summary>
-            Store the position of the current head and tail positions.
-            </summary>
-            <param name="head">return the head segment</param>
-            <param name="tail">return the tail segment</param>
-            <param name="headLow">return the head offset, value range [0, SEGMENT_SIZE]</param>
-            <param name="tailHigh">return the tail offset, value range [-1, SEGMENT_SIZE-1]</param>
-        </member>
-        <member name="P:System.Collections.Concurrent.ConcurrentQueue`1.Count">
-            <summary>
-            Gets the number of elements contained in the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>.
-            </summary>
-            <value>The number of elements contained in the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>.</value>
-            <remarks>
-            For determining whether the collection contains any items, use of the <see cref="P:System.Collections.Concurrent.ConcurrentQueue`1.IsEmpty"/>
-            property is recommended rather than retrieving the number of items from the <see cref="P:System.Collections.Concurrent.ConcurrentQueue`1.Count"/>
-            property and comparing it to 0.
-            </remarks>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.CopyTo(`0[],System.Int32)">
-            <summary>
-            Copies the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/> elements to an existing one-dimensional <see
-            cref="T:System.Array">Array</see>, starting at the specified array index.
-            </summary>
-            <param name="array">The one-dimensional <see cref="T:System.Array">Array</see> that is the
-            destination of the elements copied from the
-            <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>. The <see cref="T:System.Array">Array</see> must have zero-based
-            indexing.</param>
-            <param name="index">The zero-based index in <paramref name="array"/> at which copying
-            begins.</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="array"/> is a null reference (Nothing in
-            Visual Basic).</exception>
-            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than
-            zero.</exception>
-            <exception cref="T:System.ArgumentException"><paramref name="index"/> is equal to or greater than the
-            length of the <paramref name="array"/>
-            -or- The number of elements in the source <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/> is greater than the
-            available space from <paramref name="index"/> to the end of the destination <paramref
-            name="array"/>.
-            </exception>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.GetEnumerator">
-            <summary>
-            Returns an enumerator that iterates through the <see
-            cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>.
-            </summary>
-            <returns>An enumerator for the contents of the <see
-            cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>.</returns>
-            <remarks>
-            The enumeration represents a moment-in-time snapshot of the contents
-            of the queue.  It does not reflect any updates to the collection after
-            GetEnumerator was called.  The enumerator is safe to use
-            concurrently with reads from and writes to the queue.
-            </remarks>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.GetEnumerator(System.Collections.Concurrent.ConcurrentQueue{`0}.Segment,System.Collections.Concurrent.ConcurrentQueue{`0}.Segment,System.Int32,System.Int32)">
-            <summary>
-            Helper method of GetEnumerator to seperate out yield return statement, and prevent lazy evaluation.
-            </summary>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.Enqueue(`0)">
-            <summary>
-            Adds an object to the end of the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>.
-            </summary>
-            <param name="item">The object to add to the end of the <see
-            cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>. The value can be a null reference
-            (Nothing in Visual Basic) for reference types.
-            </param>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.TryDequeue(`0@)">
-            <summary>
-            Attempts to remove and return the object at the beginning of the <see
-            cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>.
-            </summary>
-            <param name="result">
-            When this method returns, if the operation was successful, <paramref name="result"/> contains the
-            object removed. If no object was available to be removed, the value is unspecified.
-            </param>
-            <returns>true if an element was removed and returned from the beggining of the <see
-            cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>
-            succesfully; otherwise, false.</returns>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.TryPeek(`0@)">
-            <summary>
-            Attempts to return an object from the beginning of the <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/>
-            without removing it.
-            </summary>
-            <param name="result">When this method returns, <paramref name="result"/> contains an object from
-            the beginning of the <see cref="T:System.Collections.Concurrent.ConccurrentQueue{T}"/> or an
-            unspecified value if the operation failed.</param>
-            <returns>true if and object was returned successfully; otherwise, false.</returns>
-        </member>
-        <member name="T:System.Collections.Concurrent.ConcurrentQueue`1.Segment">
-            <summary>
-            private class for ConcurrentQueue.
-            a queue is a linked list of small arrays, each node is called a segment.
-            A segment contains an array, a pointer to the next segment, and m_low, m_high indices recording
-            the first and last valid elements of the array.
-            </summary>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.Segment.#ctor(System.Int64,System.Collections.Concurrent.ConcurrentQueue{`0})">
-            <summary>
-            Create and initialize a segment with the specified index.
-            </summary>
-        </member>
-        <member name="P:System.Collections.Concurrent.ConcurrentQueue`1.Segment.Next">
-            <summary>
-            return the next segment
-            </summary>
-        </member>
-        <member name="P:System.Collections.Concurrent.ConcurrentQueue`1.Segment.IsEmpty">
-            <summary>
-            return true if the current segment is empty (doesn't have any element available to dequeue,
-            false otherwise
-            </summary>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.Segment.UnsafeAdd(`0)">
-            <summary>
-            Add an element to the tail of the current segment
-            exclusively called by ConcurrentQueue.InitializedFromCollection
-            InitializeFromCollection is responsible to guaratee that there is no index overflow,
-            and there is no contention
-            </summary>
-            <param name="value"></param>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.Segment.UnsafeGrow">
-            <summary>
-            Create a new segment and append to the current one
-            Does not update the m_tail pointer
-            exclusively called by ConcurrentQueue.InitializedFromCollection
-            InitializeFromCollection is responsible to guaratee that there is no index overflow,
-            and there is no contention
-            </summary>
-            <returns>the reference to the new Segment</returns>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.Segment.Grow">
-            <summary>
-            Create a new segment and append to the current one
-            Update the m_tail pointer
-            This method is called when there is no contention
-            </summary>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.Segment.TryAppend(`0)">
-            <summary>
-            Try to append an element at the end of this segment.
-            </summary>
-            <param name="value">the element to append</param>
-            <returns>true if the element is appended, false if the current segment is full</returns>
-            <remarks>if appending the specified element succeeds, and after which the segment is full,
-            then grow the segment</remarks>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.Segment.TryRemove(`0@)">
-            <summary>
-            try to remove an element from the head of current segment
-            </summary>
-            <param name="result">The result.</param>
-            <returns>return false only if the current segment is empty</returns>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.Segment.TryPeek(`0@)">
-            <summary>
-            try to peek the current segment
-            </summary>
-            <param name="result">holds the return value of the element at the head position,
-            value set to default(T) if there is no such an element</param>
-            <returns>true if there are elements in the current segment, false otherwise</returns>
-        </member>
-        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.Segment.AddToList(System.Collections.Generic.List{`0},System.Int32,System.Int32)">
-            <summary>
-            Adds part or all of the current segment into a List.
-            </summary>
-            <param name="list">the list to which to add</param>
-            <param name="start">the start position</param>
-            <param name="end">the end position</param>
-        </member>
-        <member name="P:System.Collections.Concurrent.ConcurrentQueue`1.Segment.Low">
-            <summary>
-            return the position of the head of the current segment
-            Value range [0, SEGMENT_SIZE], if it's SEGMENT_SIZE, it means this segment is exhausted and thus empty
-            </summary>
-        </member>
-        <member name="P:System.Collections.Concurrent.ConcurrentQueue`1.Segment.High">
-            <summary>
-            return the logical position of the tail of the current segment
-            Value range [-1, SEGMENT_SIZE-1]. When it's -1, it means this is a new segment and has no elemnet yet
-            </summary>
-        </member>
-        <member name="T:System.Collections.Concurrent.VolatileBool">
-            <summary>
-            A wrapper struct for volatile bool, please note the copy of the struct it self will not be volatile
-            for example this statement will not include in volatilness operation volatileBool1 = volatileBool2 the jit will copy the struct and will ignore the volatile
-            </summary>
-        </member>
-        <member name="T:System.Collections.Concurrent.IProducerConsumerCollection`1">
-            <summary>
-            Defines methods to manipulate thread-safe collections intended for producer/consumer usage.
-            </summary>
-            <typeparam name="T">Specifies the type of elements in the collection.</typeparam>
-            <remarks>
-            All implementations of this interface must enable all members of this interface
-            to be used concurrently from multiple threads.
-            </remarks>
-        </member>
-        <member name="M:System.Collections.Concurrent.IProducerConsumerCollection`1.CopyTo(`0[],System.Int32)">
-            <summary>
-            Copies the elements of the <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1"/> to
-            an
-            <see cref="T:System.Array"/>, starting at a specified index.
-            </summary>
-            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of
-            the elements copied from the <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1"/>.
-            The array must have zero-based indexing.</param>
-            <param name="index">The zero-based index in <paramref name="array"/> at which copying
-            begins.</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="array"/> is a null reference (Nothing in
-            Visual Basic).</exception>
-            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than
-            zero.</exception>
-            <exception cref="T:System.ArgumentException"><paramref name="index"/> is equal to or greater than the
-            length of the <paramref name="array"/>
-            -or- The number of elements in the source <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/> is greater than the
-            available space from <paramref name="index"/> to the end of the destination <paramref
-            name="array"/>.
-            </exception>
-        </member>
-        <member name="M:System.Collections.Concurrent.IProducerConsumerCollection`1.TryAdd(`0)">
-            <summary>
-            Attempts to add an object to the <see
-            cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1"/>.
-            </summary>
-            <param name="item">The object to add to the <see
-            cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1"/>.</param>
-            <returns>true if the object was added successfully; otherwise, false.</returns>
-            <exception cref="T:System.ArgumentException">The <paramref name="item"/> was invalid for this collection.</exception>
-        </member>
-        <member name="M:System.Collections.Concurrent.IProducerConsumerCollection`1.TryTake(`0@)">
-            <summary>
-            Attempts to remove and return an object from the <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1"/>.
-            </summary>
-            <param name="item">
-            When this method returns, if the object was removed and returned successfully, <paramref
-            name="item"/> contains the removed object. If no object was available to be removed, the value is
-            unspecified.
-            </param>
-            <returns>true if an object was removed and returned successfully; otherwise, false.</returns>
-        </member>
-        <member name="M:System.Collections.Concurrent.IProducerConsumerCollection`1.ToArray">
-            <summary>
-            Copies the elements contained in the <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1"/> to a new array.
-            </summary>
-            <returns>A new array containing the elements copied from the <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1"/>.</returns>
-        </member>
-        <member name="T:System.Collections.Concurrent.SystemCollectionsConcurrent_ProducerConsumerCollectionDebugView`1">
-            <summary>
-            A debugger view of the IProducerConsumerCollection that makes it simple to browse the
-            collection's contents at a point in time.
-            </summary>
-            <typeparam name="T">The type of elements stored within.</typeparam>
-        </member>
-        <member name="M:System.Collections.Concurrent.SystemCollectionsConcurrent_ProducerConsumerCollectionDebugView`1.#ctor(System.Collections.Concurrent.IProducerConsumerCollection{`0})">
-            <summary>
-            Constructs a new debugger view object for the provided collection object.
-            </summary>
-            <param name="collection">A collection to browse in the debugger.</param>
-        </member>
-        <member name="P:System.Collections.Concurrent.SystemCollectionsConcurrent_ProducerConsumerCollectionDebugView`1.Items">
-            <summary>
-            Returns a snapshot of the underlying collection's elements.
-            </summary>
-        </member>
-        <member name="T:System.Threading.LazyThreadSafetyMode">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:System.Threading.LazyThreadSafetyMode.None">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:System.Threading.LazyThreadSafetyMode.PublicationOnly">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="F:System.Threading.LazyThreadSafetyMode.ExecutionAndPublication">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="T:System.Threading.ManualResetEventSlim">
-            <summary>
-            Compatibility polyfill based on <see cref="T:System.Threading.ManualResetEvent"/>.
-            </summary>
-        </member>
-        <member name="T:System.Threading.SpinWait">
-            <summary>
-            Provides support for spin-based waiting.
-            </summary>
-            <remarks>
-            <para>
-            <see cref="T:System.Threading.SpinWait"/> encapsulates common spinning logic. On single-processor machines, yields are
-            always used instead of busy waits, and on computers with Intel� processors employing Hyper-Threading�
-            technology, it helps to prevent hardware thread starvation. SpinWait encapsulates a good mixture of
-            spinning and true yielding.
-            </para>
-            <para>
-            <see cref="T:System.Threading.SpinWait"/> is a value type, which means that low-level code can utilize SpinWait without
-            fear of unnecessary allocation overheads. SpinWait is not generally useful for ordinary applications.
-            In most cases, you should use the synchronization classes provided by the .NET Framework, such as
-            <see cref="T:System.Threading.Monitor"/>. For most purposes where spin waiting is required, however,
-            the <see cref="T:System.Threading.SpinWait"/> type should be preferred over the <see
-            cref="M:System.Threading.Thread.SpinWait(System.Int32)"/> method.
-            </para>
-            <para>
-            While SpinWait is designed to be used in concurrent applications, it is not designed to be
-            used from multiple threads concurrently.  SpinWait's members are not thread-safe.  If multiple
-            threads must spin, each should use its own instance of SpinWait.
-            </para>
-            </remarks>
-        </member>
-        <member name="P:System.Threading.SpinWait.Count">
-            <summary>
-            Gets the number of times <see cref="M:System.Threading.SpinWait.SpinOnce"/> has been called on this instance.
-            </summary>
-        </member>
-        <member name="P:System.Threading.SpinWait.NextSpinWillYield">
-            <summary>
-            Gets whether the next call to <see cref="M:System.Threading.SpinWait.SpinOnce"/> will yield the processor, triggering a
-            forced context switch.
-            </summary>
-            <value>Whether the next call to <see cref="M:System.Threading.SpinWait.SpinOnce"/> will yield the processor, triggering a
-            forced context switch.</value>
-            <remarks>
-            On a single-CPU machine, <see cref="M:System.Threading.SpinWait.SpinOnce"/> always yields the processor. On machines with
-            multiple CPUs, <see cref="M:System.Threading.SpinWait.SpinOnce"/> may yield after an unspecified number of calls.
-            </remarks>
-        </member>
-        <member name="M:System.Threading.SpinWait.SpinOnce">
-            <summary>
-            Performs a single spin.
-            </summary>
-            <remarks>
-            This is typically called in a loop, and may change in behavior based on the number of times a
-            <see cref="M:System.Threading.SpinWait.SpinOnce"/> has been called thus far on this instance.
-            </remarks>
-        </member>
-        <member name="M:System.Threading.SpinWait.Reset">
-            <summary>
-            Resets the spin counter.
-            </summary>
-            <remarks>
-            This makes <see cref="M:System.Threading.SpinWait.SpinOnce"/> and <see cref="P:System.Threading.SpinWait.NextSpinWillYield"/> behave as though no calls
-            to <see cref="M:System.Threading.SpinWait.SpinOnce"/> had been issued on this instance. If a <see cref="T:System.Threading.SpinWait"/> instance
-            is reused many times, it may be useful to reset it to avoid yielding too soon.
-            </remarks>
-        </member>
-        <member name="M:System.Threading.SpinWait.SpinUntil(System.Func{System.Boolean})">
-            <summary>
-            Spins until the specified condition is satisfied.
-            </summary>
-            <param name="condition">A delegate to be executed over and over until it returns true.</param>
-            <exception cref="T:System.ArgumentNullException">The <paramref name="condition"/> argument is null.</exception>
-        </member>
-        <member name="M:System.Threading.SpinWait.SpinUntil(System.Func{System.Boolean},System.TimeSpan)">
-            <summary>
-            Spins until the specified condition is satisfied or until the specified timeout is expired.
-            </summary>
-            <param name="condition">A delegate to be executed over and over until it returns true.</param>
-            <param name="timeout">
-            A <see cref="T:System.TimeSpan"/> that represents the number of milliseconds to wait,
-            or a TimeSpan that represents -1 milliseconds to wait indefinitely.</param>
-            <returns>True if the condition is satisfied within the timeout; otherwise, false</returns>
-            <exception cref="T:System.ArgumentNullException">The <paramref name="condition"/> argument is null.</exception>
-            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="timeout"/> is a negative number
-            other than -1 milliseconds, which represents an infinite time-out -or- timeout is greater than
-            <see cref="F:System.Int32.MaxValue"/>.</exception>
-        </member>
-        <member name="M:System.Threading.SpinWait.SpinUntil(System.Func{System.Boolean},System.Int32)">
-            <summary>
-            Spins until the specified condition is satisfied or until the specified timeout is expired.
-            </summary>
-            <param name="condition">A delegate to be executed over and over until it returns true.</param>
-            <param name="millisecondsTimeout">The number of milliseconds to wait, or <see
-            cref="F:System.Threading.Timeout.Infinite"/> (-1) to wait indefinitely.</param>
-            <returns>True if the condition is satisfied within the timeout; otherwise, false</returns>
-            <exception cref="T:System.ArgumentNullException">The <paramref name="condition"/> argument is null.</exception>
-            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="millisecondsTimeout"/> is a
-            negative number other than -1, which represents an infinite time-out.</exception>
-        </member>
-        <member name="T:System.Threading.PlatformHelper">
-            <summary>
-            A helper class to get the number of processors, it updates the numbers of processors every sampling interval.
-            </summary>
-        </member>
-        <member name="P:System.Threading.PlatformHelper.ProcessorCount">
-            <summary>
-            Gets the number of available processors
-            </summary>
-        </member>
-        <member name="P:System.Threading.PlatformHelper.IsSingleProcessor">
-            <summary>
-            Gets whether the current machine has only a single processor.
-            </summary>
-        </member>
-        <member name="T:System.Threading.TimeoutHelper">
-            <summary>
-            A helper class to capture a start time using Environment.TickCout as a time in milliseconds, also updates a given timeout bu subtracting the current time from
-            the start time
-            </summary>
-        </member>
-        <member name="M:System.Threading.TimeoutHelper.GetTime">
-            <summary>
-            Returns the Environment.TickCount as a start time in milliseconds as a uint, TickCount tools over from postive to negative every ~ 25 days
-            then ~25 days to back to positive again, uint is sued to ignore the sign and double the range to 50 days
+            Returns the results of a callback event that targets a control.
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:System.Threading.TimeoutHelper.UpdateTimeOut(System.UInt32,System.Int32)">
-            <summary>
-            Helper function to measure and update the elapsed time
-            </summary>
-            <param name="startTime"> The first time (in milliseconds) observed when the wait started</param>
-            <param name="originalWaitMillisecondsTimeout">The orginal wait timeoutout in milliseconds</param>
-            <returns>The new wait time in milliseconds, -1 if the time expired</returns>
-        </member>
-        <member name="T:System.Lazy`1">
-             <summary>
-            
-             </summary>
-             <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:System.Lazy`1.#ctor">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="M:System.Lazy`1.#ctor(System.Func{`0})">
-             <summary>
-            
-             </summary>
-             <param name="valueFactory"></param>
-        </member>
-        <member name="M:System.Lazy`1.#ctor(System.Boolean)">
-             <summary>
-            
-             </summary>
-             <param name="isThreadSafe"></param>
-        </member>
-        <member name="M:System.Lazy`1.#ctor(System.Func{`0},System.Boolean)">
-             <summary>
-            
-             </summary>
-             <param name="valueFactory"></param>
-             <param name="isThreadSafe"></param>
-        </member>
-        <member name="M:System.Lazy`1.#ctor(System.Threading.LazyThreadSafetyMode)">
-             <summary>
-            
-             </summary>
-             <param name="mode"></param>
-        </member>
-        <member name="M:System.Lazy`1.#ctor(System.Func{`0},System.Threading.LazyThreadSafetyMode)">
-             <summary>
-            
-             </summary>
-             <param name="valueFactory"></param>
-             <param name="mode"></param>
-        </member>
-        <member name="P:System.Lazy`1.Value">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:System.Lazy`1.IsValueCreated">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="M:System.Lazy`1.ToString">
-             <summary>
-            
-             </summary>
-             <returns></returns>
         </member>
     </members>
 </doc>

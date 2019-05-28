@@ -466,7 +466,7 @@
             </summary>
             <param name="assemblyNameOrPath">File name or path of the assembly to load</param>
             <param name="settings">Dictionary of option settings for loading the assembly</param>
-            <returns>True if the load was successful</returns>
+            <returns>A Test Assembly containing all loaded tests</returns>
         </member>
         <member name="M:NUnit.Framework.Api.NUnitTestAssemblyRunner.Load(System.Reflection.Assembly,System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>
@@ -474,7 +474,7 @@
             </summary>
             <param name="assembly">The assembly to load</param>
             <param name="settings">Dictionary of option settings for loading the assembly</param>
-            <returns>True if the load was successful</returns>
+            <returns>A Test Assembly containing all loaded tests</returns>
         </member>
         <member name="M:NUnit.Framework.Api.NUnitTestAssemblyRunner.CountTestCases(NUnit.Framework.Interfaces.ITestFilter)">
             <summary>
@@ -497,7 +497,7 @@
             </summary>
             <param name="listener">Interface to receive EventListener notifications.</param>
             <param name="filter">A test filter used to select tests to be run</param>
-            <returns></returns>
+            <returns>The test results from the run</returns>
         </member>
         <member name="M:NUnit.Framework.Api.NUnitTestAssemblyRunner.RunAsync(NUnit.Framework.Interfaces.ITestListener,NUnit.Framework.Interfaces.ITestFilter)">
             <summary>
@@ -537,6 +537,11 @@
         <member name="M:NUnit.Framework.Api.NUnitTestAssemblyRunner.OnRunCompleted(System.Object,System.EventArgs)">
             <summary>
             Handle the Completed event for the top level work item
+            </summary>
+        </member>
+        <member name="M:NUnit.Framework.Api.NUnitTestAssemblyRunner.WrapInNUnitCallContext(System.Action)">
+            <summary>
+            This method is a no-op in .NET Standard builds.
             </summary>
         </member>
         <member name="T:NUnit.Framework.Assert">
@@ -3021,18 +3026,27 @@
         </member>
         <member name="M:NUnit.Framework.AssertionHelper.Contains(System.Object)">
             <summary>
+            <para>
             Returns a new <see cref="T:NUnit.Framework.Constraints.SomeItemsConstraint"/> checking for the
             presence of a particular object in the collection.
+            </para>
+            <para>
+            To search for a substring instead of a collection element, use the
+            <see cref="M:NUnit.Framework.AssertionHelper.Contains(System.String)"/> overload.
+            </para>
             </summary>
         </member>
         <member name="M:NUnit.Framework.AssertionHelper.Contains(System.String)">
             <summary>
+            <para>
             Returns a new ContainsConstraint. This constraint
             will, in turn, make use of the appropriate second-level
             constraint, depending on the type of the actual argument.
-            This overload is only used if the item sought is a string,
-            since any other type implies that we are looking for a
-            collection member.
+            </para>
+            <para>
+            To search for a collection element instead of a substring, use the
+            <see cref="M:NUnit.Framework.AssertionHelper.Contains(System.Object)"/> overload.
+            </para>
             </summary>
         </member>
         <member name="M:NUnit.Framework.AssertionHelper.StringContaining(System.String)">
@@ -3160,7 +3174,7 @@
         <member name="M:NUnit.Framework.Assume.Equals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The Equals method throws an InvalidOperationException. This is done 
+            The Equals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a">The left object.</param>
@@ -3170,7 +3184,7 @@
         <member name="M:NUnit.Framework.Assume.ReferenceEquals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The ReferenceEquals method throws an InvalidOperationException. This is done 
+            The ReferenceEquals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a">The left object.</param>
@@ -3210,14 +3224,14 @@
             <summary>
             Asserts that a condition is true. If the condition is false the method throws
             an <see cref="T:NUnit.Framework.InconclusiveException"/>.
-            </summary> 
+            </summary>
             <param name="condition">The evaluated condition</param>
             <param name="message">The message to display if the condition is false</param>
             <param name="args">Arguments to be used in formatting the message</param>
         </member>
         <member name="M:NUnit.Framework.Assume.That(System.Boolean)">
             <summary>
-            Asserts that a condition is true. If the condition is false the 
+            Asserts that a condition is true. If the condition is false the
             method throws an <see cref="T:NUnit.Framework.InconclusiveException"/>.
             </summary>
             <param name="condition">The evaluated condition</param>
@@ -3226,7 +3240,7 @@
             <summary>
             Asserts that a condition is true. If the condition is false the method throws
             an <see cref="T:NUnit.Framework.InconclusiveException"/>.
-            </summary> 
+            </summary>
             <param name="condition">The evaluated condition</param>
             <param name="getExceptionMessage">A function to build the message included with the Exception</param>
         </member>
@@ -3234,7 +3248,7 @@
             <summary>
             Asserts that a condition is true. If the condition is false the method throws
             an <see cref="T:NUnit.Framework.InconclusiveException"/>.
-            </summary> 
+            </summary>
             <param name="condition">A lambda that returns a Boolean</param>
             <param name="message">The message to display if the condition is false</param>
             <param name="args">Arguments to be used in formatting the message</param>
@@ -3250,7 +3264,7 @@
             <summary>
             Asserts that a condition is true. If the condition is false the method throws
             an <see cref="T:NUnit.Framework.InconclusiveException"/>.
-            </summary> 
+            </summary>
             <param name="condition">A lambda that returns a Boolean</param>
             <param name="getExceptionMessage">A function to build the message included with the Exception</param>
         </member>
@@ -3446,7 +3460,7 @@
         </member>
         <member name="T:NUnit.Framework.DataAttribute">
             <summary>
-            Abstract base class for all data-providing attributes defined by NUnit. 
+            Abstract base class for all data-providing attributes defined by NUnit.
             Used to select all data sources for a method, class or parameter.
             </summary>
         </member>
@@ -3739,7 +3753,7 @@
         <member name="F:NUnit.Framework.ParallelScope.Self">
             <summary>
             The test may be run in parallel with others at the same level.
-            Valid on classes and methods but not assemblies.
+            Valid on classes and methods but has no effect on assemblies.
             </summary>
         </member>
         <member name="F:NUnit.Framework.ParallelScope.None">
@@ -3757,7 +3771,7 @@
         <member name="F:NUnit.Framework.ParallelScope.Children">
             <summary>
             Descendants of the test may be run in parallel with one another.
-            Valid on assemblies and classes but not on methods.
+            Valid on assemblies and classes but not on non-parameterized methods.
             </summary>
         </member>
         <member name="F:NUnit.Framework.ParallelScope.Fixtures">
@@ -3776,7 +3790,9 @@
         <member name="F:NUnit.Framework.ParallelScope.All">
             <summary>
             The test and its descendants may be run in parallel with others at
-            the same level. Valid on classes and methods but not assemblies.
+            the same level. Valid on classes and parameterized methods.
+            For assemblies it is recommended to use <see cref="F:NUnit.Framework.ParallelScope.Children"/>
+            instead, as <see cref="F:NUnit.Framework.ParallelScope.Self"/> has no effect on assemblies.
             </summary>
         </member>
         <member name="T:NUnit.Framework.PropertyAttribute">
@@ -4330,20 +4346,6 @@
             <param name="arglist">The arguments to be converted</param>
             <param name="parameters">The ParameterInfo array for the method</param>
         </member>
-        <member name="M:NUnit.Framework.TestCaseAttribute.PerformSpecialConversion(System.Object,System.Type,System.Object@)">
-            <summary>
-            Performs several special conversions allowed by NUnit in order to
-            permit arguments with types that cannot be used in the constructor
-            of an Attribute such as TestCaseAttribute or to simplify their use.
-            </summary>
-            <param name="arg">The argument to be converted</param>
-            <param name="targetType">The target <see cref="T:System.Type"/> in which the <paramref name="arg"/> should be converted</param>
-            <param name="argAsTargetType">If conversion was successfully applied, the <paramref name="arg"/> converted into <paramref name="targetType"/></param>
-            <returns>
-            <c>true</c> if <paramref name="arg"/> was converted and <paramref name="argAsTargetType"/> should be used;
-            <c>false</c> is no conversion was applied and <paramref name="argAsTargetType"/> should be ignored
-            </returns>
-        </member>
         <member name="M:NUnit.Framework.TestCaseAttribute.BuildFrom(NUnit.Framework.Interfaces.IMethodInfo,NUnit.Framework.Internal.Test)">
             <summary>
             Builds a single test from the specified method and context.
@@ -4434,8 +4436,7 @@
         <member name="M:NUnit.Framework.TestFixtureAttribute.#ctor(System.Object[])">
             <summary>
             Construct with a object[] representing a set of arguments.
-            In .NET 2.0, the arguments may later be separated into
-            type arguments and constructor arguments.
+            The arguments may later be separated into type arguments and constructor arguments.
             </summary>
             <param name="arguments"></param>
         </member>
@@ -4638,6 +4639,19 @@
             Construct the attribute, specifying a combining strategy and source of parameter data.
             </summary>
         </member>
+        <member name="T:NUnit.Framework.TimeoutAttribute">
+            <summary>
+            Applies a timeout in milliseconds to a test. 
+            When applied to a method, the test is cancelled if the timeout is exceeded. 
+            When applied to a class or assembly, the default timeout is set for all contained test methods.
+            </summary>
+        </member>
+        <member name="M:NUnit.Framework.TimeoutAttribute.#ctor(System.Int32)">
+            <summary>
+            Construct a TimeoutAttribute given a time in milliseconds
+            </summary>
+            <param name="timeout">The timeout value in milliseconds</param>
+        </member>
         <member name="T:NUnit.Framework.ValuesAttribute">
             <summary>
             Provides literal arguments for an individual parameter of a test.
@@ -4745,7 +4759,7 @@
         <member name="M:NUnit.Framework.CollectionAssert.Equals(System.Object,System.Object)">
             <summary>
             DO NOT USE! Use CollectionAssert.AreEqual(...) instead.
-            The Equals method throws an InvalidOperationException. This is done 
+            The Equals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -4754,7 +4768,7 @@
         <member name="M:NUnit.Framework.CollectionAssert.ReferenceEquals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The ReferenceEquals method throws an InvalidOperationException. This is done 
+            The ReferenceEquals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -4808,7 +4822,7 @@
         </member>
         <member name="M:NUnit.Framework.CollectionAssert.AreEqual(System.Collections.IEnumerable,System.Collections.IEnumerable)">
             <summary>
-            Asserts that expected and actual are exactly equal.  The collections must have the same count, 
+            Asserts that expected and actual are exactly equal.  The collections must have the same count,
             and contain the exact same objects in the same order.
             </summary>
             <param name="expected">The first IEnumerable of objects to be considered</param>
@@ -4816,7 +4830,7 @@
         </member>
         <member name="M:NUnit.Framework.CollectionAssert.AreEqual(System.Collections.IEnumerable,System.Collections.IEnumerable,System.Collections.IComparer)">
             <summary>
-            Asserts that expected and actual are exactly equal.  The collections must have the same count, 
+            Asserts that expected and actual are exactly equal.  The collections must have the same count,
             and contain the exact same objects in the same order.
             If comparer is not null then it will be used to compare the objects.
             </summary>
@@ -4826,7 +4840,7 @@
         </member>
         <member name="M:NUnit.Framework.CollectionAssert.AreEqual(System.Collections.IEnumerable,System.Collections.IEnumerable,System.String,System.Object[])">
             <summary>
-            Asserts that expected and actual are exactly equal.  The collections must have the same count, 
+            Asserts that expected and actual are exactly equal.  The collections must have the same count,
             and contain the exact same objects in the same order.
             </summary>
             <param name="expected">The first IEnumerable of objects to be considered</param>
@@ -4836,7 +4850,7 @@
         </member>
         <member name="M:NUnit.Framework.CollectionAssert.AreEqual(System.Collections.IEnumerable,System.Collections.IEnumerable,System.Collections.IComparer,System.String,System.Object[])">
             <summary>
-            Asserts that expected and actual are exactly equal.  The collections must have the same count, 
+            Asserts that expected and actual are exactly equal.  The collections must have the same count,
             and contain the exact same objects in the same order.
             If comparer is not null then it will be used to compare the objects.
             </summary>
@@ -5361,7 +5375,7 @@
             <param name="expected"></param>
         </member>
         <member name="P:NUnit.Framework.Constraints.CollectionContainsConstraint.DisplayName">
-            <summary> 
+            <summary>
             The display name of this Constraint for use by ToString().
             The default value is the name of the constraint with
             trailing "Constraint" removed. Derived classes may set
@@ -6020,6 +6034,15 @@
             </summary>
             <returns>Self</returns>
         </member>
+        <member name="M:NUnit.Framework.Constraints.ComparisonConstraint.DefaultDescription(System.String)">
+            <summary>
+            Provides standard description of what the constraint tests
+            based on comparison text.
+            </summary>
+            <param name="comparisonText">Describes the comparison being tested, throws <see cref="T:System.ArgumentNullException"/>
+            if null</param>
+            <exception cref="T:System.ArgumentNullException">Is thrown when null passed to a method</exception>
+        </member>
         <member name="T:NUnit.Framework.Constraints.ActualValueDelegate`1">
             <summary>
             Delegate used to delay evaluation of the actual value
@@ -6635,18 +6658,27 @@
         </member>
         <member name="M:NUnit.Framework.Constraints.ConstraintExpression.Contains(System.Object)">
             <summary>
+            <para>
             Returns a new <see cref="T:NUnit.Framework.Constraints.SomeItemsConstraint"/> checking for the
             presence of a particular object in the collection.
+            </para>
+            <para>
+            To search for a substring instead of a collection element, use the
+            <see cref="M:NUnit.Framework.Constraints.ConstraintExpression.Contains(System.String)"/> overload.
+            </para>
             </summary>
         </member>
         <member name="M:NUnit.Framework.Constraints.ConstraintExpression.Contains(System.String)">
             <summary>
+            <para>
             Returns a new ContainsConstraint. This constraint
             will, in turn, make use of the appropriate second-level
             constraint, depending on the type of the actual argument.
-            This overload is only used if the item sought is a string,
-            since any other type implies that we are looking for a
-            collection member.
+            </para>
+            <para>
+            To search for a collection element instead of a substring, use the
+            <see cref="M:NUnit.Framework.Constraints.ConstraintExpression.Contains(System.Object)"/> overload.
+            </para>
             </summary>
         </member>
         <member name="M:NUnit.Framework.Constraints.ConstraintExpression.Contain(System.Object)">
@@ -7094,7 +7126,7 @@
             <param name="expected"></param>
         </member>
         <member name="P:NUnit.Framework.Constraints.DictionaryContainsKeyConstraint.DisplayName">
-            <summary> 
+            <summary>
             The display name of this Constraint for use by ToString().
             The default value is the name of the constraint with
             trailing "Constraint" removed. Derived classes may set
@@ -7884,7 +7916,7 @@
             <remarks>
               <para>
                 The floating point comparison code is based on this excellent article:
-                http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm
+                https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/
               </para>
               <para>
                 "ULP" means Unit in the Last Place and in the context of this library refers to
@@ -7988,6 +8020,12 @@
             </summary>
             <param name="expected">The expected value.</param>
         </member>
+        <member name="P:NUnit.Framework.Constraints.GreaterThanConstraint.Description">
+            <summary>
+            The Description of what this constraint tests, for
+            use in messages and in the ConstraintResult.
+            </summary>
+        </member>
         <member name="M:NUnit.Framework.Constraints.GreaterThanConstraint.PerformComparison(NUnit.Framework.Constraints.ComparisonAdapter,System.Object,System.Object,NUnit.Framework.Constraints.Tolerance)">
             <summary>
             Perform the comparison
@@ -8003,6 +8041,12 @@
             Initializes a new instance of the <see cref="T:NUnit.Framework.Constraints.GreaterThanOrEqualConstraint"/> class.
             </summary>
             <param name="expected">The expected value.</param>
+        </member>
+        <member name="P:NUnit.Framework.Constraints.GreaterThanOrEqualConstraint.Description">
+            <summary>
+            The Description of what this constraint tests, for
+            use in messages and in the ConstraintResult.
+            </summary>
         </member>
         <member name="M:NUnit.Framework.Constraints.GreaterThanOrEqualConstraint.PerformComparison(NUnit.Framework.Constraints.ComparisonAdapter,System.Object,System.Object,NUnit.Framework.Constraints.Tolerance)">
             <summary>
@@ -8198,6 +8242,12 @@
             </summary>
             <param name="expected">The expected value.</param>
         </member>
+        <member name="P:NUnit.Framework.Constraints.LessThanConstraint.Description">
+            <summary>
+            The Description of what this constraint tests, for
+            use in messages and in the ConstraintResult.
+            </summary>
+        </member>
         <member name="M:NUnit.Framework.Constraints.LessThanConstraint.PerformComparison(NUnit.Framework.Constraints.ComparisonAdapter,System.Object,System.Object,NUnit.Framework.Constraints.Tolerance)">
             <summary>
             Perform the comparison
@@ -8213,6 +8263,12 @@
             Initializes a new instance of the <see cref="T:NUnit.Framework.Constraints.LessThanOrEqualConstraint"/> class.
             </summary>
             <param name="expected">The expected value.</param>
+        </member>
+        <member name="P:NUnit.Framework.Constraints.LessThanOrEqualConstraint.Description">
+            <summary>
+            The Description of what this constraint tests, for
+            use in messages and in the ConstraintResult.
+            </summary>
         </member>
         <member name="M:NUnit.Framework.Constraints.LessThanOrEqualConstraint.PerformComparison(NUnit.Framework.Constraints.ComparisonAdapter,System.Object,System.Object,NUnit.Framework.Constraints.Tolerance)">
             <summary>
@@ -9988,7 +10044,7 @@
         <member name="M:NUnit.Framework.DirectoryAssert.Equals(System.Object,System.Object)">
             <summary>
             DO NOT USE! Use DirectoryAssert.AreEqual(...) instead.
-            The Equals method throws an InvalidOperationException. This is done 
+            The Equals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -9997,7 +10053,7 @@
         <member name="M:NUnit.Framework.DirectoryAssert.ReferenceEquals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The ReferenceEquals method throws an InvalidOperationException. This is done 
+            The ReferenceEquals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -10319,7 +10375,7 @@
         <member name="M:NUnit.Framework.FileAssert.Equals(System.Object,System.Object)">
             <summary>
             DO NOT USE! Use FileAssert.AreEqual(...) instead.
-            The Equals method throws an InvalidOperationException. This is done 
+            The Equals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -10328,7 +10384,7 @@
         <member name="M:NUnit.Framework.FileAssert.ReferenceEquals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The ReferenceEquals method throws an InvalidOperationException. This is done 
+            The ReferenceEquals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -12525,14 +12581,14 @@
             </para>
             <para>
             The PairwiseStrategy code is based on "jenny" tool by Bob Jenkins:
-            http://burtleburtle.net/bob/math/jenny.html
+            https://burtleburtle.net/bob/math/jenny.html
             </para>
             </remarks>
         </member>
         <member name="T:NUnit.Framework.Internal.Builders.PairwiseStrategy.FleaRand">
             <summary>
             FleaRand is a pseudo-random number generator developed by Bob Jenkins:
-            http://burtleburtle.net/bob/rand/talksmall.html#flea
+            https://burtleburtle.net/bob/rand/talksmall.html#flea
             </summary>
         </member>
         <member name="M:NUnit.Framework.Internal.Builders.PairwiseStrategy.FleaRand.#ctor(System.UInt32)">
@@ -12856,9 +12912,9 @@
         </member>
         <member name="M:NUnit.Framework.Internal.Commands.DelegatingTestCommand.#ctor(NUnit.Framework.Internal.Commands.TestCommand)">
             <summary>
-            TODO: Documentation needed for constructor
+            Initializes a new instance of the <see cref="T:NUnit.Framework.Internal.Commands.DelegatingTestCommand"/> class.
             </summary>
-            <param name="innerCommand"></param>
+            <param name="innerCommand">The inner command.</param>
         </member>
         <member name="T:NUnit.Framework.Internal.Commands.DisposeFixtureCommand">
             <summary>
@@ -12893,7 +12949,9 @@
         </member>
         <member name="T:NUnit.Framework.Internal.Commands.MaxTimeCommand">
             <summary>
-            TODO: Documentation needed for class
+            <see cref="T:NUnit.Framework.Internal.Commands.MaxTimeCommand" /> adjusts the result of a successful test
+            to a failure if the elapsed time has exceeded the specified maximum
+            time allowed.
             </summary>
         </member>
         <member name="M:NUnit.Framework.Internal.Commands.MaxTimeCommand.#ctor(NUnit.Framework.Internal.Commands.TestCommand,System.Int32)">
@@ -13112,6 +13170,27 @@
             </summary>
             <param name="command">The command to be wrapped by this one</param>
         </member>
+        <member name="T:NUnit.Framework.Internal.Commands.TimeoutCommand">
+            <summary>
+            <see cref="T:NUnit.Framework.Internal.Commands.TimeoutCommand"/> creates a timer in order to cancel
+            a test if it exceeds a specified time and adjusts
+            the test result if it did time out.
+            </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Commands.TimeoutCommand.#ctor(NUnit.Framework.Internal.Commands.TestCommand,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NUnit.Framework.Internal.Commands.TimeoutCommand"/> class.
+            </summary>
+            <param name="innerCommand">The inner command</param>
+            <param name="timeout">Timeout value</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Commands.TimeoutCommand.Execute(NUnit.Framework.Internal.TestExecutionContext)">
+            <summary>
+            Runs the test, saving a TestResult in the supplied TestExecutionContext.
+            </summary>
+            <param name="context">The context in which the test should run.</param>
+            <returns>A TestResult</returns>
+        </member>
         <member name="T:NUnit.Framework.Internal.ConstraintUtils">
             <summary>
             Provides methods to support consistent checking in constraints.
@@ -13176,6 +13255,13 @@
             is called.
             </summary>
         </member>
+        <member name="T:NUnit.Framework.Internal.DefaultBlockingAwaitAdapter">
+            <summary>
+            Useful when wrapping awaitables whose <c>GetResult</c> method does not block until complete.
+            Contains a default mechanism to implement <see cref="M:NUnit.Framework.Internal.AwaitAdapter.BlockUntilCompleted"/>
+            via <see cref="P:NUnit.Framework.Internal.AwaitAdapter.IsCompleted"/> and <see cref="M:NUnit.Framework.Internal.AwaitAdapter.OnCompleted(System.Action)"/>.
+            </summary>
+        </member>
         <member name="T:NUnit.Framework.Internal.ExceptionHelper">
             <summary>
             ExceptionHelper provides static methods for working with exceptions
@@ -13212,6 +13298,11 @@
             </summary>
             <param name="exception">The exception.</param>
             <returns>A string representation of the stack trace.</returns>
+        </member>
+        <member name="M:NUnit.Framework.Internal.ExceptionHelper.RecordException(System.Delegate,System.String)">
+            <summary>
+            Executes a parameterless synchronous or async delegate and returns the exception it throws, if any.
+            </summary>
         </member>
         <member name="T:NUnit.Framework.Internal.Execution.CompositeWorkItem">
             <summary>
@@ -14190,11 +14281,12 @@
         </member>
         <member name="M:NUnit.Framework.Internal.Filters.NotFilter.Pass(NUnit.Framework.Interfaces.ITest)">
             <summary>
-            Determine if a particular test passes the filter criteria. The default 
-            implementation checks the test itself, its parents and any descendants.
+            Determine if a particular test passes the filter criteria.
             
-            Derived classes may override this method or any of the Match methods
-            to change the behavior of the filter.
+            Overriden in NotFilter so that
+            1. Two nested NotFilters are simply ignored
+            2. Otherwise, we only look at the test itself and parents, ignoring
+            any child test matches.
             </summary>
             <param name="test">The test to which the filter is applied</param>
             <returns>True if the test passes the filter, otherwise false</returns>
@@ -14876,8 +14968,17 @@
         </member>
         <member name="M:NUnit.Framework.Internal.ParamAttributeTypeConversions.TryConvert(System.Object,System.Type,System.Object@)">
             <summary>
-            Converts a single value to the <paramref name="targetType"/>, if it is supported.
+            Performs several special conversions allowed by NUnit in order to
+            permit arguments with types that cannot be used in the constructor
+            of an Attribute such as TestCaseAttribute or to simplify their use.
             </summary>
+            <param name="value">The value to be converted</param>
+            <param name="targetType">The target <see cref="T:System.Type"/> in which the <paramref name="value"/> should be converted</param>
+            <param name="convertedValue">If conversion was successfully applied, the <paramref name="value"/> converted into <paramref name="targetType"/></param>
+            <returns>
+            <c>true</c> if <paramref name="value"/> was converted and <paramref name="convertedValue"/> should be used;
+            <c>false</c> is no conversion was applied and <paramref name="convertedValue"/> should be ignored
+            </returns>
         </member>
         <member name="T:NUnit.Framework.Internal.ParameterWrapper">
             <summary>
@@ -15048,7 +15149,7 @@
             The selected strategy for joining parameter data into test cases
             </summary>
         </member>
-        <member name="F:NUnit.Framework.Internal.PropertyNames.ProcessID">
+        <member name="F:NUnit.Framework.Internal.PropertyNames.ProcessId">
             <summary>
             The process ID of the executing assembly
             </summary>
@@ -15510,6 +15611,14 @@
             <param name="type">See <see cref="M:System.Reflection.TypeExtensions.GetProperty(System.Type,System.String,System.Reflection.BindingFlags)"/>.</param>
             <param name="name">See <see cref="M:System.Reflection.TypeExtensions.GetProperty(System.Type,System.String,System.Reflection.BindingFlags)"/>.</param>
             <param name="bindingFlags">See <see cref="M:System.Reflection.TypeExtensions.GetProperty(System.Type,System.String,System.Reflection.BindingFlags)"/>.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.Reflect.GetNonGenericPublicInstanceMethod(System.Type,System.String,System.Type[])">
+            <summary>
+            Same as <c>GetMethod(<paramref name="name"/>, <see cref="F:System.Reflection.BindingFlags.Public"/> |
+            <see cref="F:System.Reflection.BindingFlags.Instance"/>, <see langword="null"/>, <paramref name="parameterTypes"/>,
+            <see langword="null"/>)</c> except that it also chooses only non-generic methods.
+            Useful for avoiding the <see cref="T:System.Reflection.AmbiguousMatchException"/> you can have with <c>GetMethod</c>.
+            </summary>
         </member>
         <member name="T:NUnit.Framework.Internal.TestCaseResult">
             <summary>
@@ -16680,10 +16789,23 @@
             </summary>
             <param name="typeInfo">The ITypeInfo for the type that represents the suite.</param>
         </member>
+        <member name="M:NUnit.Framework.Internal.ParameterizedFixtureSuite.#ctor(NUnit.Framework.Internal.ParameterizedFixtureSuite,NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a copy of the given suite with only the descendants that pass the specified filter.
+            </summary>
+            <param name="suite">The <see cref="T:NUnit.Framework.Internal.ParameterizedFixtureSuite"/> to copy.</param>
+            <param name="filter">Determines which descendants are copied.</param>
+        </member>
         <member name="P:NUnit.Framework.Internal.ParameterizedFixtureSuite.TestType">
             <summary>
             Gets a string representing the type of test
             </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.ParameterizedFixtureSuite.Copy(NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a filtered copy of the test suite.
+            </summary>
+            <param name="filter">Determines which descendants are copied.</param>
         </member>
         <member name="T:NUnit.Framework.Internal.ParameterizedMethodSuite">
             <summary>
@@ -16696,10 +16818,23 @@
             Initializes a new instance of the <see cref="T:NUnit.Framework.Internal.ParameterizedMethodSuite"/> class.
             </summary>
         </member>
+        <member name="M:NUnit.Framework.Internal.ParameterizedMethodSuite.#ctor(NUnit.Framework.Internal.ParameterizedMethodSuite,NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a copy of the given suite with only the descendants that pass the specified filter.
+            </summary>
+            <param name="suite">The <see cref="T:NUnit.Framework.Internal.ParameterizedMethodSuite"/> to copy.</param>
+            <param name="filter">Determines which descendants are copied.</param>
+        </member>
         <member name="P:NUnit.Framework.Internal.ParameterizedMethodSuite.TestType">
             <summary>
             Gets a string representing the type of test
             </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.ParameterizedMethodSuite.Copy(NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a filtered copy of the test suite.
+            </summary>
+            <param name="filter">Determines which descendants are copied.</param>
         </member>
         <member name="T:NUnit.Framework.Internal.SetUpFixture">
             <summary>
@@ -16711,6 +16846,19 @@
             <summary>
             Initializes a new instance of the <see cref="T:NUnit.Framework.Internal.SetUpFixture"/> class.
             </summary>
+        </member>
+        <member name="M:NUnit.Framework.Internal.SetUpFixture.#ctor(NUnit.Framework.Internal.SetUpFixture,NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a copy of the given suite with only the descendants that pass the specified filter.
+            </summary>
+            <param name="setUpFixture">The <see cref="T:NUnit.Framework.Internal.SetUpFixture"/> to copy.</param>
+            <param name="filter">Determines which descendants are copied.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.SetUpFixture.Copy(NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a filtered copy of the test suite.
+            </summary>
+            <param name="filter">Determines which descendants are copied.</param>
         </member>
         <member name="T:NUnit.Framework.Internal.Test">
             <summary>
@@ -16968,22 +17116,25 @@
             specifying the Assembly and the suite name.
             </summary>
             <param name="assembly">The assembly this test represents.</param>
-            <param name="name">The desired name for the test suite.</param>
+            <param name="assemblyNameOrPath">
+            This becomes the full name of the suite and the filename part is used as the suite name.
+            </param>
         </member>
         <member name="M:NUnit.Framework.Internal.TestAssembly.#ctor(System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:NUnit.Framework.Internal.TestAssembly"/> class
             specifying the suite name for an assembly that could not be loaded.
             </summary>
-            <param name="name">The desired name for the test suite.</param>
+            <param name="assemblyNameOrPath">
+            This becomes the full name of the suite and the filename part is used as the suite name.
+            </param>
         </member>
         <member name="M:NUnit.Framework.Internal.TestAssembly.#ctor(NUnit.Framework.Internal.TestAssembly,NUnit.Framework.Interfaces.ITestFilter)">
             <summary>
-            Copy-constructor style to create a filtered copy of the test assemblies
-            test cases
+            Creates a copy of the given assembly with only the descendants that pass the specified filter.
             </summary>
-            <param name="assembly"></param>
-            <param name="filter"></param>
+            <param name="assembly">The <see cref="T:NUnit.Framework.Internal.TestAssembly"/> to copy.</param>
+            <param name="filter">Determines which descendants are copied.</param>
         </member>
         <member name="P:NUnit.Framework.Internal.TestAssembly.Assembly">
             <summary>
@@ -17001,6 +17152,12 @@
             Get custom attributes specified on the assembly
             </summary>
         </member>
+        <member name="M:NUnit.Framework.Internal.TestAssembly.Copy(NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a filtered copy of the test suite.
+            </summary>
+            <param name="filter">Determines which descendants are copied.</param>
+        </member>
         <member name="T:NUnit.Framework.Internal.TestFixture">
             <summary>
             TestFixture is a surrogate for a user test fixture class,
@@ -17013,6 +17170,19 @@
             </summary>
             <param name="fixtureType">Type of the fixture.</param>
             <param name="arguments">Arguments used to instantiate the test fixture, or null if none used</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.TestFixture.#ctor(NUnit.Framework.Internal.TestFixture,NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a copy of the given suite with only the descendants that pass the specified filter.
+            </summary>
+            <param name="fixture">The <see cref="T:NUnit.Framework.Internal.TestFixture"/> to copy.</param>
+            <param name="filter">Determines which descendants are copied.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.TestFixture.Copy(NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a filtered copy of the test suite.
+            </summary>
+            <param name="filter">Determines which descendants are copied.</param>
         </member>
         <member name="T:NUnit.Framework.Internal.TestMethod">
             <summary>
@@ -17118,10 +17288,10 @@
         </member>
         <member name="M:NUnit.Framework.Internal.TestSuite.#ctor(NUnit.Framework.Internal.TestSuite,NUnit.Framework.Interfaces.ITestFilter)">
             <summary>
-            Copy constructor style to create a filtered copy of the given test suite
+            Creates a copy of the given suite with only the descendants that pass the specified filter.
             </summary>
-            <param name="suite">Test Suite to copy</param>
-            <param name="filter">Filter to be applied</param>
+            <param name="suite">The <see cref="T:NUnit.Framework.Internal.TestSuite"/> to copy.</param>
+            <param name="filter">Determines which descendants are copied.</param>
         </member>
         <member name="M:NUnit.Framework.Internal.TestSuite.Sort">
             <summary>
@@ -17133,6 +17303,12 @@
             Adds a test to the suite.
             </summary>
             <param name="test">The test.</param>
+        </member>
+        <member name="M:NUnit.Framework.Internal.TestSuite.Copy(NUnit.Framework.Interfaces.ITestFilter)">
+            <summary>
+            Creates a filtered copy of the test suite.
+            </summary>
+            <param name="filter">Determines which descendants are copied.</param>
         </member>
         <member name="P:NUnit.Framework.Internal.TestSuite.Tests">
             <summary>
@@ -17361,8 +17537,8 @@
             Reconstruct a generic type name using the provided generic type name, and a
             <see cref="T:NUnit.Framework.List"/> of the template parameters.
             </summary>
-            <param name="GenericTypeName">The name of the generic type, including the number of template parameters expected.</param>
-            <param name="TemplateParamNames">A <see cref="T:NUnit.Framework.List"/> of names of the template parameters of the provided generic type.</param>
+            <param name="genericTypeName">The name of the generic type, including the number of template parameters expected.</param>
+            <param name="templateParamNames">A <see cref="T:NUnit.Framework.List"/> of names of the template parameters of the provided generic type.</param>
         </member>
         <member name="M:NUnit.Framework.Internal.TypeNameDifferenceResolver.GetShortenedGenericTypes(System.Type,System.Type,System.String@,System.String@)">
             <summary>
@@ -17880,7 +18056,7 @@
         <member name="M:NUnit.Framework.StringAssert.Equals(System.Object,System.Object)">
             <summary>
             DO NOT USE! Use StringAssert.AreEqualIgnoringCase(...) or Assert.AreEqual(...) instead.
-            The Equals method throws an InvalidOperationException. This is done 
+            The Equals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -17889,7 +18065,7 @@
         <member name="M:NUnit.Framework.StringAssert.ReferenceEquals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The ReferenceEquals method throws an InvalidOperationException. This is done 
+            The ReferenceEquals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a"></param>
@@ -18376,7 +18552,7 @@
             is the only criterion for selection of the formatter, since
             it can be used without getting involved with a compound function.
             </summary>
-            <typeparam name="TSUPPORTED">The type supported by this formatter</typeparam>
+            <typeparam name="TSupported">The type supported by this formatter</typeparam>
             <param name="formatter">The ValueFormatter delegate</param>
         </member>
         <member name="T:NUnit.Framework.TestContext.TestAdapter">
@@ -18719,7 +18895,7 @@
         </member>
         <member name="T:NUnit.Framework.Warn">
             <summary>
-            Provides static methods to express conditions 
+            Provides static methods to express conditions
             that must be met for the test to succeed. If
             any test fails, a warning is issued.
             </summary>
@@ -18727,7 +18903,7 @@
         <member name="M:NUnit.Framework.Warn.Equals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The Equals method throws an InvalidOperationException. This is done 
+            The Equals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a">The left object.</param>
@@ -18737,7 +18913,7 @@
         <member name="M:NUnit.Framework.Warn.ReferenceEquals(System.Object,System.Object)">
             <summary>
             DO NOT USE!
-            The ReferenceEquals method throws an InvalidOperationException. This is done 
+            The ReferenceEquals method throws an InvalidOperationException. This is done
             to make sure there is no mistake by calling this function.
             </summary>
             <param name="a">The left object.</param>
@@ -18776,21 +18952,21 @@
         <member name="M:NUnit.Framework.Warn.Unless(System.Boolean,System.String,System.Object[])">
             <summary>
             Asserts that a condition is true. If the condition is false a warning is issued.
-            </summary> 
+            </summary>
             <param name="condition">The evaluated condition</param>
             <param name="message">The message to display if the condition is false</param>
             <param name="args">Arguments to be used in formatting the message</param>
         </member>
         <member name="M:NUnit.Framework.Warn.Unless(System.Boolean)">
             <summary>
-            Asserts that a condition is true. If the condition is false a warning is issued. 
+            Asserts that a condition is true. If the condition is false a warning is issued.
             </summary>
             <param name="condition">The evaluated condition</param>
         </member>
         <member name="M:NUnit.Framework.Warn.Unless(System.Boolean,System.Func{System.String})">
             <summary>
             Asserts that a condition is true. If the condition is false a warning is issued.
-            </summary> 
+            </summary>
             <param name="condition">The evaluated condition</param>
             <param name="getExceptionMessage">A function to build the message included with the Exception</param>
         </member>
@@ -18798,7 +18974,7 @@
             <summary>
             Asserts that a condition is true. If the condition is false the method throws
             an <see cref="T:NUnit.Framework.InconclusiveException"/>.
-            </summary> 
+            </summary>
             <param name="condition">A lambda that returns a Boolean</param>
             <param name="message">The message to display if the condition is false</param>
             <param name="args">Arguments to be used in formatting the message</param>
@@ -18814,7 +18990,7 @@
             <summary>
             Asserts that a condition is true. If the condition is false the method throws
             an <see cref="T:NUnit.Framework.InconclusiveException"/>.
-            </summary> 
+            </summary>
             <param name="condition">A lambda that returns a Boolean</param>
             <param name="getExceptionMessage">A function to build the message included with the Exception</param>
         </member>
@@ -18889,28 +19065,28 @@
         <member name="M:NUnit.Framework.Warn.If(System.Boolean,System.String,System.Object[])">
             <summary>
             Asserts that a condition is true. If the condition is false a warning is issued.
-            </summary> 
+            </summary>
             <param name="condition">The evaluated condition</param>
             <param name="message">The message to display if the condition is false</param>
             <param name="args">Arguments to be used in formatting the message</param>
         </member>
         <member name="M:NUnit.Framework.Warn.If(System.Boolean)">
             <summary>
-            Asserts that a condition is true. If the condition is false a warning is issued. 
+            Asserts that a condition is true. If the condition is false a warning is issued.
             </summary>
             <param name="condition">The evaluated condition</param>
         </member>
         <member name="M:NUnit.Framework.Warn.If(System.Boolean,System.Func{System.String})">
             <summary>
             Asserts that a condition is true. If the condition is false a warning is issued.
-            </summary> 
+            </summary>
             <param name="condition">The evaluated condition</param>
             <param name="getExceptionMessage">A function to build the message included with the Exception</param>
         </member>
         <member name="M:NUnit.Framework.Warn.If(System.Func{System.Boolean},System.String,System.Object[])">
             <summary>
             Asserts that a condition is false. If the condition is true a warning is issued.
-            </summary> 
+            </summary>
             <param name="condition">A lambda that returns a Boolean</param>
             <param name="message">The message to display if the condition is true</param>
             <param name="args">Arguments to be used in formatting the message</param>
@@ -18924,7 +19100,7 @@
         <member name="M:NUnit.Framework.Warn.If(System.Func{System.Boolean},System.Func{System.String})">
             <summary>
             Asserts that a condition is false. If the condition is true a warning is issued.
-            </summary> 
+            </summary>
             <param name="condition">A lambda that returns a Boolean</param>
             <param name="getExceptionMessage">A function to build the message included with the Exception</param>
         </member>
