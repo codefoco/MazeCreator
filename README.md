@@ -55,7 +55,7 @@ To get cell information you can do:
 Building
 --------
 
-    msbuild
+    msbuild MazeCreator.sln
 
 
 Kruskal
