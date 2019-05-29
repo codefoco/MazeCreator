@@ -7,7 +7,7 @@ using System.Reflection;
 [assembly: AssemblyDescription ("Library to create simple Mazes")]
 [assembly: AssemblyCompany ("Codefoco")]
 [assembly: AssemblyProduct ("MazeCreator")]
-[assembly: AssemblyCopyright ("Copyright © Code Foco 2018")]
+[assembly: AssemblyCopyright ("Copyright © Code Foco 2019")]
 [assembly: AssemblyCulture ("")]
 
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".

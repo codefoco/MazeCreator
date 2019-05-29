@@ -18,6 +18,11 @@ steps:
   inputs:
     restoreSolution: MazeCreator.sln
 
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    restoreSolution: MazeCreator.Core.sln
+
 - powershell: 'Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString(''https://chocolatey.org/install.ps1''))'
   displayName: 'Install Choco'
 
@@ -39,11 +44,18 @@ steps:
     configuration: Release
 
 - task: VSBuild@1
+  displayName: 'Build solution MazeCreator.Core.sln'
+  inputs:
+    solution: MazeCreator.Core.sln
+    platform: 'any cpu'
+    configuration: Release
+
+- task: VSBuild@1
   displayName: 'Build solution MazeCreator.sln (Android)'
   inputs:
-    solution: MazeCreator.sln
+    solution: MazeCreator.Android.sln
     platform: 'any cpu'
-    configuration: ReleaseAndroid
+    configuration: Release
 
 - task: VSTest@2
   displayName: 'VsTest - testAssemblies'
