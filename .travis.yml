@@ -11,10 +11,10 @@ install:
   - sudo apt-get install mono-devel nunit nuget
 
 script:
-  - nuget restore
+  - nuget restore MazeCreator.sln
   - msbuild MazeCreator.sln /p:Configuration=Release /t:Restore
   - msbuild MazeCreator.sln /p:Configuration=Release
-  - nunit-console ./tests/bin/Release/MazeCreatorTest.dll
+  - mono packages/NUnit.ConsoleRunner.3.10.0/tools/nunit-console3.exe ./tests/bin/Release/MazeCreatorTest.dll
 
 # Execute additional tests or commands
 #after_script:
