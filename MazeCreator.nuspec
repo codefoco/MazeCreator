@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library to create simple Mazes</description>
     <releaseNotes>Release: 040d1b0</releaseNotes>
-    <copyright>Copyright © Code Foco 2019</copyright>
+    <copyright>Copyright © Code Foco 2020</copyright>
     <tags>maze dfs</tags>
   </metadata>
   <files>
