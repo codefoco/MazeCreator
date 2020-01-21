@@ -9,84 +9,11 @@ resources:
 jobs:
 - template: common-macos.yml@templates
 
-- task: PowerShell@2
-  displayName: 'PowerShell Script'
-  inputs:
-    targetType: filePath
-    filePath: ./devops/PreBuild.ps1
-    arguments: ' MazeCreator MazeCreator.nuspec'
-
-- task: MSBuild@1
-  displayName: 'Build solution MazeCreator.Mac.sln'
-  inputs:
-    solution: MazeCreator.Mac.sln
-    configuration: Release
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: Xamarin.iOS.MazeCreator.dll'
-  inputs:
-    PathtoPublish: lib/Release/xamarinios/MazeCreator.dll
-    ArtifactName: Xamarin.iOS.MazeCreator.dll
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: Xamarin.Mac.MazeCreator.dll'
-  inputs:
-    PathtoPublish: lib/Release/xamarinmac/MazeCreator.dll
-    ArtifactName: Xamarin.Mac.MazeCreator.dll
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: Xamarin.tvOS.MazeCreator.dll'
-  inputs:
-    PathtoPublish: lib/Release/xamarintvos/MazeCreator.dll
-    ArtifactName: Xamarin.tvOS.MazeCreator.dll
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: Xamarin.watchOS.MazeCreator.dll'
-  inputs:
-    PathtoPublish: lib/Release/xamarinwatchos/MazeCreator.dll
-    ArtifactName: Xamarin.watchOS.MazeCreator.dll
-
-- task: TriggerBuild@3
-  displayName: 'Trigger a new build of MazeCreator.Windows'
-  inputs:
-    buildDefinition: 'MazeCreator.Windows'
-    ignoreSslCertificateErrors: true
-    useSameSourceVersion: true
-    password: '$(myToken)'
-
-- task: SendTelegramNotification@0
-  condition: in(variables['Agent.JobStatus'], 'SucceededWithIssues')
-  inputs:
-    botToken: '$(botToken)'
-    chats: '$(chatId)'
-    taskStatus: false
-    message: |
-            ⚠️ <b>Warning!</b>  <a href="$(Build.Repository.Uri)">$(Build.DefinitionName)</a> (<code>$(Build.SourceBranchName)</code>)
-            <pre>$(Build.SourceVersion)</pre>
-            $(Build.SourceVersionMessage) by $(Build.QueuedBy)
-
-- task: SendTelegramNotification@0
-  condition: in(variables['Agent.JobStatus'], 'Failed')
-  inputs:
-    botToken: '$(botToken)'
-    chats: '$(chatId)'
-    taskStatus: false
-    buildQueuedBy: false
-    message: |
-            ❌ <b>Fail!</b>  <a href="$(Build.Repository.Uri)">$(Build.DefinitionName)</a> (<code>$(Build.SourceBranchName)</code>)
-            <pre>$(Build.SourceVersion)</pre>
-            $(Build.SourceVersionMessage) by $(Build.QueuedBy)
-
-- task: SendTelegramNotification@0
-  condition: in(variables['Agent.JobStatus'], 'Succeeded')
-  inputs:
-    botToken: '$(botToken)'
-    chats: '$(chatId)'
-    taskStatus: false
-    buildQueuedBy: false
-    message: |
-            ✅ <b>Success!</b>  <a href="$(Build.Repository.Uri)">$(Build.DefinitionName)</a> (<code>$(Build.SourceBranchName)</code>)
-            <pre>$(Build.SourceVersion)</pre>
-            $(Build.SourceVersionMessage) by $(Build.QueuedBy)
-
-# 
+- job: Build
+  steps:
+  - task: PowerShell@2
+    displayName: 'PowerShell Script'
+    inputs:
+      targetType: filePath
+      filePath: ./devops/PreBuild.ps1
+      arguments: ' MazeCreator MazeCreator.nuspec'
