@@ -1,17 +1,13 @@
-pool:
-  name: Hosted VS2017
-  demands:
-  - msbuild
-  - visualstudio
-  - vstest
 
+# Repo: codefoco/AzureDevopsTemplates
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: codefoco/AzureDevopsTemplates
 
-steps:
-- task: NuGetToolInstaller@1
-  displayName: 'Use NuGet 4.7.3'
-  inputs:
-    versionSpec: 4.7.3
-    checkLatest: true
+jobs:
+- template: common-win.yml@templates
 
 - task: NuGetCommand@2
   displayName: 'NuGet restore'
@@ -72,7 +68,7 @@ steps:
   inputs:
     buildType: 'specific'
     project: 'NuGets'
-    definition: 'MazeCreator-Mac'
+    definition: 'MazeCreator.Mac'
     specificBuildWithTriggering: true
     artifactName: 'Xamarin.iOS.MazeCreator.dll'
     downloadPath: 'artifacts'
@@ -88,7 +84,7 @@ steps:
   inputs:
     buildType: 'specific'
     project: 'NuGets'
-    definition: 'MazeCreator-Mac'
+    definition: 'MazeCreator.Mac'
     specificBuildWithTriggering: true
     artifactName: Xamarin.Mac.MazeCreator.dll
     downloadPath: artifacts
@@ -104,7 +100,7 @@ steps:
   inputs:
     buildType: 'specific'
     project: 'NuGets'
-    definition: 'MazeCreator-Mac'
+    definition: 'MazeCreator.Mac'
     specificBuildWithTriggering: true
     artifactName: 'Xamarin.tvOS.MazeCreator.dll'
     downloadPath: 'artifacts'
@@ -120,7 +116,7 @@ steps:
   inputs:
     buildType: 'specific'
     project: 'NuGets'
-    definition: 'MazeCreator-Mac'
+    definition: 'MazeCreator.Mac'
     specificBuildWithTriggering: true
     artifactName: 'Xamarin.watchOS.MazeCreator.dll'
     downloadPath: 'artifacts'

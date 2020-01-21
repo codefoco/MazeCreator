@@ -1,42 +1,12 @@
+# Repo: codefoco/AzureDevopsTemplates
 resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: codefoco/AzureDevopsTemplates
 
-- repo: self
-  clean: true
-
-pool:
-  name: Hosted macOS
-  demands: msbuild
-
-
-steps:
-
-# Print the current version of Xcode
-- task: CmdLine@2
-  displayName: 'Show Xcode version'
-  inputs:
-    script: '/usr/bin/xcodebuild -version'
-
-
-# Azure DevOps hosted pool is still using an old version of Xamarin.iOS, 
-
-- task: CmdLine@2
-  displayName: 'Provisioning Xamarin.iOS'
-  inputs:
-    script: 'cd ~;
-            curl -O https://download.visualstudio.microsoft.com/download/pr/d11a42ff-dd11-4005-b5a8-799856a96aad/2893a2da0df8a2e2d45ea17e2be2ccce/xamarin.ios-13.4.0.2.pkg;
-            sudo installer -pkg ~/xamarin.ios-13.4.0.2.pkg -target /'
-
-- task: NuGetToolInstaller@1
-  displayName: 'Use NuGet 4.7.3'
-  inputs:
-    versionSpec: 4.7.3
-    checkLatest: true
-
-- script: 'brew update'
-  displayName: 'Run Update'
-
-- script: 'brew install gitversion --ignore-dependencies'
-  displayName: 'Install GitVersion'
+jobs:
+- template: common-macos.yml@templates
 
 - task: PowerShell@2
   displayName: 'PowerShell Script'
@@ -76,8 +46,9 @@ steps:
     ArtifactName: Xamarin.watchOS.MazeCreator.dll
 
 - task: TriggerBuild@3
+  displayName: 'Trigger a new build of MazeCreator.Windows'
   inputs:
-    buildDefinition: 'MazeCreator-Win'
+    buildDefinition: 'MazeCreator.Windows'
     ignoreSslCertificateErrors: true
     useSameSourceVersion: true
     password: '$(myToken)'

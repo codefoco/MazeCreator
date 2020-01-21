@@ -21,8 +21,8 @@ if (-Not (Test-Version-Stable-Release $nextVersion)) {
 	}
 }
 
-& nuget push *.nupkg -Source https://api.nuget.org/v3/index.json
+& nuget push *.nupkg -Source https://www.nuget.org/api/v2/package
 # Unlist previous Pre-Release packages.
 if ($versionToUnlist -ne "") {
-	& $nuget delete $versionToUnlist -Source https://api.nuget.org/v3/index.json
+	& $nuget delete $versionToUnlist -Source https://www.nuget.org/api/v2/package
 }
