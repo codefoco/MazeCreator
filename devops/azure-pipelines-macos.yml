@@ -4,6 +4,7 @@ resources:
     - repository: templates
       type: github
       name: codefoco/AzureDevopsTemplates
+      endpoint: codefoco
 
 jobs:
 - template: common-macos.yml@templates
