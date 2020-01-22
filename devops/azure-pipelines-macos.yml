@@ -21,6 +21,24 @@ steps:
     filePath: ./devops/PreBuild.ps1
     arguments: ' MazeCreator MazeCreator.nuspec'
 
+- task: TriggerBuild@3
+  inputs:
+    definitionIsInCurrentTeamProject: true
+    buildDefinition: 'MazeCreator.Windows'
+    queueBuildForUserThatTriggeredBuild: true
+    ignoreSslCertificateErrors: true
+    useSameSourceVersion: false
+    useSameBranch: true
+    waitForQueuedBuildsToFinish: false
+    storeInEnvironmentVariable: false
+    authenticationMethod: 'Personal Access Token'
+    password: '$(myToken)'
+    enableBuildInQueueCondition: false
+    dependentOnSuccessfulBuildCondition: false
+    dependentOnFailedBuildCondition: false
+    checkbuildsoncurrentbranch: false
+    failTaskIfConditionsAreNotFulfilled: false
+
 - task: MSBuild@1
   displayName: 'Build solution MazeCreator.Mac.sln'
   inputs:
@@ -51,12 +69,7 @@ steps:
     PathtoPublish: lib/Release/xamarinwatchos/MazeCreator.dll
     ArtifactName: Xamarin.watchOS.MazeCreator.dll
 
-- task: TriggerBuild@3
-  displayName: 'Trigger a new build of MazeCreator.Windows'
-  inputs:
-    buildDefinition: 'MazeCreator.Windows'
-    ignoreSslCertificateErrors: true
-    useSameSourceVersion: true
-    password: '$(myToken)'
+
+
 
 - template: send-telegram.yml@templates
