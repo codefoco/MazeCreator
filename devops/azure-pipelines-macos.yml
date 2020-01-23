@@ -11,14 +11,9 @@ pool:
   demands: msbuild
 
 steps:
-- task: TriggerBuild@3
-  displayName: 'Trigger a new build of MazeCreator.Windows'
-  inputs:
-    buildDefinition: 'MazeCreator.Windows'
-    ignoreSslCertificateErrors: true
-    useSameSourceVersion: true
-    password: '$(myToken)'
-    
+- checkout: self
+  submodules: 'true'
+
 - template: common-dotnet.yml@templates
 - template: common-macos.yml@templates
 
@@ -28,8 +23,6 @@ steps:
     targetType: filePath
     filePath: ./devops/PreBuild.ps1
     arguments: ' MazeCreator MazeCreator.nuspec'
-
-
 
 - task: MSBuild@1
   displayName: 'Build solution MazeCreator.Mac.sln'
@@ -61,7 +54,12 @@ steps:
     PathtoPublish: lib/Release/xamarinwatchos/MazeCreator.dll
     ArtifactName: Xamarin.watchOS.MazeCreator.dll
 
-
-
+steps:
+- task: TriggerBuild@3
+  displayName: 'Trigger a new build of MazeCreator.Windows'
+  inputs:
+    buildDefinition: 'MazeCreator.Windows'
+    ignoreSslCertificateErrors: true
+    password: '$(myToken)'
 
 - template: send-telegram.yml@templates
