@@ -54,7 +54,6 @@ steps:
     PathtoPublish: lib/Release/xamarinwatchos/MazeCreator.dll
     ArtifactName: Xamarin.watchOS.MazeCreator.dll
 
-steps:
 - task: TriggerBuild@3
   displayName: 'Trigger a new build of MazeCreator.Windows'
   inputs:
