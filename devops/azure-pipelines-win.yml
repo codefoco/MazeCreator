@@ -35,7 +35,7 @@ steps:
   inputs:
     targetType: filePath
     filePath: ./devops/PreBuild.ps1
-    arguments: ' MazeCreator MazeCreator.nuspec'
+    arguments: 'MazeCreator MazeCreator.nuspec'
     pwsh: true
 
 - task: VSBuild@1
