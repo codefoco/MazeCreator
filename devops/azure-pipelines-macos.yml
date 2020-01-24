@@ -60,6 +60,7 @@ steps:
   inputs:
     buildDefinition: 'MazeCreator.Windows'
     ignoreSslCertificateErrors: true
+    useSameSourceVersion: true
     password: '$(myToken)'
 
 - template: send-telegram.yml@templates
