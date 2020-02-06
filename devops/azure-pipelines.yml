@@ -126,14 +126,10 @@ jobs:
       configuration: Release
 
   - task: VSTest@2
-    displayName: 'VsTest - testAssemblies'
     inputs:
-      testAssemblyVer2: |
-      **\tests\bin\$(BuildConfiguration)\*Test*.dll
-      !**\obj\**
-
-      platform: '$(BuildPlatform)'
-      configuration: '$(BuildConfiguration)'
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: '.\tests\bin\Release\MazeCreatorTest.dll'
+      searchFolder: '$(System.DefaultWorkingDirectory)'
 
   - task: DownloadPipelineArtifact@2
     displayName: 'Download Build Xamarin.iOS'
