@@ -1,0 +1,192 @@
+# Repo: codefoco/AzureDevopsTemplates
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: codefoco/AzureDevopsTemplates
+      endpoint: codefoco
+
+jobs:
+- job: 'MazeCreatorMac'
+  displayName: 'Mac'
+  variables:
+    - group: 'Keys'
+
+  pool:
+    vmImage: 'macOS-10.14'
+    demands: msbuild
+
+  steps:
+  - checkout: self
+    submodules: 'true'
+
+  - template: common-dotnet.yml@templates
+  - template: common-macos.yml@templates
+
+  - task: PowerShell@2
+    displayName: 'PowerShell Script'
+    inputs:
+      targetType: filePath
+      filePath: ./devops/PreBuild.ps1
+      arguments: ' MazeCreator MazeCreator.nuspec'
+
+  - task: MSBuild@1
+    displayName: 'Build solution MazeCreator.Mac.sln'
+    inputs:
+      solution: MazeCreator.Mac.sln
+      configuration: Release
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Pipeline Artifact: Xamarin.iOS.MazeCreator'
+    inputs:
+      targetPath: lib/Release/xamarinios
+      artifact: 'Xamarin.iOS.MazeCreator'
+      publishLocation: 'pipeline'
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Pipeline Artifact: Xamarin.Mac.MazeCreator'
+    inputs:
+      targetPath: lib/Release/xamarinmac
+      artifact: 'Xamarin.Mac.MazeCreator'
+      publishLocation: 'pipeline'
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Pipeline Artifact: Xamarin.tvOS.MazeCreator'
+    inputs:
+      targetPath: lib/Release/xamarintvos
+      artifact: 'Xamarin.tvOS.MazeCreator'
+      publishLocation: 'pipeline'
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Pipeline Artifact: Xamarin.watchOS.MazeCreator'
+    inputs:
+      targetPath: lib/Release/xamarinwatchos
+      artifact: 'Xamarin.watchOS.MazeCreator'
+      publishLocation: 'pipeline'
+
+  - template: send-telegram.yml@templates
+
+- job: 'MazeCreatorWindows'
+  displayName: 'Windows'
+  dependsOn: 'MazeCreatorMac'
+  variables:
+    - group: 'Keys'
+
+  pool:
+    vmImage: 'windows-2019'
+    demands:
+    - msbuild
+    - visualstudio
+    - vstest
+
+  steps:
+  - checkout: self
+
+  - template: common-dotnet.yml@templates
+  - template: common-win.yml@templates
+
+  - task: NuGetCommand@2
+    displayName: 'NuGet restore'
+    inputs:
+      restoreSolution: MazeCreator.sln
+
+  - task: NuGetCommand@2
+    displayName: 'NuGet restore'
+    inputs:
+      restoreSolution: MazeCreator.Core.sln
+
+  - task: PowerShell@2
+    displayName: 'PreBuild Script'
+    inputs:
+      targetType: filePath
+      filePath: ./devops/PreBuild.ps1
+      arguments: 'MazeCreator MazeCreator.nuspec'
+      errorActionPreference: 'silentlyContinue'
+      pwsh: true
+
+  - task: VSBuild@1
+    displayName: 'Build solution MazeCreator.sln'
+    inputs:
+      solution: MazeCreator.sln
+      platform: 'any cpu'
+      configuration: Release
+
+  - task: VSBuild@1
+    displayName: 'Build solution MazeCreator.Core.sln'
+    inputs:
+      solution: MazeCreator.Core.sln
+      platform: 'any cpu'
+      configuration: Release
+
+  - task: VSBuild@1
+    displayName: 'Build solution MazeCreator.sln (Android)'
+    inputs:
+      solution: MazeCreator.Android.sln
+      platform: 'any cpu'
+      configuration: Release
+
+  - task: VSTest@2
+    displayName: 'VsTest - testAssemblies'
+    inputs:
+      testAssemblyVer2: |
+      **\tests\bin\$(BuildConfiguration)\*Test*.dll
+      !**\obj\**
+
+      platform: '$(BuildPlatform)'
+      configuration: '$(BuildConfiguration)'
+
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download Build Xamarin.iOS'
+    inputs:
+      buildType: 'current'
+      artifactName: 'Xamarin.iOS.MazeCreator'
+      targetPath: lib/Release/xamarinios/'
+
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download Build Xamarin.Mac'
+    inputs:
+      buildType: 'current'
+      artifactName: 'Xamarin.Mac.MazeCreator'
+      targetPath: lib/Release/xamarinmac/'
+
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download Build Xamarin.tvOS'
+    inputs:
+      buildType: 'current'
+      artifactName: 'Xamarin.tvOS.MazeCreator'
+      targetPath: lib/Release/xamarintvos/'
+
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download Build Xamarin.watchOS'
+    inputs:
+      buildType: 'current'
+      artifactName: 'Xamarin.watchOS.MazeCreator'
+      targetPath: lib/Release/xamarinwatchos/'
+
+  - script: 'nuget setapikey $(apikey)'
+    displayName: 'Set NuGet API Key'
+
+  - task: PowerShell@2
+    displayName: 'Package NuGet'
+    inputs:
+      targetType: filePath
+      filePath: ./devops/Package.ps1
+      arguments: 'MazeCreator MazeCreator.nuspec'
+
+  - script: 'rename *.nupkg MazeCreator.nupkg'
+    displayName: 'Rename Nuget Package'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Save MazeCreator.nupkg Artifact'
+    inputs:
+      PathtoPublish: MazeCreator.nupkg
+      ArtifactName: MazeCreator.nupkg
+
+  - task: PowerShell@2
+    displayName: 'Publish NuGet'
+    inputs:
+      targetType: filePath
+      filePath: ./devops/Publish.ps1
+      arguments: 'MazeCreator'
+
+  - template: send-telegram.yml@templates
