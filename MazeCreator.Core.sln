@@ -1,22 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MazeCreator", "MazeCreator", "{4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MazeCreator.Shared", "src\MazeCreator.Shared.shproj", "{BD205AD6-760E-48F3-BAB2-21447396BD17}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard1.0", "build\netstandard1.0\MazeCreator.netstandard1.0.csproj", "{6CD688F7-1E49-40EF-B9E9-7B191743B622}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard1.3", "build\netstandard1.3\MazeCreator.netstandard1.3.csproj", "{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard1.6", "build\netstandard1.6\MazeCreator.netstandard1.6.csproj", "{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netstandard2.0", "build\netstandard2.0\MazeCreator.netstandard2.0.csproj", "{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\MazeCreator.Core.projitems*{acdcee57-48a3-4f85-9e58-d71a4e1c7fed}*SharedItemsImports = 5
 		src\MazeCreator.Core.projitems*{bd205ad6-760e-48f3-bab2-21447396bd17}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,18 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6CD688F7-1E49-40EF-B9E9-7B191743B622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CD688F7-1E49-40EF-B9E9-7B191743B622}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CD688F7-1E49-40EF-B9E9-7B191743B622}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CD688F7-1E49-40EF-B9E9-7B191743B622}.Release|Any CPU.Build.0 = Release|Any CPU
-		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -46,9 +29,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BD205AD6-760E-48F3-BAB2-21447396BD17} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
-		{6CD688F7-1E49-40EF-B9E9-7B191743B622} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
-		{539BED86-81DD-4C75-B2D1-D9EA2F633E3E} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
-		{6262C00B-FB39-4D8F-82BE-4F90822F9F6F} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
 		{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED} = {4A43DAAC-F9FF-4EB1-BFBD-FB4655CCE1F7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

@@ -13,7 +13,7 @@ jobs:
     - group: 'Keys'
 
   pool:
-    vmImage: 'macOS-10.14'
+    vmImage: 'macOS-10.15'
     demands: msbuild
 
   steps:
@@ -125,11 +125,19 @@ jobs:
       platform: 'any cpu'
       configuration: Release
 
-  - task: VSTest@2
+  - script: 'dotnet test .\tests\bin\Release\MazeCreatorTest.dll -l:trx'
+    displayName: 'Run Windows Tests'
+
+  - script: 'RENAME TestResults\*.trx MazeCreator.Windows.xml'
+    displayName: 'Rename Test result'
+
+  - script: 'MOVE TestResults\MazeCreator.Windows.xml .'
+    displayName: 'Move Test result'
+
+  - task: PublishTestResults@2
     inputs:
-      testSelector: 'testAssemblies'
-      testAssemblyVer2: '.\tests\bin\Release\MazeCreatorTest.dll'
-      searchFolder: '$(System.DefaultWorkingDirectory)'
+      testResultsFormat: 'VSTest'
+      testResultsFiles: 'MazeCreator.Windows.xml'
 
   - task: DownloadPipelineArtifact@2
     displayName: 'Download Build Xamarin.iOS'

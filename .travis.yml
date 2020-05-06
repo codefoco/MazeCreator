@@ -4,6 +4,8 @@
 
 language: csharp
 
+dotnet: 3.1
+
 before_install:
   - export PATH=/opt/mono/bin:$PATH
 
@@ -14,7 +16,7 @@ script:
   - nuget restore MazeCreator.sln
   - msbuild MazeCreator.sln /p:Configuration=Release /t:Restore
   - msbuild MazeCreator.sln /p:Configuration=Release
-  - mono packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe ./tests/bin/Release/MazeCreatorTest.dll
+  - dotnet test ./tests/bin/Release/MazeCreatorTest.dll
 
 # Execute additional tests or commands
 #after_script:
