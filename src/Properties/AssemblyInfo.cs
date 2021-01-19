@@ -7,7 +7,7 @@ using System.Reflection;
 [assembly: AssemblyDescription ("Library to create simple Mazes")]
 [assembly: AssemblyCompany ("Codefoco")]
 [assembly: AssemblyProduct ("MazeCreator")]
-[assembly: AssemblyCopyright ("Copyright © Code Foco 2020")]
+[assembly: AssemblyCopyright ("Copyright © Code Foco 2021")]
 [assembly: AssemblyCulture ("")]
 
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
@@ -15,7 +15,7 @@ using System.Reflection;
 // and "{Major}.{Minor}.{Build}.*" will update just the revision.
 
 [assembly: AssemblyVersion("1.0.7.0")]
-[assembly: AssemblyInformationalVersion("1.0.7+Branch.master.Sha.80a328a64f12ed9032a0f14a75e6ecad967514d0")]
+[assembly: AssemblyInformationalVersion("1.0.7+Branch.main.Sha.80a328a64f12ed9032a0f14a75e6ecad967514d0")]
 [assembly: AssemblyFileVersion("1.0.7.0")]
 
 //[assembly: AssemblyDelaySign(false)]

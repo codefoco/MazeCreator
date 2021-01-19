@@ -5,13 +5,13 @@
     <version>1.0.10</version>
     <authors>Codefoco</authors>
     <owners>Vinicius Jarina</owners>
-    <licenseUrl>https://github.com/codefoco/MazeCreator/blob/master/LICENSE</licenseUrl>
+    <licenseUrl>https://github.com/codefoco/MazeCreator/blob/main/LICENSE</licenseUrl>
     <projectUrl>https://github.com/codefoco/MazeCreator</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/codefoco/MazeCreator/master/MazeCreator.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/codefoco/MazeCreator/main/MazeCreator.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library to create simple Mazes</description>
     <releaseNotes>Release: 040d1b0</releaseNotes>
-    <copyright>Copyright © Code Foco 2020</copyright>
+    <copyright>Copyright © Code Foco 2021</copyright>
     <tags>maze dfs</tags>
   </metadata>
   <files>
