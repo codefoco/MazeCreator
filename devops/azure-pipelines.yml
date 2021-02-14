@@ -39,28 +39,28 @@ jobs:
   - task: PublishPipelineArtifact@1
     displayName: 'Publish Pipeline Artifact: Xamarin.iOS.MazeCreator'
     inputs:
-      targetPath: lib/Release/xamarinios
+      targetPath: lib/Release/xamarinios/
       artifact: 'Xamarin.iOS.MazeCreator'
       publishLocation: 'pipeline'
 
   - task: PublishPipelineArtifact@1
     displayName: 'Publish Pipeline Artifact: Xamarin.Mac.MazeCreator'
     inputs:
-      targetPath: lib/Release/xamarinmac
+      targetPath: lib/Release/xamarinmac/
       artifact: 'Xamarin.Mac.MazeCreator'
       publishLocation: 'pipeline'
 
   - task: PublishPipelineArtifact@1
     displayName: 'Publish Pipeline Artifact: Xamarin.tvOS.MazeCreator'
     inputs:
-      targetPath: lib/Release/xamarintvos
+      targetPath: lib/Release/xamarintvos/
       artifact: 'Xamarin.tvOS.MazeCreator'
       publishLocation: 'pipeline'
 
   - task: PublishPipelineArtifact@1
     displayName: 'Publish Pipeline Artifact: Xamarin.watchOS.MazeCreator'
     inputs:
-      targetPath: lib/Release/xamarinwatchos
+      targetPath: lib/Release/xamarinwatchos/
       artifact: 'Xamarin.watchOS.MazeCreator'
       publishLocation: 'pipeline'
 
@@ -168,28 +168,28 @@ jobs:
     inputs:
       buildType: 'current'
       artifactName: 'Xamarin.iOS.MazeCreator'
-      targetPath: lib/Release/xamarinios/'
+      targetPath: lib/Release/xamarinios/
 
   - task: DownloadPipelineArtifact@2
     displayName: 'Download Build Xamarin.Mac'
     inputs:
       buildType: 'current'
       artifactName: 'Xamarin.Mac.MazeCreator'
-      targetPath: lib/Release/xamarinmac/'
+      targetPath: lib/Release/xamarinmac/
 
   - task: DownloadPipelineArtifact@2
     displayName: 'Download Build Xamarin.tvOS'
     inputs:
       buildType: 'current'
       artifactName: 'Xamarin.tvOS.MazeCreator'
-      targetPath: lib/Release/xamarintvos/'
+      targetPath: lib/Release/xamarintvos/
 
   - task: DownloadPipelineArtifact@2
     displayName: 'Download Build Xamarin.watchOS'
     inputs:
       buildType: 'current'
       artifactName: 'Xamarin.watchOS.MazeCreator'
-      targetPath: lib/Release/xamarinwatchos/'
+      targetPath: lib/Release/xamarinwatchos/
 
   - script: 'nuget setapikey $(apikey)'
     displayName: 'Set NuGet API Key'
