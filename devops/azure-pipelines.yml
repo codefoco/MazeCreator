@@ -93,7 +93,17 @@ jobs:
   - task: NuGetCommand@2
     displayName: 'NuGet restore'
     inputs:
-      restoreSolution: MazeCreator.Core.sln
+      restoreSolution: MazeCreator.net45.sln
+
+  - task: NuGetCommand@2
+    displayName: 'NuGet restore'
+    inputs:
+      restoreSolution: MazeCreator.netcoreapp3.1.sln
+
+  - task: NuGetCommand@2
+    displayName: 'NuGet restore'
+    inputs:
+      restoreSolution: MazeCreator.net5.0.sln
 
   - task: PowerShell@2
     displayName: 'PreBuild Script'
@@ -119,16 +129,16 @@ jobs:
       configuration: Release
 
   - task: VSBuild@1
-    displayName: 'Build solution MazeCreator.Core.sln'
+    displayName: 'Build solution MazeCreator.netcoreapp3.1.sln'
     inputs:
-      solution: MazeCreator.Core.sln
+      solution: MazeCreator.netcoreapp3.1.sln
       platform: 'any cpu'
       configuration: Release
 
   - task: VSBuild@1
-    displayName: 'Build solution MazeCreator.NET5.sln'
+    displayName: 'Build solution MazeCreator.net5.0.sln'
     inputs:
-      solution: MazeCreator.NET5.sln
+      solution: MazeCreator.net5.0.sln
       platform: 'any cpu'
       configuration: Release
 

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MazeCreatorTest</RootNamespace>
     <AssemblyName>MazeCreatorTest</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
@@ -54,17 +54,17 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NUnit">
-      <Version>3.13.0</Version>
+      <Version>3.13.1</Version>
     </PackageReference>
     <PackageReference Include="NUnit3TestAdapter">
-      <Version>3.16.1</Version>
+      <Version>3.17.0</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\build\net45\MazeCreator.csproj">
-      <Project>{c45805a8-6436-4738-bd9f-4632eea63bbc}</Project>
+    <ProjectReference Include="..\build\net46\MazeCreator.csproj">
+      <Project>{C45805A8-6436-4738-BD9F-4632EEA63BBE}</Project>
       <Name>MazeCreator</Name>
     </ProjectReference>
   </ItemGroup>

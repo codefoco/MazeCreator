@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MazeCreator", "MazeCreator"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MazeCreator.Shared", "src\MazeCreator.Shared.shproj", "{BD205AD6-760E-48F3-BAB2-21447396BD17}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.net50", "build\net50\MazeCreator.net50.csproj", "{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeCreator.netcoreapp3.1", "build\netcoreapp3.1\MazeCreator.netcoreapp3.1.csproj", "{ACDCEE57-48A3-4F85-9E58-D71A4E1C7FED}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

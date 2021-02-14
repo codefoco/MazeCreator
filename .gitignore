@@ -23,4 +23,6 @@ build/TVOS/obj/
 build/WatchOS/obj/
 build/XamariniOS/obj/
 build/XamarinMac/obj/
-build/net50/obj
+build/net5.0/obj
+build/net46/obj
+build/netcoreapp3.1/obj
