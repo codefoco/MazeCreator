@@ -105,6 +105,13 @@ jobs:
       pwsh: true
 
   - task: VSBuild@1
+    displayName: 'Build solution MazeCreator.net45.sln'
+    inputs:
+      solution: MazeCreator.net45.sln
+      platform: 'any cpu'
+      configuration: Release
+
+  - task: VSBuild@1
     displayName: 'Build solution MazeCreator.sln'
     inputs:
       solution: MazeCreator.sln
@@ -115,6 +122,13 @@ jobs:
     displayName: 'Build solution MazeCreator.Core.sln'
     inputs:
       solution: MazeCreator.Core.sln
+      platform: 'any cpu'
+      configuration: Release
+
+  - task: VSBuild@1
+    displayName: 'Build solution MazeCreator.NET5.sln'
+    inputs:
+      solution: MazeCreator.NET5.sln
       platform: 'any cpu'
       configuration: Release
 
