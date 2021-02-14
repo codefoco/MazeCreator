@@ -17,7 +17,6 @@
   <files>
     <file src="lib\Release\net5.0\MazeCreator.dll" target="lib\net5.0" />
     <file src="lib\Release\net46\MazeCreator.dll" target="lib\net46" />
-    <file src="lib\Release\net45\MazeCreator.dll" target="lib\net45" />
     <file src="lib\Release\MonoAndroid\MazeCreator.dll" target="lib\MonoAndroid" />
     <file src="lib\Release\xamarinmac\MazeCreator.dll" target="lib\xamarinmac" />
     <file src="lib\Release\xamarintvos\MazeCreator.dll" target="lib\xamarintvos" />

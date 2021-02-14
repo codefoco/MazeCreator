@@ -15,8 +15,12 @@
     <tags>maze dfs</tags>
   </metadata>
   <files>
-    <file src="lib\Release\net45\MazeCreator.pdb" target="lib\net45" />
+    <file src="lib\Release\net5.0\MazeCreator.pdb" target="lib\net5.0" />
+    <file src="lib\Release\net46\MazeCreator.pdb" target="lib\net46" />
     <file src="lib\Release\MonoAndroid\MazeCreator.pdb" target="lib\MonoAndroid" />
+    <file src="lib\Release\xamarinmac\MazeCreator.pdb" target="lib\xamarinmac" />
+    <file src="lib\Release\xamarintvos\MazeCreator.pdb" target="lib\xamarintvos" />
     <file src="lib\Release\xamarinios\MazeCreator.pdb" target="lib\xamarinios" />
+    <file src="lib\Release\xamarinwatchos\MazeCreator.pdb" target="lib\xamarinwatchos" />
   </files>
 </package>
